@@ -2,6 +2,8 @@
 
 A quarterly decision tool for the underwriter at a private flood insurer. For each of 3,232 US counties it gives one of four calls: grow, re-price, pause or hold. Each call compares 48 years of NFIP claims (1978–2025) with FEMA's modeled flood loss. Public data only.
 
+**Live site:** https://rutuja310.github.io/fricative-flood-gap-finder/: this quarter's plan, every county on a map, storm watch, and Excel/CSV downloads.
+
 This repo holds only the flood project.
 
 Everything is in [`flood/`](flood/README.md): the pipeline, the scheduled refresh, the n8n workflow, the live demo, the outputs and the change log.

@@ -2,7 +2,7 @@
  "quarterly": {
   "mode": "quarterly",
   "updated": true,
-  "new_fema_data": true,
+  "new_fema_data": false,
   "fema": {
    "NfipClaims": "2026-09-09T16:23:10.614Z",
    "NfipResidentialPenetrationRates": "2026-08-04T16:40:37.737Z"
@@ -16,7 +16,7 @@
  },
  "storms": {
   "mode": "storms",
-  "since": "2026-08-01",
+  "since": "2026-11-05",
   "events": [
    {
     "disaster": 4955,
@@ -75,7 +75,8 @@
       "insured_model": 2080367,
       "pen": 0.1017
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 3660,
@@ -126,7 +127,8 @@
       "insured_model": 50108,
       "pen": 0.0059
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 3658,
@@ -169,7 +171,8 @@
       "insured_model": null,
       "pen": null
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 3657,
@@ -228,7 +231,8 @@
       "insured_model": 548446,
       "pen": 0.0038
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 3655,
@@ -296,7 +300,8 @@
       "insured_model": 2080367,
       "pen": 0.1017
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 3656,
@@ -339,7 +344,8 @@
       "insured_model": 40447,
       "pen": 0.0053
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4948,
@@ -374,7 +380,8 @@
       "insured_model": null,
       "pen": null
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4947,
@@ -401,7 +408,8 @@
       "insured_model": 197494,
       "pen": 0.0088
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4952,
@@ -436,7 +444,8 @@
       "insured_model": 2451952,
       "pen": 0.0701
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4946,
@@ -463,7 +472,8 @@
       "insured_model": null,
       "pen": null
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4953,
@@ -506,7 +516,8 @@
       "insured_model": 66546,
       "pen": 0.0058
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4951,
@@ -558,7 +569,8 @@
       "insured_model": 2789017,
       "pen": 0.0482
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4954,
@@ -576,7 +588,8 @@
      "hold": 0
     },
     "alert": false,
-    "top_exposure": []
+    "top_exposure": [],
+    "new": false
    },
    {
     "disaster": 4945,
@@ -635,7 +648,8 @@
       "insured_model": 65101,
       "pen": 0.0028
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 3654,
@@ -695,7 +709,8 @@
       "insured_model": 2451952,
       "pen": 0.0701
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4937,
@@ -754,7 +769,8 @@
       "insured_model": 47040,
       "pen": 0.007
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4944,
@@ -805,7 +821,8 @@
       "insured_model": null,
       "pen": null
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4943,
@@ -864,7 +881,8 @@
       "insured_model": 19972,
       "pen": 0.0037
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4942,
@@ -915,7 +933,8 @@
       "insured_model": 7998,
       "pen": 0.0015
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4940,
@@ -974,7 +993,8 @@
       "insured_model": 36787,
       "pen": 0.0151
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4939,
@@ -1033,7 +1053,8 @@
       "insured_model": 22822,
       "pen": 0.0036
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4938,
@@ -1092,7 +1113,8 @@
       "insured_model": 657,
       "pen": 0.0006
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4941,
@@ -1110,7 +1132,8 @@
      "hold": 0
     },
     "alert": false,
-    "top_exposure": []
+    "top_exposure": [],
+    "new": false
    },
    {
     "disaster": 4935,
@@ -1169,7 +1192,8 @@
       "insured_model": 165290,
       "pen": 0.0204
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 4933,
@@ -1228,7 +1252,8 @@
       "insured_model": 135707,
       "pen": 0.0191
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 3652,
@@ -1255,7 +1280,8 @@
       "insured_model": 3096006,
       "pen": 0.0175
      }
-    ]
+    ],
+    "new": false
    },
    {
     "disaster": 3651,
@@ -1314,298 +1340,12 @@
       "insured_model": 225546,
       "pen": 0.0038
      }
-    ]
-   },
-   {
-    "disaster": 4929,
-    "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, AND FLOODING",
-    "type": "Severe Storm",
-    "state": "MO",
-    "declared": "2026-08-03",
-    "kind": "DR",
-    "counties": 34,
-    "on_list": [
-     {
-      "fips": "29087",
-      "county": "Holt, MO",
-      "call": "pause",
-      "on_list": "pause",
-      "insured_model": 127390,
-      "pen": 0.0522
-     }
     ],
-    "calls": {
-     "grow": 1,
-     "re-price": 4,
-     "pause": 6,
-     "hold": 23
-    },
-    "alert": true,
-    "top_exposure": [
-     {
-      "fips": "29029",
-      "county": "Camden, MO",
-      "call": "grow",
-      "on_list": null,
-      "insured_model": 277704,
-      "pen": 0.0061
-     },
-     {
-      "fips": "29201",
-      "county": "Scott, MO",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 217160,
-      "pen": 0.0411
-     },
-     {
-      "fips": "29087",
-      "county": "Holt, MO",
-      "call": "pause",
-      "on_list": "pause",
-      "insured_model": 127390,
-      "pen": 0.0522
-     },
-     {
-      "fips": "29145",
-      "county": "Newton, MO",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 95169,
-      "pen": 0.0061
-     },
-     {
-      "fips": "29097",
-      "county": "Jasper, MO",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 58528,
-      "pen": 0.0024
-     }
-    ]
-   },
-   {
-    "disaster": 4928,
-    "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, AND FLOODING",
-    "type": "Severe Storm",
-    "state": "NE",
-    "declared": "2026-08-03",
-    "kind": "DR",
-    "counties": 8,
-    "on_list": [],
-    "calls": {
-     "grow": 1,
-     "re-price": 1,
-     "pause": 0,
-     "hold": 6
-    },
-    "alert": false,
-    "top_exposure": [
-     {
-      "fips": "31019",
-      "county": "Buffalo, NE",
-      "call": "grow",
-      "on_list": null,
-      "insured_model": 60640,
-      "pen": 0.0062
-     },
-     {
-      "fips": "31067",
-      "county": "Gage, NE",
-      "call": "re-price",
-      "on_list": null,
-      "insured_model": 19079,
-      "pen": 0.0043
-     },
-     {
-      "fips": "31093",
-      "county": "Howard, NE",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 17280,
-      "pen": 0.0079
-     },
-     {
-      "fips": "31169",
-      "county": "Thayer, NE",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 8708,
-      "pen": 0.0039
-     },
-     {
-      "fips": "31127",
-      "county": "Nemaha, NE",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 2720,
-      "pen": 0.0016
-     }
-    ]
-   },
-   {
-    "disaster": 4932,
-    "title": "SEVERE STORM, STRAIGHT-LINE WINDS, TORNADOES, FLOODING, LANDSLIDES, AND MUDSLIDES",
-    "type": "Flood",
-    "state": "WV",
-    "declared": "2026-08-03",
-    "kind": "DR",
-    "counties": 11,
-    "on_list": [],
-    "calls": {
-     "grow": 1,
-     "re-price": 2,
-     "pause": 0,
-     "hold": 8
-    },
-    "alert": false,
-    "top_exposure": [
-     {
-      "fips": "54103",
-      "county": "Wetzel, WV",
-      "call": "grow",
-      "on_list": null,
-      "insured_model": 226455,
-      "pen": 0.0155
-     },
-     {
-      "fips": "54083",
-      "county": "Randolph, WV",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 174441,
-      "pen": 0.0106
-     },
-     {
-      "fips": "54097",
-      "county": "Upshur, WV",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 102494,
-      "pen": 0.0103
-     },
-     {
-      "fips": "54041",
-      "county": "Lewis, WV",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 85154,
-      "pen": 0.0079
-     },
-     {
-      "fips": "54071",
-      "county": "Pendleton, WV",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 79240,
-      "pen": 0.0098
-     }
-    ]
-   },
-   {
-    "disaster": 4930,
-    "title": "TROPICAL STORM ARTHUR",
-    "type": "Tropical Storm",
-    "state": "MS",
-    "declared": "2026-08-03",
-    "kind": "DR",
-    "counties": 9,
-    "on_list": [],
-    "calls": {
-     "grow": 0,
-     "re-price": 2,
-     "pause": 0,
-     "hold": 7
-    },
-    "alert": false,
-    "top_exposure": [
-     {
-      "fips": "28047",
-      "county": "Harrison, MS",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 5462852,
-      "pen": 0.1445
-     },
-     {
-      "fips": "28045",
-      "county": "Hancock, MS",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 3961448,
-      "pen": 0.3314
-     },
-     {
-      "fips": "28109",
-      "county": "Pearl River, MS",
-      "call": "re-price",
-      "on_list": null,
-      "insured_model": 292503,
-      "pen": 0.0264
-     },
-     {
-      "fips": "28039",
-      "county": "George, MS",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 29786,
-      "pen": 0.0076
-     },
-     {
-      "fips": "28031",
-      "county": "Covington, MS",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": 21211,
-      "pen": 0.0071
-     }
-    ]
-   },
-   {
-    "disaster": 4931,
-    "title": "SUPER TYPHOON BAVI",
-    "type": "Typhoon",
-    "state": "MP",
-    "declared": "2026-08-03",
-    "kind": "DR",
-    "counties": 3,
-    "on_list": [],
-    "calls": {
-     "grow": 0,
-     "re-price": 0,
-     "pause": 0,
-     "hold": 3
-    },
-    "alert": false,
-    "top_exposure": [
-     {
-      "fips": "69100",
-      "county": "Rota, MP",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": null,
-      "pen": null
-     },
-     {
-      "fips": "69110",
-      "county": "Saipan, MP",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": null,
-      "pen": null
-     },
-     {
-      "fips": "69120",
-      "county": "Tinian, MP",
-      "call": "hold",
-      "on_list": null,
-      "insured_model": null,
-      "pen": null
-     }
-    ]
+    "new": false
    }
   ],
-  "alert": true,
+  "new_events": 0,
+  "alert": false,
   "date": "2026-11-05",
   "report": "flood/out/reports/storms-2026-11-05.md"
  }

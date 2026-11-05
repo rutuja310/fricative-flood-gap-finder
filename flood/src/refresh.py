@@ -13,6 +13,7 @@ Options:
   --force       Re-run even if FEMA has not republished.
   --no-fetch    Re-use flood/raw/ instead of downloading again (for demos and tests).
   --since DATE  For --storms: look back to DATE (YYYY-MM-DD) instead of the last check.
+  --publish     Afterwards, commit flood/out and flood/demo and push, so the public site (GitHub Pages) updates.
 
 Every run writes a Markdown report to flood/out/reports/ and updates flood/out/reports/latest.json, which the
 live demo reads.
@@ -41,6 +42,7 @@ STORM_TYPES = {"Flood", "Hurricane", "Tropical Storm", "Coastal Storm", "Typhoon
 MANY_COUNTIES = 25        # a declaration this wide is an alert on its own
 MANY_CHANGES = 10         # this many changed calls in one run is an alert
 FOLLOWUP_DAYS = (30, 60, 90)
+RECENT_DAYS = 90         # the demo's storm panel shows declarations from this many days back
 
 
 def today():
@@ -266,12 +268,21 @@ def cmd_storms(a):
                                        "counties": sorted(e["fips"]),
                                        "calls_at_declaration": {r["fips"]: r["call"] for r in rows}})
         state["seen"].append(e["disaster"])
+    # Keep a rolling 90-day list so the demo always shows recent storms; alerts fire only on new ones.
+    for e in out_events:
+        e["new"] = True
+    keep = (today() - dt.timedelta(days=RECENT_DAYS)).isoformat()
+    store = {str(k): {**v, "new": False} for k, v in state.get("events", {}).items() if v["declared"] >= keep}
+    store.update({str(e["disaster"]): e for e in out_events})
+    state["events"] = store
+    recent = sorted(store.values(), key=lambda e: e["declared"], reverse=True)
     state["last_check"] = today().isoformat()
     REPORTS.mkdir(parents=True, exist_ok=True)
     STORM_STATE.write_text(json.dumps(state, indent=1))
     md = [f"# Flood Gap Finder: storm watch, {today():%d %B %Y}\n",
-          f"FEMA declarations for floods, hurricanes and tropical or coastal storms since {since}: "
-          f"**{len(out_events)} events**" + (", **alert**." if alert else ", no alert.") + "\n",
+          f"New FEMA declarations for floods, hurricanes and tropical or coastal storms since {since}: "
+          f"**{len(out_events)}**" + (", **alert**." if alert else ", no alert.")
+          + f" {len(recent)} declarations in the last {RECENT_DAYS} days in total.\n",
           "Claims from a storm reach FEMA's data over the following months, so calls are re-checked "
           f"{', '.join(map(str, FOLLOWUP_DAYS))} days after each declaration.\n"]
     for e in out_events:
@@ -285,7 +296,7 @@ def cmd_storms(a):
         if e["top_exposure"]:
             md.append("Largest insured exposure in the area: " + "; ".join(
                 f"{r['county']} ({LABEL[r['call']]})" for r in e["top_exposure"]) + ".\n")
-    payload = {"mode": "storms", "since": since, "events": out_events, "alert": alert}
+    payload = {"mode": "storms", "since": since, "events": recent, "new_events": len(out_events), "alert": alert}
     payload["report"] = save_report("storms", "\n".join(md), payload)
     return {"mode": "storms", "since": since, "events": len(out_events), "alert": alert,
             "alert_events": [e["title"] for e in out_events if e["alert"]], "report": payload["report"]}
@@ -328,10 +339,25 @@ def main():
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--no-fetch", action="store_true")
     ap.add_argument("--since")
+    ap.add_argument("--publish", action="store_true")
     a = ap.parse_args()
     fn = {"monthly": cmd_monthly, "quarterly": cmd_quarterly, "storms": cmd_storms, "followups": cmd_followups}
     mode = next(m for m in fn if getattr(a, m))
-    print(json.dumps(fn[mode](a), default=str))
+    result = fn[mode](a)
+    if a.publish:
+        result["published"] = publish_site(mode)
+    print(json.dumps(result, default=str))
+
+
+def publish_site(mode):
+    """Commit the refreshed outputs and push; GitHub Pages republishes within a minute or two."""
+    repo = ROOT.parent
+    git = lambda *args: subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True)  # noqa: E731
+    git("add", "flood/out", "flood/demo")
+    if git("diff", "--cached", "--quiet").returncode == 0:
+        return False
+    git("commit", "-m", f"Flood Gap Finder: {mode} refresh {today().isoformat()}")
+    return git("push").returncode == 0
 
 
 if __name__ == "__main__":

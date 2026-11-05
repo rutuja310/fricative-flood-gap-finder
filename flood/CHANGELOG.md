@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Public site and downloads (5 Nov 2026)
+
+- **New repo.** The project moved to `rutuja310/fricative-flood-gap-finder`, with no Medicare files or history.
+- **GitHub Pages site.** A root `index.html` redirects to `flood/demo/`, and `.nojekyll` makes GitHub serve the files as they are. `flood/demo/page.html` is the page source (also used for the Claude artifact); `publish.build_page()` wraps it into a full `flood/demo/index.html`.
+- **Downloads**, rebuilt on every run by `publish.write_downloads()`:
+  - `plan.xlsx`: About, Grow, Re-price and Pause sheets.
+  - `plan-grow.csv`, `plan-re-price.csv`, `plan-pause.csv`.
+  - `counties.xlsx` (All counties + About) and `counties.csv`: every county with its call, reason, evidence and market numbers.
+- **Page buttons.** "Download the plan (Excel)", a CSV link on each list, "Download these counties (CSV)" for whatever filter or list is on the map, and a Downloads and reports panel. Inside the Claude viewer, where downloads are blocked, the links open the public site's copies.
+- **`refresh.py --publish`** commits `flood/out` and `flood/demo` and pushes, so each scheduled run updates the site. The n8n workflow now uses it on all four schedules.
+- **Storm watch keeps a rolling 90-day list** of declarations, so the panel isn't blanked on days with no new storms. Alerts fire only on new declarations.
+
 ### Target customers (added 5 Nov 2026)
 
 These are the named targets for the model. They're young or growing private flood MGAs that are choosing which counties to enter, plus the insurers and reinsurers backing them. Facts come from trade-press reports and haven't been checked against each company's own disclosures. State counts come from different dates.

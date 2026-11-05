@@ -12,6 +12,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 warnings.filterwarnings("ignore")
 import flood as F  # noqa: E402
+import publish  # noqa: E402
 
 OUT = Path(__file__).resolve().parent.parent / "out"
 
@@ -103,6 +104,8 @@ def main():
     hod.to_csv(OUT / "holdout_counties.csv")
     df[["action", "chr_cred"]].to_csv(OUT / "calls_snapshot.csv")
     export_demo(df, claims, summary)
+    publish.write_downloads(df, summary)
+    publish.build_page()
     print(json.dumps({k: summary[k] for k in ("actions", "plan", "afford_flagged_grow")}, indent=1,
                      default=str))
 

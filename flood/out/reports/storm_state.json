@@ -3521,5 +3521,1332 @@
    }
   }
  ],
+ "events": {
+  "4955": {
+   "disaster": 4955,
+   "title": "HURRICANE ISAIAS",
+   "type": "Hurricane",
+   "state": "FL",
+   "declared": "2026-10-27",
+   "kind": "DR",
+   "counties": 15,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 7,
+    "pause": 3,
+    "hold": 5
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "12005",
+     "county": "Bay, FL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 3122149,
+     "pen": 0.1786
+    },
+    {
+     "fips": "12113",
+     "county": "Santa Rosa, FL",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 2919620,
+     "pen": 0.1405
+    },
+    {
+     "fips": "12033",
+     "county": "Escambia, FL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 2812016,
+     "pen": 0.0832
+    },
+    {
+     "fips": "12131",
+     "county": "Walton, FL",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 2295554,
+     "pen": 0.2041
+    },
+    {
+     "fips": "12091",
+     "county": "Okaloosa, FL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 2080367,
+     "pen": 0.1017
+    }
+   ],
+   "new": false
+  },
+  "3660": {
+   "disaster": 3660,
+   "title": "SEVERE STORMS AND FLOODING",
+   "type": "Flood",
+   "state": "NM",
+   "declared": "2026-10-26",
+   "kind": "EM",
+   "counties": 4,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 4
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "35043",
+     "county": "Sandoval, NM",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 216485,
+     "pen": 0.0108
+    },
+    {
+     "fips": "35039",
+     "county": "Rio Arriba, NM",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 144795,
+     "pen": 0.0073
+    },
+    {
+     "fips": "35045",
+     "county": "San Juan, NM",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 88578,
+     "pen": 0.0029
+    },
+    {
+     "fips": "35006",
+     "county": "Cibola, NM",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 50108,
+     "pen": 0.0059
+    }
+   ],
+   "new": false
+  },
+  "3658": {
+   "disaster": 3658,
+   "title": "TROPICAL STORM CHAMPI",
+   "type": "Tropical Storm",
+   "state": "MP",
+   "declared": "2026-10-17",
+   "kind": "EM",
+   "counties": 3,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 3
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "69100",
+     "county": "Rota, MP",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": null,
+     "pen": null
+    },
+    {
+     "fips": "69110",
+     "county": "Saipan, MP",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": null,
+     "pen": null
+    },
+    {
+     "fips": "69120",
+     "county": "Tinian, MP",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": null,
+     "pen": null
+    }
+   ],
+   "new": false
+  },
+  "3657": {
+   "disaster": 3657,
+   "title": "HURRICANE ISAIAS",
+   "type": "Tropical Storm",
+   "state": "GA",
+   "declared": "2026-10-09",
+   "kind": "EM",
+   "counties": 76,
+   "on_list": [],
+   "calls": {
+    "grow": 1,
+    "re-price": 4,
+    "pause": 1,
+    "hold": 70
+   },
+   "alert": true,
+   "top_exposure": [
+    {
+     "fips": "13121",
+     "county": "Fulton, GA",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 1247043,
+     "pen": 0.0076
+    },
+    {
+     "fips": "13067",
+     "county": "Cobb, GA",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 1194518,
+     "pen": 0.0096
+    },
+    {
+     "fips": "13089",
+     "county": "DeKalb, GA",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 1008520,
+     "pen": 0.0106
+    },
+    {
+     "fips": "13095",
+     "county": "Dougherty, GA",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 599208,
+     "pen": 0.0274
+    },
+    {
+     "fips": "13135",
+     "county": "Gwinnett, GA",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 548446,
+     "pen": 0.0038
+    }
+   ],
+   "new": false
+  },
+  "3655": {
+   "disaster": 3655,
+   "title": "HURRICANE ISAIAS",
+   "type": "Tropical Storm",
+   "state": "FL",
+   "declared": "2026-10-09",
+   "kind": "EM",
+   "counties": 27,
+   "on_list": [
+    {
+     "fips": "12029",
+     "county": "Dixie, FL",
+     "call": "re-price",
+     "on_list": "re-price",
+     "insured_model": 224983,
+     "pen": 0.0581
+    }
+   ],
+   "calls": {
+    "grow": 1,
+    "re-price": 11,
+    "pause": 5,
+    "hold": 10
+   },
+   "alert": true,
+   "top_exposure": [
+    {
+     "fips": "12005",
+     "county": "Bay, FL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 3122149,
+     "pen": 0.1786
+    },
+    {
+     "fips": "12113",
+     "county": "Santa Rosa, FL",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 2919620,
+     "pen": 0.1405
+    },
+    {
+     "fips": "12033",
+     "county": "Escambia, FL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 2812016,
+     "pen": 0.0832
+    },
+    {
+     "fips": "12131",
+     "county": "Walton, FL",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 2295554,
+     "pen": 0.2041
+    },
+    {
+     "fips": "12091",
+     "county": "Okaloosa, FL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 2080367,
+     "pen": 0.1017
+    }
+   ],
+   "new": false
+  },
+  "3656": {
+   "disaster": 3656,
+   "title": "HURRICANE ISAIAS",
+   "type": "Hurricane",
+   "state": "AL",
+   "declared": "2026-10-09",
+   "kind": "EM",
+   "counties": 3,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 3,
+    "hold": 0
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "01003",
+     "county": "Baldwin, AL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 4692751,
+     "pen": 0.0925
+    },
+    {
+     "fips": "01097",
+     "county": "Mobile, AL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 3075768,
+     "pen": 0.0361
+    },
+    {
+     "fips": "01053",
+     "county": "Escambia, AL",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 40447,
+     "pen": 0.0053
+    }
+   ],
+   "new": false
+  },
+  "4948": {
+   "disaster": 4948,
+   "title": "COTTONWOOD FIRE, FLOODING, AND MUDSLIDES",
+   "type": "Flood",
+   "state": "UT",
+   "declared": "2026-10-07",
+   "kind": "DR",
+   "counties": 2,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 2
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "49031",
+     "county": "Piute, UT",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 8032,
+     "pen": 0.0171
+    },
+    {
+     "fips": "49001",
+     "county": "Beaver, UT",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": null,
+     "pen": null
+    }
+   ],
+   "new": false
+  },
+  "4947": {
+   "disaster": 4947,
+   "title": "SEVERE STORM AND FLOODING",
+   "type": "Severe Storm",
+   "state": "NH",
+   "declared": "2026-10-07",
+   "kind": "DR",
+   "counties": 1,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 1
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "33003",
+     "county": "Carroll, NH",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 197494,
+     "pen": 0.0088
+    }
+   ],
+   "new": false
+  },
+  "4952": {
+   "disaster": 4952,
+   "title": "HURRICANE LOWELL",
+   "type": "Hurricane",
+   "state": "HI",
+   "declared": "2026-10-07",
+   "kind": "DR",
+   "counties": 2,
+   "on_list": [],
+   "calls": {
+    "grow": 2,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 0
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "15009",
+     "county": "Maui, HI",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 2789017,
+     "pen": 0.0482
+    },
+    {
+     "fips": "15007",
+     "county": "Kauai, HI",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 2451952,
+     "pen": 0.0701
+    }
+   ],
+   "new": false
+  },
+  "4946": {
+   "disaster": 4946,
+   "title": "SUPER TYPHOON BAVI",
+   "type": "Typhoon",
+   "state": "GU",
+   "declared": "2026-10-07",
+   "kind": "DR",
+   "counties": 1,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 1
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "66010",
+     "county": "Guam, GU",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": null,
+     "pen": null
+    }
+   ],
+   "new": false
+  },
+  "4953": {
+   "disaster": 4953,
+   "title": "SEVERE STORMS AND FLOODING",
+   "type": "Severe Storm",
+   "state": "WV",
+   "declared": "2026-10-07",
+   "kind": "DR",
+   "counties": 3,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 1,
+    "pause": 0,
+    "hold": 2
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "54039",
+     "county": "Kanawha, WV",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 1873773,
+     "pen": 0.0148
+    },
+    {
+     "fips": "54033",
+     "county": "Harrison, WV",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 136846,
+     "pen": 0.0055
+    },
+    {
+     "fips": "54019",
+     "county": "Fayette, WV",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 66546,
+     "pen": 0.0058
+    }
+   ],
+   "new": false
+  },
+  "4951": {
+   "disaster": 4951,
+   "title": "HURRICANE LALA",
+   "type": "Hurricane",
+   "state": "HI",
+   "declared": "2026-10-07",
+   "kind": "DR",
+   "counties": 3,
+   "on_list": [
+    {
+     "fips": "15003",
+     "county": "Honolulu, HI",
+     "call": "grow",
+     "on_list": "grow",
+     "insured_model": 13108076,
+     "pen": 0.041
+    }
+   ],
+   "calls": {
+    "grow": 3,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 0
+   },
+   "alert": true,
+   "top_exposure": [
+    {
+     "fips": "15003",
+     "county": "Honolulu, HI",
+     "call": "grow",
+     "on_list": "grow",
+     "insured_model": 13108076,
+     "pen": 0.041
+    },
+    {
+     "fips": "15001",
+     "county": "Hawaii, HI",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 3096006,
+     "pen": 0.0175
+    },
+    {
+     "fips": "15009",
+     "county": "Maui, HI",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 2789017,
+     "pen": 0.0482
+    }
+   ],
+   "new": false
+  },
+  "4954": {
+   "disaster": 4954,
+   "title": "SEVERE STORMS AND FLOODING",
+   "type": "Flood",
+   "state": "NM",
+   "declared": "2026-10-07",
+   "kind": "DR",
+   "counties": 0,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 0
+   },
+   "alert": false,
+   "top_exposure": [],
+   "new": false
+  },
+  "4945": {
+   "disaster": 4945,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, FLOODING, AND LANDSLIDES",
+   "type": "Flood",
+   "state": "OH",
+   "declared": "2026-10-02",
+   "kind": "DR",
+   "counties": 7,
+   "on_list": [],
+   "calls": {
+    "grow": 1,
+    "re-price": 2,
+    "pause": 1,
+    "hold": 3
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "39049",
+     "county": "Franklin, OH",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 645910,
+     "pen": 0.0031
+    },
+    {
+     "fips": "39061",
+     "county": "Hamilton, OH",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 373759,
+     "pen": 0.0035
+    },
+    {
+     "fips": "39089",
+     "county": "Licking, OH",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 180044,
+     "pen": 0.0056
+    },
+    {
+     "fips": "39025",
+     "county": "Clermont, OH",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 92905,
+     "pen": 0.0038
+    },
+    {
+     "fips": "39119",
+     "county": "Muskingum, OH",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 65101,
+     "pen": 0.0028
+    }
+   ],
+   "new": false
+  },
+  "3654": {
+   "disaster": 3654,
+   "title": "TROPICAL STORM NOLO",
+   "type": "Tropical Storm",
+   "state": "HI",
+   "declared": "2026-09-25",
+   "kind": "EM",
+   "counties": 4,
+   "on_list": [
+    {
+     "fips": "15003",
+     "county": "Honolulu, HI",
+     "call": "grow",
+     "on_list": "grow",
+     "insured_model": 13108076,
+     "pen": 0.041
+    }
+   ],
+   "calls": {
+    "grow": 4,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 0
+   },
+   "alert": true,
+   "top_exposure": [
+    {
+     "fips": "15003",
+     "county": "Honolulu, HI",
+     "call": "grow",
+     "on_list": "grow",
+     "insured_model": 13108076,
+     "pen": 0.041
+    },
+    {
+     "fips": "15001",
+     "county": "Hawaii, HI",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 3096006,
+     "pen": 0.0175
+    },
+    {
+     "fips": "15009",
+     "county": "Maui, HI",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 2789017,
+     "pen": 0.0482
+    },
+    {
+     "fips": "15007",
+     "county": "Kauai, HI",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 2451952,
+     "pen": 0.0701
+    }
+   ],
+   "new": false
+  },
+  "4937": {
+   "disaster": 4937,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, FLOODING, LANDSLIDES, AND MUDSLIDES",
+   "type": "Severe Storm",
+   "state": "KY",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 20,
+   "on_list": [],
+   "calls": {
+    "grow": 1,
+    "re-price": 3,
+    "pause": 0,
+    "hold": 16
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "21029",
+     "county": "Bullitt, KY",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 418979,
+     "pen": 0.0183
+    },
+    {
+     "fips": "21101",
+     "county": "Henderson, KY",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 198918,
+     "pen": 0.0143
+    },
+    {
+     "fips": "21093",
+     "county": "Hardin, KY",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 129403,
+     "pen": 0.0082
+    },
+    {
+     "fips": "21151",
+     "county": "Madison, KY",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 104369,
+     "pen": 0.0073
+    },
+    {
+     "fips": "21167",
+     "county": "Mercer, KY",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 47040,
+     "pen": 0.007
+    }
+   ],
+   "new": false
+  },
+  "4944": {
+   "disaster": 4944,
+   "title": "WILDFIRES, FLOODING, AND MUDSLIDES",
+   "type": "Fire",
+   "state": "CO",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 4,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 4
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "08101",
+     "county": "Pueblo, CO",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 32620,
+     "pen": 0.0017
+    },
+    {
+     "fips": "08091",
+     "county": "Ouray, CO",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 28282,
+     "pen": 0.007
+    },
+    {
+     "fips": "08033",
+     "county": "Dolores, CO",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 3364,
+     "pen": 0.0033
+    },
+    {
+     "fips": "08027",
+     "county": "Custer, CO",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": null,
+     "pen": null
+    }
+   ],
+   "new": false
+  },
+  "4943": {
+   "disaster": 4943,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, AND FLOODING",
+   "type": "Severe Storm",
+   "state": "KS",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 22,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 2,
+    "pause": 1,
+    "hold": 19
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "20015",
+     "county": "Butler, KS",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 74205,
+     "pen": 0.0054
+    },
+    {
+     "fips": "20191",
+     "county": "Sumner, KS",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 51967,
+     "pen": 0.0092
+    },
+    {
+     "fips": "20047",
+     "county": "Edwards, KS",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 25680,
+     "pen": 0.0225
+    },
+    {
+     "fips": "20035",
+     "county": "Cowley, KS",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 20546,
+     "pen": 0.0027
+    },
+    {
+     "fips": "20021",
+     "county": "Cherokee, KS",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 19972,
+     "pen": 0.0037
+    }
+   ],
+   "new": false
+  },
+  "4942": {
+   "disaster": 4942,
+   "title": "SEVERE STORMS AND FLOODING",
+   "type": "Severe Storm",
+   "state": "IA",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 4,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 2,
+    "hold": 2
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "19153",
+     "county": "Polk, IA",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 240855,
+     "pen": 0.0041
+    },
+    {
+     "fips": "19169",
+     "county": "Story, IA",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 43708,
+     "pen": 0.0028
+    },
+    {
+     "fips": "19181",
+     "county": "Warren, IA",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 8245,
+     "pen": 0.0013
+    },
+    {
+     "fips": "19099",
+     "county": "Jasper, IA",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 7998,
+     "pen": 0.0015
+    }
+   ],
+   "new": false
+  },
+  "4940": {
+   "disaster": 4940,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, AND FLOODING",
+   "type": "Severe Storm",
+   "state": "KS",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 30,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 30
+   },
+   "alert": true,
+   "top_exposure": [
+    {
+     "fips": "20161",
+     "county": "Riley, KS",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 186778,
+     "pen": 0.0152
+    },
+    {
+     "fips": "20169",
+     "county": "Saline, KS",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 85163,
+     "pen": 0.008
+    },
+    {
+     "fips": "20149",
+     "county": "Pottawatomie, KS",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 44757,
+     "pen": 0.0077
+    },
+    {
+     "fips": "20037",
+     "county": "Crawford, KS",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 43462,
+     "pen": 0.0041
+    },
+    {
+     "fips": "20143",
+     "county": "Ottawa, KS",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 36787,
+     "pen": 0.0151
+    }
+   ],
+   "new": false
+  },
+  "4939": {
+   "disaster": 4939,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, AND FLOODING",
+   "type": "Severe Storm",
+   "state": "MO",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 9,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 4,
+    "pause": 2,
+    "hold": 3
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "29181",
+     "county": "Ripley, MO",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 77090,
+     "pen": 0.012
+    },
+    {
+     "fips": "29223",
+     "county": "Wayne, MO",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 66478,
+     "pen": 0.0096
+    },
+    {
+     "fips": "29141",
+     "county": "Morgan, MO",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 48603,
+     "pen": 0.004
+    },
+    {
+     "fips": "29093",
+     "county": "Iron, MO",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 37330,
+     "pen": 0.0049
+    },
+    {
+     "fips": "29123",
+     "county": "Madison, MO",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 22822,
+     "pen": 0.0036
+    }
+   ],
+   "new": false
+  },
+  "4938": {
+   "disaster": 4938,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, AND FLOODING",
+   "type": "Severe Storm",
+   "state": "SD",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 8,
+   "on_list": [],
+   "calls": {
+    "grow": 1,
+    "re-price": 0,
+    "pause": 1,
+    "hold": 6
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "46117",
+     "county": "Stanley, SD",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 243269,
+     "pen": 0.0735
+    },
+    {
+     "fips": "46065",
+     "county": "Hughes, SD",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 26105,
+     "pen": 0.0045
+    },
+    {
+     "fips": "46005",
+     "county": "Beadle, SD",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 4759,
+     "pen": 0.0008
+    },
+    {
+     "fips": "46037",
+     "county": "Day, SD",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 4488,
+     "pen": 0.0028
+    },
+    {
+     "fips": "46059",
+     "county": "Hand, SD",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 657,
+     "pen": 0.0006
+    }
+   ],
+   "new": false
+  },
+  "4941": {
+   "disaster": 4941,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, AND FLOODING",
+   "type": "Severe Storm",
+   "state": "SD",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 0,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 0
+   },
+   "alert": false,
+   "top_exposure": [],
+   "new": false
+  },
+  "4935": {
+   "disaster": 4935,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, AND FLOODING",
+   "type": "Flood",
+   "state": "TX",
+   "declared": "2026-09-01",
+   "kind": "DR",
+   "counties": 26,
+   "on_list": [],
+   "calls": {
+    "grow": 3,
+    "re-price": 1,
+    "pause": 1,
+    "hold": 21
+   },
+   "alert": true,
+   "top_exposure": [
+    {
+     "fips": "48029",
+     "county": "Bexar, TX",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 2355495,
+     "pen": 0.0078
+    },
+    {
+     "fips": "48091",
+     "county": "Comal, TX",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 982143,
+     "pen": 0.0241
+    },
+    {
+     "fips": "48265",
+     "county": "Kerr, TX",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 341957,
+     "pen": 0.0244
+    },
+    {
+     "fips": "48259",
+     "county": "Kendall, TX",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 326770,
+     "pen": 0.0263
+    },
+    {
+     "fips": "48019",
+     "county": "Bandera, TX",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 165290,
+     "pen": 0.0204
+    }
+   ],
+   "new": false
+  },
+  "4933": {
+   "disaster": 4933,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, AND FLOODING",
+   "type": "Flood",
+   "state": "IN",
+   "declared": "2026-08-25",
+   "kind": "DR",
+   "counties": 30,
+   "on_list": [],
+   "calls": {
+    "grow": 0,
+    "re-price": 5,
+    "pause": 1,
+    "hold": 24
+   },
+   "alert": true,
+   "top_exposure": [
+    {
+     "fips": "18097",
+     "county": "Marion, IN",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 1091381,
+     "pen": 0.0067
+    },
+    {
+     "fips": "18089",
+     "county": "Lake, IN",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 429161,
+     "pen": 0.0048
+    },
+    {
+     "fips": "18057",
+     "county": "Hamilton, IN",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 323633,
+     "pen": 0.0045
+    },
+    {
+     "fips": "18035",
+     "county": "Delaware, IN",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 148514,
+     "pen": 0.0073
+    },
+    {
+     "fips": "18015",
+     "county": "Carroll, IN",
+     "call": "re-price",
+     "on_list": null,
+     "insured_model": 135707,
+     "pen": 0.0191
+    }
+   ],
+   "new": false
+  },
+  "3652": {
+   "disaster": 3652,
+   "title": "HURRICANE LALA",
+   "type": "Tropical Storm",
+   "state": "HI",
+   "declared": "2026-08-25",
+   "kind": "EM",
+   "counties": 1,
+   "on_list": [],
+   "calls": {
+    "grow": 1,
+    "re-price": 0,
+    "pause": 0,
+    "hold": 0
+   },
+   "alert": false,
+   "top_exposure": [
+    {
+     "fips": "15001",
+     "county": "Hawaii, HI",
+     "call": "grow",
+     "on_list": null,
+     "insured_model": 3096006,
+     "pen": 0.0175
+    }
+   ],
+   "new": false
+  },
+  "3651": {
+   "disaster": 3651,
+   "title": "SEVERE STORMS, STRAIGHT-LINE WINDS, TORNADOES, AND FLOODING",
+   "type": "Flood",
+   "state": "IN",
+   "declared": "2026-08-15",
+   "kind": "EM",
+   "counties": 53,
+   "on_list": [],
+   "calls": {
+    "grow": 1,
+    "re-price": 9,
+    "pause": 5,
+    "hold": 38
+   },
+   "alert": true,
+   "top_exposure": [
+    {
+     "fips": "18097",
+     "county": "Marion, IN",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 1091381,
+     "pen": 0.0067
+    },
+    {
+     "fips": "18089",
+     "county": "Lake, IN",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 429161,
+     "pen": 0.0048
+    },
+    {
+     "fips": "18057",
+     "county": "Hamilton, IN",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 323633,
+     "pen": 0.0045
+    },
+    {
+     "fips": "18005",
+     "county": "Bartholomew, IN",
+     "call": "hold",
+     "on_list": null,
+     "insured_model": 234356,
+     "pen": 0.0129
+    },
+    {
+     "fips": "18003",
+     "county": "Allen, IN",
+     "call": "pause",
+     "on_list": null,
+     "insured_model": 225546,
+     "pen": 0.0038
+    }
+   ],
+   "new": false
+  }
+ },
  "last_check": "2026-11-05"
 }

@@ -4,14 +4,16 @@ County-by-county grow / re-price / hold / avoid calls for a private flood insure
 
 | Piece | Where |
 |---|---|
-| Live demo | https://claude.ai/artifact/N1f6ca4x6WbYGTtx8iL96H (page source: `flood/demo/index.html`) |
+| Public site (GitHub Pages) | https://rutuja310.github.io/fricative-flood-gap-finder/ (built from `flood/demo/page.html` into `flood/demo/index.html`) |
+| Downloads | `flood/demo/downloads/`: `plan.xlsx`, `plan-{grow,re-price,pause}.csv`, `counties.xlsx`, `counties.csv` |
+| Live demo in Claude | https://claude.ai/artifact/N1f6ca4x6WbYGTtx8iL96H (same page; its download links open the public site) |
 | Deck | https://claude.ai/artifact/Ru7kDpujGzwgQkVd2jLqVN |
 | Memo | https://claude.ai/artifact/RPDn32fitiTPVDedgiZcNS |
 | Loom script | https://claude.ai/artifact/HBS1jnxXFPzNZisXVJgH11 |
 | Fetch raw data | `sh flood/src/fetch_raw.sh` → `flood/raw/` (not in git) |
 | Analysis | `flood/src/flood.py` (scores, calls, blind test) |
 | Run everything | `python3 flood/src/run_flood.py` → `flood/out/` and `flood/demo/data.json` |
-| Scheduled refresh | `python3 flood/src/refresh.py --monthly | --quarterly | --storms | --followups` → `flood/out/reports/` |
+| Scheduled refresh | `python3 flood/src/refresh.py --monthly | --quarterly | --storms | --followups [--publish]` → `flood/out/reports/`; `--publish` commits and pushes so the site updates |
 | n8n workflow | `flood/n8n/flood_refresh_workflow.json` (runs from `~/workspace/fricative-flood-gap-finder`; set the Notion block ID and alert email first) |
 | Code | https://github.com/rutuja310/fricative-flood-gap-finder |
 

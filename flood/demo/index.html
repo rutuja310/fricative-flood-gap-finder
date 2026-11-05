@@ -1,3 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="This quarter's grow / re-price / pause counties for a private flood writer, from 48 years of NFIP claims vs FEMA's flood model.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
 <title>Flood Gap Finder</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,6 +67,15 @@ button:focus-visible, input:focus-visible, li[tabindex]:focus-visible { outline:
 .list .nm { font-weight: 600; }
 .list .rs { font-size: .85rem; color: var(--muted); }
 .list .rc { font-size: .78rem; color: var(--ok); }
+.dl-btn { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 600; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); text-decoration: none; cursor: pointer; white-space: nowrap; }
+.dl-btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); font-weight: 500; }
+.dl-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.dl-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.dl-list li { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; padding: 10px 0; border-top: 1px solid var(--line); }
+.dl-list li:first-child { border-top: 0; padding-top: 0; }
+.dl-list .what { display: grid; gap: 2px; min-width: 0; }
+.dl-list .what b { font-weight: 600; }
+.dl-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .bt-line { font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
 .bt-line b { color: var(--ink); font-weight: 600; }
 
@@ -145,7 +163,10 @@ footer a { color: inherit; }
   <section class="panel" aria-labelledby="plan-h">
     <div class="plan-head">
       <div style="display:grid;gap:4px"><p class="eyebrow" id="plan-date">This quarter's plan</p><h2 id="plan-h">Top 5 counties for each decision</h2></div>
-      <p class="note">Click a county to see why. “Show on map” highlights a list.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <p class="note">Click a county to see why. “Show on map” highlights a list.</p>
+        <a class="dl-btn" data-dl="downloads/plan.xlsx" href="downloads/plan.xlsx" download>Download the plan (Excel)</a>
+      </div>
     </div>
     <div class="lists" id="lists"><p class="loading">Loading the plan…</p></div>
   </section>
@@ -162,6 +183,7 @@ footer a { color: inherit; }
           <button aria-pressed="false" data-a="pause"><i class="sw pause"></i>Pause</button>
           <button aria-pressed="false" data-a="hold"><i class="sw hold"></i>Hold</button>
         </div>
+        <button class="dl-btn ghost" id="dl-view" type="button">Download these counties (CSV)</button>
       </div>
       <svg class="map" id="map" viewBox="0 0 975 610" role="img" aria-label="US counties colored by call"></svg>
       <p class="note">Colors show the call for every county. Grey: no strong signal or too little data. Connecticut appears grey because FEMA's risk index uses the state's new planning regions, which this map doesn't draw.</p>
@@ -175,7 +197,8 @@ footer a { color: inherit; }
       <div id="storms"></div>
     </div>
     <div class="panel">
-      <div><h2>Reports</h2><p class="note">The workflow re-runs the scores and writes these on a schedule.</p></div>
+      <div><h2>Downloads and reports</h2><p class="note" id="dl-sub">Spreadsheets of the plan and every county, rebuilt on each scheduled run.</p></div>
+      <ul class="dl-list" id="downloads"></ul>
       <dl class="status" id="status"></dl>
       <p class="note">Monthly: when FEMA republishes claims or insured-share data, re-score and list counties whose call changed. Quarterly: this plan. Daily: storm watch, with re-checks 30, 60 and 90 days after each declaration, because claims reach FEMA's data over the following months.</p>
     </div>
@@ -247,7 +270,8 @@ footer a { color: inherit; }
   $("lists").innerHTML = Object.entries(META).map(([k, [t, sub, bk]]) => `
     <div class="panel list ${k}">
       <div class="list-top"><div><h2>${t}</h2><p class="list-sub">${sub}</p></div>
-        <button class="show-btn" aria-pressed="false" data-list="${k}">Show on map</button></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><button class="show-btn" aria-pressed="false" data-list="${k}">Show on map</button>
+        <a class="show-btn" data-dl="downloads/plan-${k}.csv" href="downloads/plan-${k}.csv" download style="text-decoration:none">CSV</a></div></div>
       <ol>${(S.plan[k] || []).map((r, i) => `
         <li tabindex="0" data-id="${r.fips}"><span class="rk">${i + 1}</span>
           <div><div class="nm">${esc(r.county)}, ${esc(r.state)}</div>
@@ -378,7 +402,7 @@ footer a { color: inherit; }
   // ---------- Storm watch + reports ----------
   const st = R.storms;
   if (st && st.events) {
-    $("storm-sub").textContent = `Since ${st.since}: ${st.events.length} declarations, checked ${st.date}. Alerts first.`;
+    $("storm-sub").textContent = `${st.events.length} declarations in the last 90 days · last checked ${st.date}${st.new_events != null ? ` (${st.new_events} new)` : ""}. Alerts first.`;
     const evs = [...st.events].sort((a, b) => (b.alert - a.alert) || b.declared.localeCompare(a.declared)).slice(0, 6);
     $("storms").innerHTML = evs.map(e => {
       const calls = Object.entries(e.calls).filter(([, n]) => n).map(([k, n]) => `${n} ${LABEL[k].toLowerCase()}`).join(", ");
@@ -392,6 +416,45 @@ footer a { color: inherit; }
   } else { $("storms").innerHTML = '<p class="note">No storm check has run yet.</p>'; }
   const row = (k, label) => { const r = R[k]; return `<dt>${label}</dt><dd>${r ? `${esc(r.date)}${r.changed_calls != null ? ` · ${int(r.changed_calls)} calls changed` : ""}${r.alert ? " · alert" : ""}` : "not run yet"}</dd>`; };
   $("status").innerHTML = row("quarterly", "Quarterly plan") + row("monthly", "Monthly refresh") + row("storms", "Storm watch") + row("followups", "Storm follow-ups");
+
+  // ---------- Downloads ----------
+  // On the public site (GitHub Pages) files download directly. Inside the Claude viewer downloads are blocked,
+  // so links point at the public site's copies instead, and in-browser CSVs are replaced by a note.
+  const SITE = "https://rutuja310.github.io/fricative-flood-gap-finder/flood/demo/";
+  const local = /(^|\.)github\.io$/.test(location.hostname) || ["localhost", "127.0.0.1"].includes(location.hostname);
+  const fileUrl = (p) => local ? p : SITE + p;
+  if (!local) document.querySelectorAll("a[data-dl]").forEach(a => { a.href = fileUrl(a.dataset.dl); a.removeAttribute("download"); a.target = "_blank"; a.rel = "noopener"; });
+  const reportHref = (r) => r && r.report ? (local ? "../../" + r.report : SITE + "../../" + r.report) : null;
+  const items = [
+    ["This quarter's plan", "Grow, re-price and pause lists with reasons, plus an About sheet", [["Excel", "downloads/plan.xlsx"], ["Grow CSV", "downloads/plan-grow.csv"], ["Re-price CSV", "downloads/plan-re-price.csv"], ["Pause CSV", "downloads/plan-pause.csv"]]],
+    ["All counties", `${int(S.counties)} counties: call, reason, evidence, market`, [["Excel", "downloads/counties.xlsx"], ["CSV", "downloads/counties.csv"]]],
+  ];
+  const reps = [["quarterly", "Quarterly plan report"], ["monthly", "Monthly refresh report"], ["storms", "Storm watch report"], ["followups", "Storm follow-up report"]]
+    .filter(([k]) => R[k] && R[k].report).map(([k, l]) => [l, `Run ${R[k].date}`, [["Markdown", reportHref(R[k]), true]]]);
+  $("downloads").innerHTML = [...items, ...reps].map(([t, sub, links]) => `<li><span class="what"><b>${esc(t)}</b><span class="note">${esc(sub)}</span></span>
+    <span class="dl-actions">${links.map(([l, h, abs]) => `<a class="dl-btn ghost" href="${esc(abs ? h : fileUrl(h))}" ${local ? "download" : 'target="_blank" rel="noopener"'}>${esc(l)}</a>`).join("")}</span></li>`).join("");
+  if (!local) $("dl-sub").innerHTML = `In this viewer, files open from the <a href="${SITE}" target="_blank" rel="noopener">public site</a>.`;
+
+  const CSV_COLS = [["FIPS", (id) => id], ["County", (id, c) => c.n], ["State", (id, c) => c.s], ["Call", (id, c) => LABEL[c.a]],
+    ["Reason", (id, c) => c.hl], ["Score (x model)", (id, c) => c.g], ["Gap all years (x model)", (id, c) => c.gr],
+    ["Gap without worst year (x model)", (id, c) => c.gc], ["Worst year", (id, c) => c.wy], ["Still true recently?", (id, c) => c.rn],
+    ["Paid claims 1978-2025", (id, c) => c.c], ["Homes", (id, c) => c.h], ["Homes with NFIP cover", (id, c) => c.pol],
+    ["Share with NFIP cover", (id, c) => c.p], ["Median household income", (id, c) => c.inc], ["Median home value", (id, c) => c.hv],
+    ["Modeled flood loss per year", (id, c) => c.m]];
+  const cell = (v) => v == null ? "" : /[",\n]/.test(String(v)) ? '"' + String(v).replace(/"/g, '""') + '"' : String(v);
+  $("dl-view").addEventListener("click", () => {
+    if (!local) { window.open(SITE, "_blank", "noopener"); return; }
+    const L = onList();
+    const ids = Object.keys(C).filter(id => listShown ? L.has(id) : (filter === "all" || C[id].a === filter));
+    const rows = [CSV_COLS.map(c => c[0]).join(",")].concat(ids.map(id => CSV_COLS.map(([, f]) => cell(f(id, C[id]))).join(",")));
+    const blob = new Blob(["\ufeff" + rows.join("\n")], { type: "text/csv;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `flood-gap-finder-${listShown ? listShown + "-list" : filter}-counties.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+  if (!local) $("dl-view").textContent = "Download on the public site";
 
   // ---------- List backtest ----------
   $("lbt").innerHTML = `<thead><tr><th>List, made with data to 2014</th><th class="r">Counties</th><th class="r">Losses vs model, 2015–24</th><th class="r">Ran above the model</th><th class="r">Ran 1.5× or more</th></tr></thead><tbody>` +
@@ -422,3 +485,6 @@ footer a { color: inherit; }
   addEventListener("hashchange", () => { const m = location.hash.match(/^#c(\d{5})$/); if (m && C[m[1]]) select(m[1], false); });
 })();
 </script>
+
+</body>
+</html>
