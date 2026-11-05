@@ -13,6 +13,8 @@ Everything is in [`flood/`](flood/README.md): the pipeline, the scheduled refres
 ```sh
 pip install -r requirements.txt
 sh flood/src/fetch_raw.sh          # downloads FEMA, Census and BLS inputs into flood/raw/ (not in git)
+sh flood/src/fetch_policies_api.sh # optional, can take hours: NFIP policies in force for the point-in-time backtest
+sh flood/src/fetch_tracts.sh       # optional: NRI tracts, ACS homes, NOAA storms for the tract and storm tests
 python3 flood/src/run_flood.py     # scores every county → flood/out/ and flood/demo/data.json
 python3 flood/src/refresh.py --quarterly --no-fetch   # writes this quarter's plan report
 ```

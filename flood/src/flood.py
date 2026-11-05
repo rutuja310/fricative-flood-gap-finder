@@ -79,20 +79,45 @@ def load_pen():
     return out.dropna(subset=["pen"]).drop_duplicates("fips").set_index("fips")
 
 
-def load_claims():
-    """County x year totals of paid NFIP claims, nominal dollars."""
+SNAP_THEN, SNAP_TEST = 2014, (2019,)   # 1 July snapshots of NFIP policies in force (2019: mid test decade)
+RESIDENTIAL = (1, 2, 3, 11, 12, 13, 14, 15, 16)    # occupancyType codes for homes
+
+
+def load_policies(digits=5):
+    """Residential NFIP policies in force on 1 July of each snapshot year, by county (fips x year; digits=11:
+    by census tract, as coded), from fetch_policies_api.sh. None when they haven't been fetched."""
+    d = RAW / "policies"
+    if not any(d.glob("*/*.csv")):
+        return None
+    day = lambda c: f"TRY_CAST(substr({c}, 1, 10) AS DATE)"  # noqa: E731
+    q = f"""
+      WITH p AS (SELECT CAST(regexp_extract(filename, '(\\d{{4}})/[^/]+$', 1) AS INT) AS snap, *
+                 FROM read_csv('{d}/*/*.csv', filename=true, all_varchar=true))
+      SELECT snap, substr(censusGeoid, 1, {digits}) AS fips, sum(coalesce(TRY_CAST(policyCount AS INT), 1)) AS n
+      FROM p
+      WHERE TRY_CAST(occupancyType AS INT) IN {RESIDENTIAL} AND length(censusGeoid) >= {digits}
+        AND {day('policyTerminationDate')} > make_date(snap, 7, 1)
+        AND coalesce({day('cancellationDateOfFloodPolicy')} > make_date(snap, 7, 1), true)
+      GROUP BY 1, 2"""
+    return duckdb.sql(q).df().pivot(index="fips", columns="snap", values="n").fillna(0)
+
+
+def load_claims(tract=False):
+    """County x year totals of paid NFIP claims, nominal dollars (tract=True: by census tract, as coded)."""
     pq = RAW / "claims" / "NfipClaimsV3.parquet"
     f = pq if pq.exists() else RAW / "claims" / "claims_api.csv"
     src = f"'{f}'" if f.suffix == ".parquet" else f"read_csv('{f}', all_varchar=true)"
     year = "yearOfLoss"
     num = lambda c: f"coalesce(TRY_CAST({c} AS DOUBLE), 0)"  # noqa: E731
+    key = "substr(censusGeoid, 1, 11)" if tract else "lpad(CAST(countyCode AS VARCHAR), 5, '0')"
+    col = "censusGeoid" if tract else "countyCode"
     q = f"""
-      SELECT lpad(CAST(countyCode AS VARCHAR), 5, '0') AS fips, TRY_CAST({year} AS INT) AS year,
+      SELECT {key} AS fips, TRY_CAST({year} AS INT) AS year,
              count(*) AS claims,
              sum(CASE WHEN {num('amountPaidOnBuildingClaim')} > 0 THEN 1 ELSE 0 END) AS paid_claims,
              sum({num('amountPaidOnBuildingClaim')}) AS bldg,
              sum({num('amountPaidOnContentsClaim')}) AS cont
-      FROM {src} WHERE countyCode IS NOT NULL AND countyCode <> '' GROUP BY 1, 2"""
+      FROM {src} WHERE {col} IS NOT NULL AND length({col}) >= {11 if tract else 1} GROUP BY 1, 2"""
     c = duckdb.sql(q).df()
     c = c[(c.year >= FIRST) & (c.year <= LAST)].copy()
     k = c.year.map(lambda y: CPI[BASE_YEAR] / CPI[y])
@@ -126,6 +151,14 @@ def build():
     nri, pen, c = load_nri(), load_pen(), load_claims()
     df = nri.join(pen, how="left")
     df["insured_model"] = df.ealb * df.pen
+    # Point-in-time insured share for the backtest: policies in force in 2014 (what was known then) and in
+    # 2019, mid test decade, each over today's home count.
+    pol = load_policies()
+    if pol is not None and SNAP_THEN in pol and all(y in pol for y in SNAP_TEST):
+        h = df.homes.where(df.homes > 0)
+        df["pen_then"] = pol[SNAP_THEN].reindex(df.index).fillna(0) / h
+        df["pen_test"] = pol[list(SNAP_TEST)].mean(axis=1).reindex(df.index).fillna(0) / h
+        df["insured_then"], df["insured_test"] = df.ealb * df.pen_then, df.ealb * df.pen_test
 
     full_b, full_bc, full_n = window(c, FIRST, LAST)
     ex_b, _, _ = window(c, FIRST, LAST, drop=(2024,))
@@ -297,17 +330,35 @@ def scores_as_of(df, c, end_year):
     return decide(a)
 
 
-def backtest_lists(df, c, end_year=2014, sizes=(5, 25)):
+def point_in_time(df):
+    """The county table with the insured share each backtest step could have known: 2014 policies in force
+    to score, the test decade's to judge the outcome. Needs build() to have found the policy snapshots."""
+    t = df.copy()
+    for col, paid, m in [("chr_train", "paid_chronic_train", "insured_then"), ("rel_test", "paid_test", "insured_test"),
+                         ("chr_test", "paid_chronic_test", "insured_test")]:
+        ok = t[m] > 0
+        t.attrs[f"nat_{col}"] = nat = t.loc[ok, paid].sum() / t.loc[ok, m].sum()
+        t[col] = t[paid] / t[m].where(ok) / nat
+    return t
+
+
+def backtest_lists(df, c, end_year=2014, sizes=(5, 25), pit=False):
     """Make the lists as of end_year, then see how those counties ran in the next ten years (2015-2024),
-    against the model at the US norm for that decade. Pricing at the model = 1.0x by construction."""
-    a = scores_as_of(df, c, end_year)
+    against the model at the US norm for that decade. Pricing at the model = 1.0x by construction.
+    pit=True scores with the 2014 insured share and judges with the test decade's (point_in_time)."""
+    if pit:
+        df = point_in_time(df)
+        a = scores_as_of(df.assign(insured_model=df.insured_then, pen=df.pen_then), c, end_year)
+        m_test = df.insured_test
+    else:
+        a, m_test = scores_as_of(df, c, end_year), df.insured_model
     nat_test = df.attrs["nat_rel_test"]
-    res = {"as_of": end_year, "outcome_years": list(TEST), "lists": {}}
+    res = {"as_of": end_year, "outcome_years": list(TEST), "point_in_time": pit, "lists": {}}
     for k in sizes:
         lists = plan(a, n=k)
         for name, fips in lists.items():
             sub = df.loc[fips]
-            exp = (sub.insured_model * nat_test).sum()
+            exp = (m_test[fips] * nat_test).sum()
             res["lists"][f"{name}_top{k}"] = {
                 "counties": [{"fips": f, "county": df.loc[f, "county"], "state": df.loc[f, "state"],
                               "score_then": round(float(a.loc[f, "chr_cred"]), 2),
@@ -317,9 +368,9 @@ def backtest_lists(df, c, end_year=2014, sizes=(5, 25)):
                 "share_ran_above_model": float((sub.rel_test >= 1).mean()),
                 "share_ran_high_1_5x": float((sub.rel_test >= 1.5).mean()),
             }
-    base = df[(df.insured_model > 0) & (df.claims_train >= 30)]
+    base = df[(m_test > 0) & (df.claims_train >= 30)]
     res["baseline_all_counties"] = {
-        "next_decade_dollars_vs_model": float(base.paid_test.sum() / (base.insured_model * nat_test).sum()),
+        "next_decade_dollars_vs_model": float(base.paid_test.sum() / (m_test[base.index] * nat_test).sum()),
         "share_ran_above_model": float((base.rel_test >= 1).mean()),
         "share_ran_high_1_5x": float((base.rel_test >= 1.5).mean()),
     }
@@ -403,3 +454,125 @@ def holdout(df, min_claims=30):
     res["top20_test"] = top20[["county", "state", "train_cred", "rel_test", "paid_test", "worst_year_test"]] \
         .reset_index().to_dict("records")
     return res, d
+
+
+# ---- Finer and fairer tests: census tracts, and storm years taken out (public data, fetch_tracts.sh) ----
+
+TROPICAL = ("Hurricane", "Hurricane (Typhoon)", "Tropical Storm", "Tropical Depression", "Storm Surge/Tide")
+
+
+def tract_xwalk(tracts):
+    """Map tract codes as found in claims and policies (2010 or 2020 tracts) onto 2020 tracts. A 2020 code maps to
+    itself; a 2010-only code is split across the 2020 tracts it overlaps, by share of its land area."""
+    rel = pd.read_csv(RAW / "geo" / "tab20_tract20_tract10_natl.txt", sep="|", dtype=str,
+                      usecols=["GEOID_TRACT_20", "GEOID_TRACT_10", "AREALAND_PART"])
+    rel["w"] = rel.AREALAND_PART.astype(float)
+    rel["w"] /= rel.groupby("GEOID_TRACT_10").w.transform("sum")
+    rel = rel[~rel.GEOID_TRACT_10.isin(tracts) & (rel.w > 0)]
+    same = pd.DataFrame({"t_in": list(tracts), "t20": list(tracts), "w": 1.0})
+    return pd.concat([same, rel.rename(columns={"GEOID_TRACT_10": "t_in", "GEOID_TRACT_20": "t20"})[["t_in", "t20", "w"]]])
+
+
+def _to_2020(frame, xw, by, cols):
+    m = frame.merge(xw, left_on="fips", right_on="t_in")
+    m[cols] = m[cols].mul(m.w, axis=0)
+    return m.drop(columns=["fips"]).rename(columns={"t20": "fips"}).groupby(["fips"] + by, as_index=False)[cols].sum()
+
+
+def build_tracts(df):
+    """The county method run on 2020 census tracts, point in time: NRI tract building flood EAL x the tract's
+    insured share (residential policies in force July 2014 to score, July 2019 to judge, over ACS 2019-2023
+    housing units). Returns (tracts, tract x year claims) shaped like build()'s, or None if not fetched."""
+    nri = RAW / "nri_tracts" / "NRI_Table_CensusTracts.csv"
+    cl = RAW / "claims" / "claims_api.csv"
+    if not nri.exists() or not cl.exists() or "censusGeoid" not in cl.open().readline():
+        return None
+    n = pd.read_csv(nri, dtype={"TRACTFIPS": str, "STCOFIPS": str})
+    t = pd.DataFrame({"fips": n.TRACTFIPS, "county_fips": n.STCOFIPS.str.zfill(5),
+                      "ealb": _num(n.IFLD_EALB) + _num(n.CFLD_EALB)}).set_index("fips")
+    t = t.join(df[["county", "state"]], on="county_fips")
+    acs = pd.read_csv(RAW / "acs" / "acsdt5y2023-b25001.dat", sep="|", dtype=str)
+    acs = acs[acs.GEO_ID.str.startswith("1400000US")]
+    t["homes"] = pd.to_numeric(acs.set_index(acs.GEO_ID.str[9:]).B25001_E001, errors="coerce").reindex(t.index)
+    xw = tract_xwalk(set(t.index))
+
+    pol = load_policies(11).reset_index().melt(id_vars="fips", var_name="snap", value_name="n")
+    pol = _to_2020(pol, xw, ["snap"], ["n"]).pivot(index="fips", columns="snap", values="n")
+    h = t.homes.where(t.homes > 0)
+    t["pen_then"] = (pol[SNAP_THEN].reindex(t.index).fillna(0) / h).clip(upper=1)
+    t["pen_test"] = (pol[list(SNAP_TEST)].mean(axis=1).reindex(t.index).fillna(0) / h).clip(upper=1)
+    t["insured_then"], t["insured_test"] = t.ealb * t.pen_then, t.ealb * t.pen_test
+
+    c = _to_2020(load_claims(tract=True), xw, ["year"], ["claims", "paid_claims", "bldg_real", "cont_real"])
+    tr_b, _, tr_n = window(c, *TRAIN)
+    te_b, _, te_n = window(c, *TEST)
+    t["paid_test"], t["claims_train"] = te_b.reindex(t.index).fillna(0), tr_n.reindex(t.index).fillna(0)
+    for tag, (lo, hi) in [("_train", TRAIN), ("_test", TEST)]:
+        ch, worst, wy = chronic(c, lo, hi)
+        t["paid_chronic" + tag] = ch.reindex(t.index).fillna(0.0)
+        t["worst_year" + tag] = wy.reindex(t.index)
+    t["insured_model"] = t.insured_test
+    t = point_in_time(t)
+    t.attrs["claims_coded"] = float(c.paid_claims.sum())
+    return t, c
+
+
+def load_storms():
+    """County x year pairs with a NOAA tropical storm, hurricane or storm surge event, 2015-2024. NOAA codes
+    these by forecast zone, so zones are mapped to the counties they cover. None if not fetched."""
+    d = RAW / "storms"
+    if not any(d.glob("details_*.csv.gz")):
+        return None
+    zc = pd.read_csv(d / "zone_county.dbx", sep="|", header=None, dtype=str,
+                     names=["st", "zone", "cwa", "name", "sz", "county", "fips", "tz", "fe", "lat", "lon"])
+    zc = zc.assign(state_fips=zc.fips.str[:2], zone=zc.zone.str.zfill(3))[["state_fips", "zone", "fips"]]
+    e = pd.concat(pd.read_csv(f, dtype=str, usecols=["YEAR", "STATE_FIPS", "CZ_TYPE", "CZ_FIPS", "EVENT_TYPE"])
+                  for f in sorted(d.glob("details_*.csv.gz")))
+    e = e[e.EVENT_TYPE.isin(TROPICAL)].assign(state_fips=lambda x: x.STATE_FIPS.str.zfill(2),
+                                              cz=lambda x: x.CZ_FIPS.str.zfill(3), year=lambda x: x.YEAR.astype(int))
+    county = e[e.CZ_TYPE == "C"].assign(fips=lambda x: x.state_fips + x.cz)
+    zone = e[e.CZ_TYPE == "Z"].merge(zc, left_on=["state_fips", "cz"], right_on=["state_fips", "zone"])
+    return pd.concat([county[["fips", "year"]], zone[["fips", "year"]]]).drop_duplicates()
+
+
+def storm_split(df, c, storms):
+    """The county blind test (point in time) with each county's tropical-storm years taken out of 2015-2024,
+    and how much of the surprise in unflagged counties came in those years."""
+    t = point_in_time(df)
+    w = c[(c.year >= TEST[0]) & (c.year <= TEST[1])].merge(storms.assign(storm=True), on=["fips", "year"], how="left")
+    w["storm"] = w.storm.fillna(False).astype(bool)
+    n_storm = storms.groupby("fips").year.nunique().reindex(t.index).fillna(0)
+    calm = w[~w.storm].groupby("fips").bldg_real.sum().reindex(t.index).fillna(0) / (TEST[1] - TEST[0] + 1 - n_storm).where(n_storm < 10)
+    storm_paid = w[w.storm].groupby("fips").bldg_real.sum().reindex(t.index).fillna(0) / (TEST[1] - TEST[0] + 1)
+    ok = t.insured_test > 0
+    nat = calm[ok].sum() / t.loc[ok, "insured_test"].sum()
+    calm_t = t.assign(paid_test=calm, rel_test=calm / t.insured_test.where(ok) / nat, chr_test=calm / t.insured_test.where(ok) / nat,
+                      insured_model=t.insured_test)
+    calm_t.attrs["nat_rel_test"] = nat
+    res, _ = holdout(calm_t)
+    _, d = holdout(t.assign(insured_model=t.insured_test))
+    flag = d.train_cred >= 1.5
+    excess = (d.paid_test - d.exp_test).clip(lower=0)
+    share = (storm_paid.reindex(d.index) / d.paid_test.where(d.paid_test > 0)).fillna(0)
+    res["storm_county_years"] = int(len(storms))
+    res["counties_with_storm"] = int((n_storm > 0).sum())
+    res["unflagged_excess_in_storm_years"] = float((excess * share)[~flag].sum() / excess[~flag].sum())
+    return res
+
+
+def tract_holdout(df, c, tracts, tc):
+    """The blind test on census tracts, plus the question the county test leaves open: inside counties the
+    county score did not flag, does the tract score find where the 2015-2024 surprise landed?"""
+    res, d = holdout(tracts)
+    _, dc = holdout(point_in_time(df).assign(insured_model=lambda x: x.insured_test))
+    in_flagged_county = d.county_fips.map(dc.train_cred >= 1.5).fillna(False).astype(bool)
+    inside = d[~in_flagged_county]
+    flag, hi = inside.train_cred >= 1.5, inside.rel_test >= 1.5
+    excess = (inside.paid_test - inside.exp_test).clip(lower=0)
+    res["in_unflagged_counties"] = {
+        "tracts": int(len(inside)), "flagged": int(flag.sum()), "base_rate_high": float(hi.mean()),
+        "hit_rate_flagged": float(hi[flag].mean()), "hit_rate_low_flag": float(hi[inside.train_cred <= 0.8].mean()),
+        "excess_share_in_flagged_tracts": float(excess[flag].sum() / excess.sum())}
+    res["tracts_total"] = int(len(tracts))
+    res["claims_on_a_tract"] = float(tc.paid_claims.sum() / c.paid_claims.sum())
+    return res

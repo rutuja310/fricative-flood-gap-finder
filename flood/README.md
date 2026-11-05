@@ -11,6 +11,8 @@ County-by-county grow / re-price / hold / avoid calls for a private flood insure
 | Memo | https://claude.ai/artifact/RPDn32fitiTPVDedgiZcNS |
 | Loom script | https://claude.ai/artifact/HBS1jnxXFPzNZisXVJgH11 |
 | Fetch raw data | `sh flood/src/fetch_raw.sh` → `flood/raw/` (not in git) |
+| Point-in-time policies (optional) | `sh flood/src/fetch_policies_api.sh` → `flood/raw/policies/` (hours when the API is slow; adds the point-in-time backtest) |
+| Tracts and storms (optional) | `sh flood/src/fetch_tracts.sh` → NRI tracts, ACS homes, tract crosswalk, NOAA storms (about a minute; adds the tract and storm-years-out tests) |
 | Analysis | `flood/src/flood.py` (scores, calls, blind test) |
 | Run everything | `python3 flood/src/run_flood.py` → `flood/out/` and `flood/demo/data.json` |
 | Scheduled refresh | `python3 flood/src/refresh.py --monthly | --quarterly | --storms | --followups [--publish]` → `flood/out/reports/`; `--publish` commits and pushes so the site updates |
@@ -25,17 +27,18 @@ County-by-county grow / re-price / hold / avoid calls for a private flood insure
 - **CPI-U annual averages:** hard-coded in `flood.py`.
 - **Census ACS 2019–2023 (B19013 income, B25077 home value):** keyless summary files from www2.census.gov.
 - **FEMA disaster declarations (v2):** OpenFEMA API, read by `refresh.py --storms`.
+- **NFIP policies in force (v3 `NfipPolicies`), 1 July 2014 and 2019:** OpenFEMA API, one day of effective dates per call (the parquet is refused and deep paging times out). Used only by the point-in-time backtest.
 
 ## This quarter's lists
 
 - **Grow:** top 5 by modeled loss on homes without NFIP cover. Counties must be affordable and agree over the last ten years, with at most 2 per state.
 - **Re-price and Pause:** top 5 by score. Counties need 300+ paid claims and must agree over the last ten years.
 
-Backtest (lists made with data to 2014, top 25, losses vs model in 2015–2024):
-- Grow: 0.24×.
-- Pause: 2.06×.
-- Re-price: 0.41×. Weak, so treat it as a review list.
-- All counties: 1.02×.
+Backtest (lists made with data to 2014, top 25, losses vs model in 2015–2024). The insured share is the one known at each step (policies in force July 2014 to score, July 2019 to judge); today's share for every year is in brackets:
+- Grow: 0.16× (0.24×).
+- Pause: 2.24× (2.06×).
+- Re-price: 0.91× (0.41×). No better than all counties, so treat it as a review list.
+- All counties: 1.01× (1.02×).
 
 ## The score
 
@@ -52,7 +55,9 @@ Calls:
 ## Blind test
 
 Scores use 1978–2014 only and are checked against 2015–2024.
-- **By county count:** flagged-high counties ran high 24.6% of the time, vs 12.5% for flagged-low and a 17.9% base rate.
-- **By dollars:** 86% of the losses above the model landed in unflagged counties.
+- **By county count:** flagged-high counties ran high 29.2% of the time, vs 11.8% for flagged-low and a 20.5% base rate (today's share: 24.6%, 12.5%, 17.9%).
+- **By dollars:** 82% of the losses above the model landed in unflagged counties (86% with today's share).
+- **Storm years out (NOAA Storm Events):** 80% of that unflagged excess came in years a hurricane, tropical storm or storm surge hit the county. With those years taken out of 2015–2024, flagged-high counties ran high 45%, vs 12% flagged-low and a 33% base rate (the base rate rises because storm dollars also leave the national norm). The score reads lasting gaps; it can't place the next hurricane.
+- **Census tracts (2020 tracts; 97% of claims carry a tract code):** the same point-in-time test on 6,750 tracts with 30+ claims to 2014. Flagged-high tracts ran high 35%, vs 14% flagged-low and a 25% base rate (Spearman 0.24). Losses above the model in unflagged areas fall to 69% (82% by county). Inside counties the county score did not flag, flagged tracts ran high 44% (base 26%, flagged-low 17%) and held 24% of those counties' excess: the tract score finds part of what the county score misses.
 
 So the tool is a pricing signal and needs a concentration cap.

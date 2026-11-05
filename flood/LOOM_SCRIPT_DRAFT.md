@@ -1,6 +1,6 @@
 # Loom script draft (5 min) and hand-off
 
-Draft spoken text, about 795 words, roughly 5:05 at 155 words a minute. Lead with the recommendation; each part answers a question in the brief.
+Draft spoken text, about 870 words, roughly 5:35 at 155 words a minute. Lead with the recommendation; each part answers a question in the brief.
 
 ## Hand-off
 1. Done (5 Nov 2026): this script is in the Loom script doc (https://claude.ai/artifact/HBS1jnxXFPzNZisXVJgH11), replacing the old 12-slide version, with a run-of-show table, the demo clicks as a numbered list and the recording checklist updated. Demo link: https://rutuja310.github.io/fricative-flood-gap-finder/
@@ -12,7 +12,7 @@ Draft spoken text, about 795 words, roughly 5:05 at 155 words a minute. Lead wit
 
 Hi, I'm Rutuja. This tool is for one person: the head of underwriting at a young private flood insurer, who decides each quarter which counties to grow in, which to re-price and where to stop writing. My recommendation, up front. Pause new business in five river counties where insured homes have lost 13 to 50 times what FEMA's flood model predicts. Send the re-price list to pricing as a review list, not a decision. And treat the grow list as a screen, capped at two counties per state.
 
-Why this decision, and why now? Only 3 in 100 US homes have federal flood cover, against 64 billion dollars a year of modeled flood damage. That gap is the private market's opportunity, opening now: the NFIP couldn't write new policies in the October 2025 shutdown, and the largest private writer quadrupled its book in four years. Growing that fast on a model nobody has checked against claims piles the book up where the next storm lands. So the real question isn't how to sell more. It's where.
+Why this decision, and why now? Only 3 in 100 US homes have federal flood cover, against 64 billion dollars a year of modeled flood damage. That gap is the private market's opportunity, opening now: the NFIP couldn't write new policies in the October 2025 shutdown, and the largest private writer, Neptune Flood, quadrupled its book in four years. Growing that fast on a model nobody has checked against claims piles the book up where the next storm lands. So the real question isn't how to sell more. It's where.
 
 ## Part 2 · Slides 3–4 · 1:10–1:35 · Who decides and why it's hard today
 
@@ -32,23 +32,23 @@ Grow: Los Angeles. Claims have run at 0.4 times the model, and only half a perce
 
 The storm watch reads FEMA declarations daily. Replaying Hurricane Isaias, 10 of the 15 Florida counties declared were already on our lists. The plan downloads as a spreadsheet.
 
-## Part 4 · Slides 6–8 · 2:30–3:15 · Why trust the call
+## Part 4 · Slides 6–9 · 2:30–3:45 · Why trust the call
 
 Behind the site: a monthly refresh, the quarterly plan and the daily storm watch, each sending a report.
 
-Why trust it? It joins six public sources on the county code: claims, insured share, FEMA's model, Census income, disaster declarations and prices. Then the test. I built the lists with data only through 2014 and checked the next ten years. Pause counties lost twice what the model predicted; 72 percent ran above it, against 26 percent of all counties. Grow counties lost a quarter of it. Re-price didn't beat the baseline, which is exactly why I recommend it as a review list.
+Why trust it? It joins six public sources on the county code: claims, insured share, FEMA's model, Census income, disaster declarations and prices. Then the test. I built the lists with only what was known in 2014, including how many homes were insured then, and checked the next ten years. Pause counties lost more than twice what the model predicted; 76 percent ran above it, against 27 percent of all counties. Grow counties lost a sixth of it. Re-price didn't beat the baseline, which is exactly why I recommend it as a review list. And what it misses is mostly hurricanes: NOAA's records put 80 percent of the surprise in unflagged counties in storm years. Take those years out, and flagged counties ran high 45 percent of the time, against 12 for low. What would sharpen the test isn't public: the insurer's own book and model, private flood claims, and home-level flood depth from paid vendors.
 
 The score: actual claims over what the model expects, worst year left out so one storm can't set a price, and pulled toward average when data is thin.
 
-## Part 5 · Slide 9 · 3:15–4:20 · Sources dropped, where the data didn't line up, where AI helped and was checked
+## Part 5 · Slide 10 · 3:45–4:50 · Sources dropped, where the data didn't line up, where AI helped and was checked
 
 Sources I dropped: private flood data and vendor models, because they aren't public; NAIC's private flood data, because it's state level only. Where the data didn't line up: the original pitch said 45 of 52 billion dollars of loss sat in under-insured counties; on current FEMA data it's 32.5 of 66. Western North Carolina looked like 12 to 20 times the model; it's 1.8, and 0.6 without Helene. One storm. That's why the worst year comes out. And ranking by dollars just picked the Katrina and Sandy counties, so lists rank by evidence.
 
-AI helped me pull and join 2.7 million claims and build the pipeline and site in days. But I had to check it. It repeated the pitch's numbers until I recomputed them. It wrote a baseline of 1.00 before computing it; the real number is 1.02. And it offered New Orleans as a pause example, which is a hold once Katrina is left out. My rule became: no number on a slide I haven't recomputed.
+AI helped me pull and join 2.7 million claims and build the pipeline and site in days. But I had to check it. It repeated the pitch's numbers until I recomputed them. It wrote a baseline of 1.00 before computing it; the real number is 1.01. And it offered New Orleans as a pause example, which is a hold once Katrina is left out. My rule became: no number on a slide I haven't recomputed.
 
-## Part 6 · Slide 10 · 4:20–5:05 · Where it breaks, another week, what would change the call
+## Part 6 · Slide 11 · 4:50–5:35 · Where it breaks, another week, what would change the call
 
-Where it breaks: it's FEMA's model, not the insurer's; a county is too coarse to price a home; and NFIP claims aren't their book. History can't see the next big storm: 86 percent of losses above the model hit counties we hadn't flagged. That's why growth is capped and there's a storm watch. And dry counties top the grow list, so it's a screen, not a plan.
+Where it breaks: it's FEMA's model, not the insurer's; a county is too coarse to price a home; and NFIP claims aren't their book. History can't see the next big storm: 82 percent of losses above the model hit counties we hadn't flagged. That's why growth is capped and there's a storm watch. And dry counties top the grow list, so it's a screen, not a plan.
 
 With another week: validate with three to five underwriters, fix the grow list with disaster history and demand signals, and let insurers test their own model against our claims file.
 

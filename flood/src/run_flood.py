@@ -28,6 +28,13 @@ def main():
     ho, hod = F.holdout(df)
     plan = F.plan(df)
     list_bt = F.backtest_lists(df, claims)
+    # The same tests with the insured share known at each step (NFIP policy snapshots), when fetched
+    pit = "insured_then" in df
+    if pit:
+        list_bt_pit = F.backtest_lists(df, claims, pit=True)
+        ho_pit, _ = F.holdout(F.point_in_time(df).assign(insured_model=lambda t: t.insured_test))
+    # Finer and fairer: the same blind test on census tracts, and with tropical-storm years taken out (NOAA)
+    tr, storms = (F.build_tracts(df), F.load_storms()) if pit else (None, None)
 
     cols = ["county", "state", "population", "pen", "policies", "homes", "ealb", "ealb_inland", "ealb_coastal",
             "insured_model", "paid_bldg", "paid_bc", "paid_bldg_ex2024", "paid_2024", "claims_n",
@@ -100,6 +107,15 @@ def main():
         "top_grow": top_grow[["county", "state", "pen", "ealb", "homes", "policies", "chr_cred", "action"]]
         .reset_index().to_dict("records"),
     }
+    if pit:
+        summary["list_backtest_pit"] = list_bt_pit
+        summary["holdout_pit"] = {k: (r(v, 4) if isinstance(v, float) else v) for k, v in ho_pit.items()}
+        summary["pit_snapshots"] = {"then": F.SNAP_THEN, "test": list(F.SNAP_TEST)}
+    clean = lambda res: {k: (r(v, 4) if isinstance(v, float) else v) for k, v in res.items()}  # noqa: E731
+    if tr is not None:
+        summary["holdout_tracts"] = clean(F.tract_holdout(df, claims, *tr))
+    if storms is not None:
+        summary["holdout_storm_years_out"] = clean(F.storm_split(df, claims, storms))
     (OUT / "summary.json").write_text(json.dumps(summary, indent=1, default=str))
     hod.to_csv(OUT / "holdout_counties.csv")
     df[["action", "chr_cred"]].to_csv(OUT / "calls_snapshot.csv")

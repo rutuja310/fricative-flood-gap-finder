@@ -1,11 +1,11 @@
 #!/bin/sh
 # Fallback for when the claims parquet download is refused: page the OpenFEMA v3 NfipClaims API
-# (10,000 rows per call, five columns) into flood/raw/claims/claims_api.csv.
+# (10,000 rows per call, seven columns) into flood/raw/claims/claims_api.csv.
 set -e
 R="$(cd "$(dirname "$0")/.." && pwd)/raw/claims"
 mkdir -p "$R/pages"
 API='https://www.fema.gov/api/open/v3/NfipClaims'
-SEL='countyCode,yearOfLoss,amountPaidOnBuildingClaim,amountPaidOnContentsClaim,id'
+SEL='countyCode,censusGeoid,floodEvent,yearOfLoss,amountPaidOnBuildingClaim,amountPaidOnContentsClaim,id'
 N=$(curl -sS "$API?\$top=1&\$select=id&\$inlinecount=allpages" | sed -n 's/.*"count":\([0-9]*\).*/\1/p')
 echo "rows: $N"
 skip=0

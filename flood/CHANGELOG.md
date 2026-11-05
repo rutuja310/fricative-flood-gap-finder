@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+### Point-in-time backtest (5 Nov 2026)
+
+- **The backtest no longer has to use today's insured share.** `fetch_policies_api.sh` pulls NFIP policies in force on 1 July 2014 and 1 July 2019 from OpenFEMA (one day of effective dates per call; the parquet is refused and deep paging times out). `flood.py` scores the 2014 lists using 2014 policies and judges 2015–24 using 2019 policies (`load_policies`, `point_in_time`, `backtest_lists(pit=True)`). `run_flood.py` writes `list_backtest_pit` and `holdout_pit` next to the existing results. FEMA's model is still today's (NRI didn't exist in 2014).
+- **The results hold or get stronger** (top 25, losses in 2015–24 vs the model; current method in brackets):
+  - Grow: 0.16× (0.24×).
+  - Re-price: 0.91× (0.41×). Still no better than all counties, so it stays a review list.
+  - Pause: 2.24× (2.06×), with 76% running above the model (72%).
+  - All counties: 1.01× (1.02×).
+- **Blind test:** counties flagged high ran high again 29.2% of the time (24.6%), against 20.5% for any county (17.9%) and 11.8% for counties flagged low (12.5%). Rank correlation 0.32 (0.25). 82% of the losses above the model hit unflagged counties (86%).
+- Not yet in `flood/out/`, the deck or the demo: the pipeline hasn't been re-run.
+
+### Storm years out, and a tract-level test (5 Nov 2026)
+
+- **Storm split (NOAA Storm Events 2015–2024, zone-coded events mapped to counties with NWS's zone-county file).** `load_storms` and `storm_split` rerun the point-in-time blind test with each county's hurricane, tropical storm and storm surge years taken out of 2015–2024 (2,244 county-years, 790 counties). Flagged high ran high 45%, any county 33%, flagged low 12% (lift vs low 3.8×, from 2.5×); Spearman 0.34. 80% of the losses above the model in unflagged counties came in those storm years. Slide 9's callout, footer and notes, the Loom doc and this draft say so (script about 870 words, 5:35).
+- **Tract-level test.** `fetch_tracts.sh` pulls the NRI v1.20 tract table, ACS B25001 housing units, the 2010→2020 tract relationship file, NOAA details and the zone-county file; `fetch_claims_api.sh` now also pulls `censusGeoid` and `floodEvent`. `build_tracts` and `tract_holdout` run the same point-in-time method on 2020 tracts (2010-coded claims and policies split by land area; 97% of paid claims land on a tract). On 6,750 tracts with 30+ claims to 2014: flagged high ran high 35%, any tract 25%, flagged low 14%; Spearman 0.24; 69% of losses above the model in unflagged tracts (82% by county). Inside counties the county score didn't flag, flagged tracts ran high 44% (base 26%) and held 24% of the excess. Recorded in `summary.json` (`holdout_tracts`, `holdout_storm_years_out`) and the README; kept out of the deck and video. County results are unchanged by the new claims download.
+
+### Slide 9 on point-in-time numbers; non-public data only (5 Nov 2026)
+
+- **Slide 9 now shows the point-in-time backtest**: Grow 0.16×, Re-price 0.91×, all counties 1.01×, Pause 2.24× (4%, 28%, 27%, 76% ran above the model); blind test 29.2% / 20.5% / 11.8%, and 82% of losses above the model in unflagged counties. The footer names the 2014 and 2019 policy snapshots. `run_flood.py` was re-run, so `summary.json` carries both versions; the other outputs differ only in float rounding. README, the Loom script draft and the Loom doc use the new numbers.
+- **"What would sharpen the test" now lists only data we can't get publicly**: the insurer's book by address and their own model (from the insurer), private flood claims (paid industry data; public claims cover the NFIP only) and home-level flood depth and floor height (paid risk-vendor APIs). Policies by year is done; claims by census tract and NOAA storm data are public, so they belong in the tool, not on the wish list.
+
+### Deck: backtest slide (5 Nov 2026)
+
+- **New slide 9, "Tested on a decade it hadn't seen",** between the method and the story slides. Left: each list's top 25 counties (built on data to 2014), with 2015–24 losses as a multiple of FEMA's model: Grow 0.24×, Re-price 0.41×, all counties 1.02×, Pause 2.06×, with the share that ran above the model (4%, 20%, 26%, 72%). Right: the county blind test (flagged high ran high again 24.6% vs 17.9% for any county and 12.5% flagged low), plus the catch that 86% of losses above the model hit unflagged counties.
+- **Slide 9 adds "What would sharpen the test"** as a band across the bottom; the chart and blind-test card are shorter to make room. It lists four items: policies in force by year (the expected loss uses the 2026 insured share and today's NRI for every past year, so the 2014 lists lean on later information); claims by census tract; NOAA storm tracks and rainfall, to tell one bad storm from a lasting gap; and the insurer's own model. The first three are public. The Loom script's slide 9 line gained one sentence on this (about 830 words, about 5:20).
+- **Slide 7 (architecture): the "alpha" card is replaced by "How it runs"**: 2.7M NFIP claims (1978–2025), 3,232 counties scored every run, 6 public sources joined on one county key, and about 1 minute for a full refresh. This means the backtest numbers appear only on slide 9. The footer now lists the sources, and the speaker notes match.
+- **Deck is now 11 slides.** The Loom script doc moves the backtest lines from slide 7 to the new slide 9 and renumbers the story (10) and next steps (11); the run of show and this draft match.
+
 ### Loom script: 5-minute version in the doc (5 Nov 2026)
 
 - **The Loom script doc now holds the decision-led 5-minute script**, replacing the 7½-minute, 12-slide version. Slide numbers match the 10-slide deck.
