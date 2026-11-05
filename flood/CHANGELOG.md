@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+### Next steps from the side discussion (5 Nov 2026)
+
+Added to the deck's next-steps slide (three columns: Bring your own model / Make it usable, and right / Sharpen the story), its speaker notes, the Loom script (Slide 12) and the memo:
+
+1. **Bring your own model** (a next step, not built in). From their vendor model's county or ZIP losses: gap vs the US norm, pattern vs one storm, still true 2016–2025, claims depth, a blind test against their model, their model vs FEMA's with claims as the tie-breaker, and their book's share in hot counties. Wording: "Vendors calibrate on NFIP claims in total; we test where your model still misses, county by county, and whether those misses repeat."
+2. **No uploads: download and merge** on the FIPS code via a ZIP-to-county crosswalk, with a data dictionary, a stable versioned layout, raw ingredients, and later a ZIP-level file.
+3. **Reframe the pitch as a growth-targeting screen for young MGAs** opening a new state, with re-price and pause as "don't grow here" checks.
+4. **Fix the grow list** (the dry-county problem): disaster-declaration history, demand signals (NFIP policy trend, share of homes in mapped flood zones, mortgage share), and a tail stress test with a numeric cap per storm footprint.
+5. **Go below county level:** tract or ZIP gaps for the big grow counties.
+6. **Validate with 3–5 underwriters,** including whether they'd act on the grow counties.
+7. **Name the limits upfront:** county is too coarse, FEMA's model, NFIP isn't their book, the grow list looks off.
+8. **Research a pivot:** flood exposure on a regional lender's mortgage book.
+
+Kept from before: phase two (how much to re-price) and the one-quarter pilot. The Loom script's demo clicks were also updated for the hover bar and the methodology panel (they referred to removed sections), and the timing is now about 7½ minutes.
+
 ### Methodology panel (5 Nov 2026)
 
 - **Three buttons replace the dense footer text:** "How a call is made", "How the lists are ranked" and "Limits". Each opens a side panel; tabs inside switch between the three, and ×, Escape or a click outside closes it.
