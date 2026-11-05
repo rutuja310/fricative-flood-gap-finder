@@ -52,7 +52,27 @@ button:focus-visible, input:focus-visible, li[tabindex]:focus-visible { outline:
 /* This quarter's plan */
 .plan-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
 .lists { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-@media (max-width: 980px) { .lists { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 860px) { .lists { grid-template-columns: minmax(0, 1fr); } }
+/* Plan bar: three decision tiles; hovering (or clicking / focusing) a tile opens its top 5 below it */
+.tile { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+.tile.open, .tile:focus-within { z-index: 30; }
+.tile-head { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline; text-align: left;
+  padding: 14px 16px; background: transparent; border: 0; color: var(--ink); font: inherit; cursor: pointer; border-radius: 10px; }
+.tile-head:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.tile-t { color: var(--ci); font-weight: 600; font-size: 1.2rem; }
+.tile-n { font-size: .78rem; font-weight: 600; color: var(--ci); border: 1px solid currentColor; border-radius: 999px; padding: 1px 9px; white-space: nowrap; }
+.tile-head .list-sub, .tile-peek { grid-column: 1 / -1; }
+.tile-peek { font-size: .82rem; color: var(--muted); display: flex; gap: 6px; align-items: center; min-width: 0; }
+.tile-peek span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.chev { flex: none; width: 9px; height: 9px; border-right: 2px solid var(--ci); border-bottom: 2px solid var(--ci); transform: rotate(45deg); margin: -4px 2px 0 auto; }
+.tile.open .chev { transform: rotate(-135deg); margin-top: 3px; }
+.pop { display: none; position: absolute; left: -1px; right: -1px; top: calc(100% - 6px); padding: 6px 12px 14px;
+  background: var(--panel); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 10px 10px;
+  box-shadow: 0 18px 36px -12px rgba(10, 18, 26, .35); gap: 10px; }
+.tile.open { border-radius: 10px 10px 0 0; }
+.tile.open .pop { display: grid; }
+.pop-tools { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; padding-top: 4px; border-top: 1px solid var(--line); padding-top: 10px; }
+@media (max-width: 860px) { .pop { position: static; box-shadow: none; border: 0; padding: 0 12px 14px; } .tile.open { border-radius: 10px; } }
 .list { border-top: 6px solid var(--c); }
 .list.grow { --c: var(--grow); --ci: var(--grow-ink); } .list.re-price { --c: var(--reprice); --ci: var(--reprice-ink); } .list.pause { --c: var(--pause); --ci: var(--pause-ink); }
 .list-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
@@ -164,7 +184,7 @@ footer a { color: inherit; }
     <div class="plan-head">
       <div style="display:grid;gap:4px"><p class="eyebrow" id="plan-date">This quarter's plan</p><h2 id="plan-h">Top 5 counties for each decision</h2></div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
-        <p class="note">Click a county to see why. “Show on map” highlights a list.</p>
+        <p class="note">Hover a decision to see its top 5 counties; click a county to see why.</p>
         <a class="dl-btn" data-dl="downloads/plan.xlsx" href="downloads/plan.xlsx" download>Download the plan (Excel)</a>
       </div>
     </div>
@@ -268,24 +288,50 @@ footer a { color: inherit; }
     "pause": (v) => `Lists like this made in 2014 lost <b>${v.next_decade_dollars_vs_model.toFixed(2)}×</b> the model over 2015–24; ${pct(v.share_ran_above_model, 0)} ran above it (all counties: ${pct(base.share_ran_above_model, 0)}).`,
   };
   $("lists").innerHTML = Object.entries(META).map(([k, [t, sub, bk]]) => `
-    <div class="panel list ${k}">
-      <div class="list-top"><div><h2>${t}</h2><p class="list-sub">${sub}</p></div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><button class="show-btn" aria-pressed="false" data-list="${k}">Show on map</button>
-        <a class="show-btn" data-dl="downloads/plan-${k}.csv" href="downloads/plan-${k}.csv" download style="text-decoration:none">CSV</a></div></div>
+    <div class="tile list ${k}" data-k="${k}">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="pop-${k}">
+        <span class="tile-t">${t}</span><span class="tile-n">Top ${(S.plan[k] || []).length}</span>
+        <span class="list-sub">${sub}</span>
+        <span class="tile-peek"><span>${(S.plan[k] || []).slice(0, 3).map(r => esc(r.county)).join(" · ")}${(S.plan[k] || []).length > 3 ? " …" : ""}</span><i class="chev" aria-hidden="true"></i></span>
+      </button>
+      <div class="pop" id="pop-${k}" role="region" aria-label="${t}: top ${(S.plan[k] || []).length} counties">
+      <div class="pop-tools"><button class="show-btn" aria-pressed="false" data-list="${k}">Show on map</button>
+        <a class="show-btn" data-dl="downloads/plan-${k}.csv" href="downloads/plan-${k}.csv" download style="text-decoration:none">CSV</a></div>
       <ol>${(S.plan[k] || []).map((r, i) => `
         <li tabindex="0" data-id="${r.fips}"><span class="rk">${i + 1}</span>
           <div><div class="nm">${esc(r.county)}, ${esc(r.state)}</div>
           <div class="rs">${esc(r.headline.replace(/^[^:]+:\s*/, "").replace(/\.$/, ""))}</div>
           <div class="rc">Still true recently: ${esc((r.recent || "").replace(/^Yes:\s*/, ""))}</div></div></li>`).join("")}</ol>
       <p class="bt-line">${lbt[bk] ? btText[k](lbt[bk]) : ""}</p>
+      </div>
     </div>`).join("");
+  // Open on hover (with a short close delay so the pointer can travel into the list), on click/tap, and on focus.
+  const tiles = [...document.querySelectorAll(".tile")];
+  const setOpen = (tile, on) => {
+    tile.classList.toggle("open", on);
+    tile.querySelector(".tile-head").setAttribute("aria-expanded", String(on));
+  };
+  const closeAll = (except) => tiles.forEach(t => { if (t !== except) setOpen(t, false); });
+  const canHover = matchMedia("(hover: hover)").matches;
+  tiles.forEach(tile => {
+    let timer = null;
+    if (canHover) {
+      tile.addEventListener("mouseenter", () => { clearTimeout(timer); closeAll(tile); setOpen(tile, true); });
+      tile.addEventListener("mouseleave", () => { timer = setTimeout(() => setOpen(tile, false), 220); });
+    }
+    tile.querySelector(".tile-head").addEventListener("click", () => { const on = !tile.classList.contains("open"); closeAll(tile); setOpen(tile, on); });
+    tile.addEventListener("focusout", (e) => { if (!tile.contains(e.relatedTarget)) setOpen(tile, false); });
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeAll(); });
+  document.addEventListener("click", (e) => { if (!e.target.closest(".tile")) closeAll(); });
   document.querySelectorAll(".list li").forEach(li => {
-    const go = () => { select(li.dataset.id); $("sheet").scrollIntoView({ behavior: "smooth", block: "nearest" }); };
+    const go = () => { select(li.dataset.id); closeAll(); $("sheet").scrollIntoView({ behavior: "smooth", block: "nearest" }); };
     li.addEventListener("click", go); li.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
   });
-  document.querySelectorAll(".show-btn").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("button.show-btn").forEach(b => b.addEventListener("click", () => {
     listShown = listShown === b.dataset.list ? null : b.dataset.list;
-    document.querySelectorAll(".show-btn").forEach(o => o.setAttribute("aria-pressed", String(o.dataset.list === listShown)));
+    document.querySelectorAll("button.show-btn").forEach(o => o.setAttribute("aria-pressed", String(o.dataset.list === listShown)));
+    closeAll();
     if (listShown) { filter = "all"; document.querySelectorAll("#seg button").forEach(o => o.setAttribute("aria-pressed", String(o.dataset.a === "all"))); }
     restyle();
     $("map").scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -333,7 +379,7 @@ footer a { color: inherit; }
   document.querySelectorAll("#seg button").forEach(b => b.addEventListener("click", () => {
     filter = b.dataset.a; listShown = null;
     document.querySelectorAll("#seg button").forEach(o => o.setAttribute("aria-pressed", String(o === b)));
-    document.querySelectorAll(".show-btn").forEach(o => o.setAttribute("aria-pressed", "false"));
+    document.querySelectorAll("button.show-btn").forEach(o => o.setAttribute("aria-pressed", "false"));
     restyle();
   }));
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", restyle);

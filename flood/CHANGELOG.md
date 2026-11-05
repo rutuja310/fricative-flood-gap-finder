@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Plan hover bar (5 Nov 2026)
+
+- **Compact plan.** The three full top-5 lists at the top are now a bar of three tiles: Grow, Re-price, Pause. Each tile shows the decision, what to do, and the first three counties.
+- **Dropdowns.** Hovering a tile opens its top 5 counties, with reasons, the recent-years check, "Show on map", the CSV link and the backtest line. Click or tap also opens it (phones), as does keyboard focus. Escape or a click outside closes it, and picking a county closes it and opens that county's panel. A short close delay lets the pointer move from the tile into the list.
+- **Fix.** The "CSV" link no longer also toggles "Show on map".
+
 ### Public site and downloads (5 Nov 2026)
 
 - **New repo.** The project moved to `rutuja310/fricative-flood-gap-finder`, with no Medicare files or history.
