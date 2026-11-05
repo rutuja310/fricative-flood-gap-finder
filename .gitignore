@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.DS_Store
+
+# Flood inputs are re-downloaded by flood/src/fetch_raw.sh
+flood/raw/

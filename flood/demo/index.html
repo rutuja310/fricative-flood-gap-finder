@@ -1,0 +1,424 @@
+<title>Flood Gap Finder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: an underwriting desk. This quarter's three lists first, then the map + county sheet that explain them, then reports and the evidence. */
+:root {
+  --bg: #f4f5f1; --panel: #fbfcf9; --ink: #15202b; --muted: #56616c; --line: #d8ddd5; --soft: #e9ece6;
+  --grow: #2a68ad; --reprice: #d07a22; --pause: #8f2d1b; --hold: #c7cdc5; --nodata: #eceee9;
+  --grow-ink: #2a68ad; --reprice-ink: #a9541a; --pause-ink: #8f2d1b; --warn-bg: #f6e6d6; --warn-ink: #7a3d10;
+  --ok: #2f7a4b; --model: #15202b; --bar: #2a68ad; --focus: #15202b;
+  --display: "Source Serif 4", Georgia, serif; --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11171d; --panel: #182029; --ink: #e8ece8; --muted: #a3adb5; --line: #2c3742; --soft: #212b35;
+  --grow: #5b9be0; --reprice: #e9963f; --pause: #e0644a; --hold: #46515b; --nodata: #1d252e;
+  --grow-ink: #7fb2ea; --reprice-ink: #f0a75a; --pause-ink: #ee8a74; --warn-bg: #3a2a1a; --warn-ink: #f3c79b;
+  --ok: #6fc48f; --model: #e8ece8; --bar: #5b9be0; --focus: #e8ece8; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11171d; --panel: #182029; --ink: #e8ece8; --muted: #a3adb5; --line: #2c3742; --soft: #212b35;
+  --grow: #5b9be0; --reprice: #e9963f; --pause: #e0644a; --hold: #46515b; --nodata: #1d252e;
+  --grow-ink: #7fb2ea; --reprice-ink: #f0a75a; --pause-ink: #ee8a74; --warn-bg: #3a2a1a; --warn-ink: #f3c79b;
+  --ok: #6fc48f; --model: #e8ece8; --bar: #5b9be0; --focus: #e8ece8; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 84rem; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 56px; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.1; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.05rem; font-family: var(--body); font-weight: 600; }
+p { margin: 0; }
+.eyebrow { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.lede { max-width: 70ch; color: var(--muted); font-size: 1.02rem; }
+.lede b { color: var(--ink); font-weight: 600; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.note { font-size: .8rem; color: var(--muted); max-width: 80ch; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 14px; min-width: 0; align-content: start; }
+button { font: inherit; }
+button:focus-visible, input:focus-visible, li[tabindex]:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* This quarter's plan */
+.plan-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.lists { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 980px) { .lists { grid-template-columns: minmax(0, 1fr); } }
+.list { border-top: 6px solid var(--c); }
+.list.grow { --c: var(--grow); --ci: var(--grow-ink); } .list.re-price { --c: var(--reprice); --ci: var(--reprice-ink); } .list.pause { --c: var(--pause); --ci: var(--pause-ink); }
+.list-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.list-top h2 { color: var(--ci); font-family: var(--body); font-weight: 600; font-size: 1.15rem; }
+.list-sub { font-size: .85rem; color: var(--muted); }
+.show-btn { font-size: .78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; }
+.show-btn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.list ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.list li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 8px; padding: 9px 8px; border-radius: 8px; cursor: pointer; }
+.list li:hover, .list li.on { background: var(--soft); }
+.list .rk { font-family: var(--mono); color: var(--ci); font-weight: 500; }
+.list .nm { font-weight: 600; }
+.list .rs { font-size: .85rem; color: var(--muted); }
+.list .rc { font-size: .78rem; color: var(--ok); }
+.bt-line { font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.bt-line b { color: var(--ink); font-weight: 600; }
+
+/* Map + county sheet */
+.desk { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .desk { grid-template-columns: minmax(0, 1fr); } }
+.tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.search { flex: 1 1 15rem; min-width: 0; display: flex; }
+.search input { width: 100%; font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font-size: .85rem; padding: 7px 12px; border: 0; background: transparent; color: var(--ink); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.grow { background: var(--grow); } .sw.re-price { background: var(--reprice); } .sw.pause { background: var(--pause); } .sw.hold { background: var(--hold); }
+.map { width: 100%; height: auto; display: block; }
+.map path.c { stroke: var(--panel); stroke-width: .25; cursor: pointer; }
+.map path.c.dim { opacity: .15; }
+.map path.c.sel { filter: brightness(1.08); }
+.map path.st { fill: none; stroke: var(--panel); stroke-width: 1; pointer-events: none; }
+.map .hl-halo { fill: none; stroke: var(--panel); stroke-width: 6; stroke-linejoin: round; }
+.map .hl-line { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linejoin: round; }
+.map .hl-ring { fill: none; stroke: var(--ink); stroke-width: 3; }
+.map .hl-ring-halo { fill: none; stroke: var(--panel); stroke-width: 7; }
+@media (prefers-reduced-motion: no-preference) {
+  .map path.c { transition: opacity .2s; }
+  .map .hl-ring { animation: hl-pulse 1.6s ease-in-out infinite; }
+  @keyframes hl-pulse { 50% { stroke-opacity: .55; } }
+}
+.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font-size: .8rem; padding: 6px 9px; border-radius: 6px; max-width: 18rem; z-index: 5; }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: .85rem; padding: 3px 10px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.pill.grow { color: var(--grow-ink); } .pill.re-price { color: var(--reprice-ink); } .pill.pause { color: var(--pause-ink); } .pill.hold { color: var(--muted); }
+.sheet-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; justify-content: space-between; }
+.headline { font-family: var(--display); font-size: 1.3rem; line-height: 1.3; text-wrap: pretty; }
+.check { font-size: .9rem; display: grid; gap: 4px; }
+.check .k { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.flag { background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 8px 12px; font-size: .88rem; }
+.kv { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; font-size: .9rem; margin: 0; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.kv .sec { grid-column: 1 / -1; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding-top: 6px; border-top: 1px solid var(--line); }
+.spark { width: 100%; height: auto; display: block; }
+.spark text { fill: var(--muted); font-family: var(--mono); font-size: 10px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .8rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.lg-bar { width: 10px; height: 10px; background: var(--bar); display: inline-block; }
+.lg-line { width: 16px; border-top: 2px dashed var(--model); display: inline-block; }
+
+/* Reports and evidence */
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: 20px; }
+.ev { display: grid; gap: 4px; padding: 10px 0; border-top: 1px solid var(--line); }
+.ev:first-of-type { border-top: 0; padding-top: 0; }
+.ev .t { font-weight: 600; }
+.ev .alert { color: var(--pause-ink); font-weight: 600; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+.lk { color: inherit; text-decoration: underline; background: none; border: 0; padding: 0; cursor: pointer; font-size: inherit; }
+.status { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: .9rem; margin: 0; }
+.status dt { color: var(--muted); } .status dd { margin: 0; }
+.strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.stat { background: var(--panel); padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
+.stat .v { font-family: var(--display); font-size: 1.7rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat .l { font-size: .82rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+th { text-align: left; font-weight: 500; color: var(--muted); font-size: .78rem; border-bottom: 1px solid var(--line); padding: 6px 8px; }
+td { padding: 7px 8px; border-bottom: 1px solid var(--soft); }
+td.r, th.r { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.bars { display: grid; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: 11rem 1fr 3.5rem; gap: 10px; align-items: center; font-size: .85rem; }
+@media (max-width: 520px) { .bar-row { grid-template-columns: 7.5rem 1fr 3rem; } }
+.bar-track { height: 14px; background: var(--soft); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--reprice); }
+.bar-fill.base { background: var(--hold); } .bar-fill.model { background: var(--muted); }
+footer { font-size: .8rem; color: var(--muted); display: grid; gap: 6px; max-width: 92ch; }
+footer a { color: inherit; }
+.loading { color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:10px">
+    <p class="eyebrow">Live demo · private flood underwriting · quarterly plan</p>
+    <h1>Flood Gap Finder</h1>
+    <p class="lede">This quarter's decisions for a private flood writer: <b>where to grow, what to re-price, where to pause.</b> Every call compares 48 years of what insured homes actually lost (NFIP claims, 1978–2025) with what the flood model predicts. Public data only.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="plan-h">
+    <div class="plan-head">
+      <div style="display:grid;gap:4px"><p class="eyebrow" id="plan-date">This quarter's plan</p><h2 id="plan-h">Top 5 counties for each decision</h2></div>
+      <p class="note">Click a county to see why. “Show on map” highlights a list.</p>
+    </div>
+    <div class="lists" id="lists"><p class="loading">Loading the plan…</p></div>
+  </section>
+
+  <section class="desk">
+    <div class="panel">
+      <div class="tools">
+        <label class="search" for="q"><input id="q" list="names" placeholder="Find a county, e.g. Buncombe, NC" autocomplete="off" aria-label="Find a county"></label>
+        <datalist id="names"></datalist>
+        <div class="seg" role="group" aria-label="Show call" id="seg">
+          <button aria-pressed="true" data-a="all">All</button>
+          <button aria-pressed="false" data-a="grow"><i class="sw grow"></i>Grow</button>
+          <button aria-pressed="false" data-a="re-price"><i class="sw re-price"></i>Re-price</button>
+          <button aria-pressed="false" data-a="pause"><i class="sw pause"></i>Pause</button>
+          <button aria-pressed="false" data-a="hold"><i class="sw hold"></i>Hold</button>
+        </div>
+      </div>
+      <svg class="map" id="map" viewBox="0 0 975 610" role="img" aria-label="US counties colored by call"></svg>
+      <p class="note">Colors show the call for every county. Grey: no strong signal or too little data. Connecticut appears grey because FEMA's risk index uses the state's new planning regions, which this map doesn't draw.</p>
+    </div>
+    <aside class="panel" id="sheet" aria-live="polite"><p class="loading">Select a county.</p></aside>
+  </section>
+
+  <section class="two">
+    <div class="panel">
+      <div><h2>Storm watch</h2><p class="note" id="storm-sub">FEMA disaster declarations for floods, hurricanes and tropical or coastal storms, checked daily.</p></div>
+      <div id="storms"></div>
+    </div>
+    <div class="panel">
+      <div><h2>Reports</h2><p class="note">The workflow re-runs the scores and writes these on a schedule.</p></div>
+      <dl class="status" id="status"></dl>
+      <p class="note">Monthly: when FEMA republishes claims or insured-share data, re-score and list counties whose call changed. Quarterly: this plan. Daily: storm watch, with re-checks 30, 60 and 90 days after each declaration, because claims reach FEMA's data over the following months.</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div><h2>Would these lists have worked?</h2>
+    <p class="note">The same rules, run on claims up to 2014 only, then checked against 2015–2024. “Losses vs model” compares what those counties actually lost with what the model predicted for that decade; pricing at the model would be 1.0×.</p></div>
+    <div class="tbl"><table id="lbt"></table></div>
+    <p class="note" id="lbt-read"></p>
+  </section>
+
+  <section class="strip" id="strip" aria-label="Headline numbers"></section>
+
+  <section class="panel">
+    <div><h2>Does the gap repeat? Blind test of the score</h2>
+    <p class="note">Counties scored on 1978–2014 claims only, then checked on 2015–2024. “Ran high” means losses at least 1.5× the model, relative to the US norm for that decade.</p></div>
+    <div class="bars" id="bt-bars"></div>
+  </section>
+
+  <footer>
+    <p><b>How a call is made.</b> Expected loss = FEMA National Risk Index modeled flood loss to buildings (inland + coastal, v1.20, Dec 2025) × the share of homes with NFIP cover (Aug 2026). Actual = NFIP building claims paid per year, 1978–2025, in 2024 dollars. Each county is compared with the US-wide ratio for the same years, with its single worst year left out so one storm doesn't decide the call. The result is shrunk toward 1 when the county has few claims (full weight at 1,082 paid claims). Pause: 3× or more. Re-price: 1.5× or more. Grow: 0.8× or less, with under 10% of homes insured. Hold: everything else.</p>
+    <p><b>How the lists are ranked.</b> Grow: modeled loss on homes without NFIP cover. Only affordable counties whose last ten years agree are included, at most 2 per state so the list never sits in one storm path. Re-price and Pause: strength of evidence. Only counties with 300+ paid claims whose last ten years agree are included.</p>
+    <p><b>Limits.</b> Private flood cover isn't public by county, so “homes without NFIP cover” is an upper bound on headroom, especially in Florida and Texas. Today's insured share stands in for past years. The model is FEMA's public one, not the insurer's own. Affordability uses Census ACS 2019–2023 median household income and home value; “modeled loss per home” spreads loss to all buildings over homes, so it overstates the cost per home.</p>
+    <p>Sources: <a href="https://www.fema.gov/about/openfema/data-sets" target="_blank" rel="noopener">OpenFEMA</a> (NFIP claims v3, residential penetration rates, disaster declarations) · <a href="https://www.arcgis.com/home/item.html?id=39485e8035d446a5bff03259508ae355" target="_blank" rel="noopener">FEMA National Risk Index counties</a> · <a href="https://www.census.gov/programs-surveys/acs/data/summary-file.html" target="_blank" rel="noopener">Census ACS summary files</a> · BLS CPI-U.</p>
+  </footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+(async function () {
+  const $ = (id) => document.getElementById(id);
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const COLOR = { "grow": "--grow", "re-price": "--reprice", "pause": "--pause", "hold": "--hold" };
+  const LABEL = { "grow": "Grow", "re-price": "Re-price", "pause": "Pause", "hold": "Hold" };
+  const money = (v) => v == null ? "–" : Math.abs(v) >= 1e9 ? "$" + (v / 1e9).toFixed(1) + "B" :
+    Math.abs(v) >= 1e6 ? "$" + (v / 1e6).toFixed(1) + "M" : Math.abs(v) >= 1e3 ? "$" + Math.round(v / 1e3) + "K" : "$" + Math.round(v);
+  const pct = (v, d = 1) => v == null ? "–" : (v * 100).toFixed(d) + "%";
+  const x = (v) => v == null ? "–" : v.toFixed(v >= 10 ? 0 : 1) + "×";
+  const int = (v) => v == null ? "–" : Math.round(v).toLocaleString("en-US");
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  let D, topo;
+  try {
+    [D, topo] = await Promise.all([fetch("data.json").then(r => r.json()), fetch("counties-10m.json").then(r => r.json())]);
+  } catch (e) {
+    $("lists").innerHTML = '<p class="note">Could not load the county data. Reload the page to try again.</p>';
+    return;
+  }
+  const C = D.counties, S = D.summary, NAT = D.nat_ratio, R = D.reports || {};
+  let filter = "all", selected = null, listShown = null;
+
+  // ---------- This quarter's plan ----------
+  const qd = R.quarterly && R.quarterly.date ? new Date(R.quarterly.date + "T12:00:00") : new Date();
+  $("plan-date").textContent = `This quarter's plan · Q${Math.floor(qd.getMonth() / 3) + 1} ${qd.getFullYear()}`;
+  const lbt = S.list_backtest.lists, base = S.list_backtest.baseline_all_counties;
+  const META = {
+    "grow": ["Grow", "Put agents, marketing and capacity here", "grow_top25"],
+    "re-price": ["Re-price", "Take these to the pricing team", "re-price_top25"],
+    "pause": ["Pause", "Stop new business or tighten terms", "pause_top25"],
+  };
+  const btText = {
+    "grow": (v) => `Lists like this made in 2014 lost <b>${v.next_decade_dollars_vs_model.toFixed(2)}×</b> the model over 2015–24; ${pct(v.share_ran_above_model, 0)} ran above it (all counties: ${pct(base.share_ran_above_model, 0)}).`,
+    "re-price": (v) => `Weak evidence: lists like this made in 2014 lost ${v.next_decade_dollars_vs_model.toFixed(2)}× the model over 2015–24. <b>Review with pricing; don't act on the list alone.</b>`,
+    "pause": (v) => `Lists like this made in 2014 lost <b>${v.next_decade_dollars_vs_model.toFixed(2)}×</b> the model over 2015–24; ${pct(v.share_ran_above_model, 0)} ran above it (all counties: ${pct(base.share_ran_above_model, 0)}).`,
+  };
+  $("lists").innerHTML = Object.entries(META).map(([k, [t, sub, bk]]) => `
+    <div class="panel list ${k}">
+      <div class="list-top"><div><h2>${t}</h2><p class="list-sub">${sub}</p></div>
+        <button class="show-btn" aria-pressed="false" data-list="${k}">Show on map</button></div>
+      <ol>${(S.plan[k] || []).map((r, i) => `
+        <li tabindex="0" data-id="${r.fips}"><span class="rk">${i + 1}</span>
+          <div><div class="nm">${esc(r.county)}, ${esc(r.state)}</div>
+          <div class="rs">${esc(r.headline.replace(/^[^:]+:\s*/, "").replace(/\.$/, ""))}</div>
+          <div class="rc">Still true recently: ${esc((r.recent || "").replace(/^Yes:\s*/, ""))}</div></div></li>`).join("")}</ol>
+      <p class="bt-line">${lbt[bk] ? btText[k](lbt[bk]) : ""}</p>
+    </div>`).join("");
+  document.querySelectorAll(".list li").forEach(li => {
+    const go = () => { select(li.dataset.id); $("sheet").scrollIntoView({ behavior: "smooth", block: "nearest" }); };
+    li.addEventListener("click", go); li.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+  });
+  document.querySelectorAll(".show-btn").forEach(b => b.addEventListener("click", () => {
+    listShown = listShown === b.dataset.list ? null : b.dataset.list;
+    document.querySelectorAll(".show-btn").forEach(o => o.setAttribute("aria-pressed", String(o.dataset.list === listShown)));
+    if (listShown) { filter = "all"; document.querySelectorAll("#seg button").forEach(o => o.setAttribute("aria-pressed", String(o.dataset.a === "all"))); }
+    restyle();
+    $("map").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }));
+
+  // ---------- Map ----------
+  const svg = d3.select("#map");
+  const feats = topojson.feature(topo, topo.objects.counties).features;
+  const proj = d3.geoAlbersUsa().fitSize([975, 610], topojson.feature(topo, topo.objects.nation));
+  const path = d3.geoPath(proj);
+  const fill = (id) => { const c = C[id]; return c ? css(COLOR[c.a]) : css("--nodata"); };
+  const onList = () => new Set(listShown ? (S.plan[listShown] || []).map(r => r.fips) : []);
+  const paths = svg.append("g").selectAll("path").data(feats).join("path")
+    .attr("class", "c").attr("d", path).attr("fill", d => fill(d.id))
+    .on("mousemove", (ev, d) => {
+      const c = C[d.id]; const t = $("tip"); if (!c) { t.hidden = true; return; }
+      t.innerHTML = `<b>${esc(c.n)}, ${esc(c.s)}</b><br>${LABEL[c.a]} · ${x(c.g)} the model · ${pct(c.p)} with NFIP cover`;
+      t.hidden = false; t.style.left = Math.min(ev.clientX + 12, innerWidth - 290) + "px"; t.style.top = (ev.clientY + 12) + "px";
+    })
+    .on("mouseleave", () => { $("tip").hidden = true; })
+    .on("click", (ev, d) => select(d.id));
+  svg.append("path").attr("class", "st").attr("d", path(topojson.mesh(topo, topo.objects.states, (a, b) => a !== b)));
+  const featById = new Map(feats.map(f => [f.id, f]));
+  const hl = svg.append("g").attr("pointer-events", "none").style("display", "none");
+  const hlHalo = hl.append("path").attr("class", "hl-halo");
+  const hlLine = hl.append("path").attr("class", "hl-line");
+  const hlRingHalo = hl.append("circle").attr("class", "hl-ring-halo");
+  const hlRing = hl.append("circle").attr("class", "hl-ring");
+
+  function restyle() {
+    const L = onList();
+    paths.attr("fill", d => fill(d.id))
+      .classed("dim", d => listShown ? !L.has(d.id) : (filter !== "all" && (!C[d.id] || C[d.id].a !== filter)))
+      .classed("sel", d => d.id === selected);
+    document.querySelectorAll(".list li").forEach(li => li.classList.toggle("on", li.dataset.id === selected));
+    const f = featById.get(selected);
+    if (!f) { hl.style("display", "none"); return; }
+    const d = path(f), [[x0, y0], [x1, y1]] = path.bounds(f), [cx, cy] = path.centroid(f);
+    hlHalo.attr("d", d); hlLine.attr("d", d);
+    const r = Math.max(18, Math.max(x1 - x0, y1 - y0) / 2 + 12);
+    hlRingHalo.attr("cx", cx).attr("cy", cy).attr("r", r);
+    hlRing.attr("cx", cx).attr("cy", cy).attr("r", r);
+    hl.style("display", null);
+  }
+  document.querySelectorAll("#seg button").forEach(b => b.addEventListener("click", () => {
+    filter = b.dataset.a; listShown = null;
+    document.querySelectorAll("#seg button").forEach(o => o.setAttribute("aria-pressed", String(o === b)));
+    document.querySelectorAll(".show-btn").forEach(o => o.setAttribute("aria-pressed", "false"));
+    restyle();
+  }));
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", restyle);
+  new MutationObserver(restyle).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  // ---------- Search ----------
+  const byName = {};
+  $("names").innerHTML = Object.entries(C).sort((a, b) => (a[1].n + a[1].s).localeCompare(b[1].n + b[1].s))
+    .map(([id, c]) => { const k = `${c.n}, ${c.s}`; byName[k.toLowerCase()] = id; return `<option value="${esc(k)}"></option>`; }).join("");
+  $("q").addEventListener("change", (e) => { const id = byName[e.target.value.trim().toLowerCase()]; if (id) select(id); });
+
+  // ---------- County sheet ----------
+  function spark(c) {
+    if (!c.ys) return '<p class="note">No NFIP claims on record for this county.</p>';
+    const W = 360, H = 120, L = 34, B = 18, yrs = D.years, n = yrs.length;
+    const expK = (c.im || 0) * NAT / 1000;
+    const max = Math.max(expK * 1.2, d3.max(c.ys)) || 1;
+    const sx = (i) => L + (i * (W - L - 4)) / n, bw = (W - L - 4) / n - 1;
+    const sy = d3.scaleSqrt().domain([0, max]).range([H - B, 6]);
+    let s = `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="Yearly NFIP building claims paid versus model expectation">`;
+    s += `<line x1="${L}" x2="${W}" y1="${H - B}" y2="${H - B}" stroke="${css("--line")}"/>`;
+    c.ys.forEach((v, i) => { if (v > 0) s += `<rect x="${sx(i)}" y="${sy(v)}" width="${Math.max(bw, 1)}" height="${H - B - sy(v)}" fill="${css("--bar")}"/>`; });
+    if (expK > 0) s += `<line x1="${L}" x2="${W}" y1="${sy(expK)}" y2="${sy(expK)}" stroke="${css("--model")}" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+    s += `<text x="${L - 4}" y="${sy(max) + 8}" text-anchor="end">${money(max * 1000)}</text>`;
+    s += `<text x="${L - 4}" y="${H - B}" text-anchor="end">0</text>`;
+    [[0, "start"], [22, "middle"], [n - 1, "end"]].forEach(([i, a]) => { s += `<text x="${i === n - 1 ? W - 2 : sx(i)}" y="${H - 4}" text-anchor="${a}">${yrs[i]}</text>`; });
+    return s + "</svg>";
+  }
+  function select(id, push = true) {
+    const c = C[id]; if (!c) return;
+    selected = id; restyle();
+    if (push) { try { history.replaceState(null, "", "#c" + id); } catch (e) {} }
+    const exp = c.im != null ? c.im * NAT : null;
+    const uninsured = c.h != null && c.pol != null ? c.h - c.pol : null;
+    const rest = (c.hl || c.w || "").replace(/^[^:]+:\s*/, "");
+    const flag = c.a === "grow" && c.af ? `<p class="flag"><b>Grow, slowly:</b> affordability will limit uptake here (median household income ${money(c.inc)}${c.lpi != null ? `; modeled flood loss per home is ${pct(c.lpi)} of it` : ""}).</p>` : "";
+    $("sheet").innerHTML = `
+      <div class="sheet-head"><div><p class="eyebrow">${esc(c.s)} · FIPS ${id}</p><h2>${esc(c.n)}</h2></div>
+        <span class="pill ${c.a}"><i class="sw ${c.a}"></i>${LABEL[c.a]}</span></div>
+      <p class="headline"><b>${LABEL[c.a]} ${esc(c.n)}:</b> ${esc(rest)}</p>
+      <div class="check"><span class="k">Still true recently?</span><span>${esc(c.rn || "–")}</span></div>
+      ${flag}
+      <div style="display:grid;gap:6px">${spark(c)}
+        <div class="legend"><span><i class="lg-bar"></i>NFIP building claims paid each year (2024 $)</span><span><i class="lg-line"></i>What the model predicts</span></div></div>
+      <dl class="kv">
+        <span class="sec">The evidence</span>
+        <dt>Expected NFIP paid / yr (model, US norm)</dt><dd>${money(exp)}</dd>
+        <dt>Actual NFIP paid / yr, 1978–2025</dt><dd>${money(c.pd)}</dd>
+        <dt>Gap, all years</dt><dd>${x(c.gr)}</dd>
+        <dt>Gap without worst year (${c.wy || "–"})</dt><dd>${x(c.gc)}</dd>
+        <dt>Worst year, in normal years of loss</dt><dd>${c.sh == null ? "–" : int(c.sh) + " yrs"}</dd>
+        <dt>Paid claims behind it</dt><dd>${int(c.c)}</dd>
+        <dt>Score used for the call</dt><dd><b>${x(c.g)}</b></dd>
+        <span class="sec">The market</span>
+        <dt>Homes</dt><dd>${int(c.h)}</dd>
+        <dt>Homes with NFIP cover</dt><dd>${int(c.pol)} (${pct(c.p)})</dd>
+        <dt>Homes without NFIP cover (upper bound)</dt><dd>${int(uninsured)}</dd>
+        <dt>Median household income</dt><dd>${money(c.inc)}</dd>
+        <dt>Median home value</dt><dd>${money(c.hv)}</dd>
+        <dt>Modeled flood loss, all buildings / yr</dt><dd>${money(c.m)}</dd>
+        <dt>FEMA inland / coastal flood rating</dt><dd style="font-family:var(--body)">${esc(c.ir || "–")} / ${esc(c.cr || "–")}</dd>
+      </dl>
+      <p class="note">Private flood cover isn't public by county, so homes without NFIP cover is an upper bound on headroom.</p>`;
+  }
+
+  // ---------- Storm watch + reports ----------
+  const st = R.storms;
+  if (st && st.events) {
+    $("storm-sub").textContent = `Since ${st.since}: ${st.events.length} declarations, checked ${st.date}. Alerts first.`;
+    const evs = [...st.events].sort((a, b) => (b.alert - a.alert) || b.declared.localeCompare(a.declared)).slice(0, 6);
+    $("storms").innerHTML = evs.map(e => {
+      const calls = Object.entries(e.calls).filter(([, n]) => n).map(([k, n]) => `${n} ${LABEL[k].toLowerCase()}`).join(", ");
+      const hits = e.on_list.length ? `<p>On this quarter's lists: ${e.on_list.map(r => `<button class="lk" data-id="${r.fips}">${esc(r.county)}</button> (${LABEL[r.on_list]})`).join("; ")}.</p>` : "";
+      const top = e.top_exposure.length ? `<p class="note">Largest insured exposure: ${e.top_exposure.slice(0, 3).map(r => `<button class="lk" data-id="${r.fips}">${esc(r.county)}</button> (${LABEL[r.call]})`).join("; ")}.</p>` : "";
+      return `<div class="ev">${e.alert ? '<span class="alert">Alert</span>' : ""}
+        <span class="t">${esc(e.title.toLowerCase().replace(/\b\w/g, m => m.toUpperCase()))} · ${esc(e.state)}</span>
+        <span class="note">${esc(e.type)}, declared ${esc(e.declared)} · ${e.counties} counties: ${calls || "none on our map"}</span>${hits}${top}</div>`;
+    }).join("");
+    $("storms").querySelectorAll("button.lk").forEach(b => b.addEventListener("click", () => { select(b.dataset.id); $("sheet").scrollIntoView({ behavior: "smooth", block: "nearest" }); }));
+  } else { $("storms").innerHTML = '<p class="note">No storm check has run yet.</p>'; }
+  const row = (k, label) => { const r = R[k]; return `<dt>${label}</dt><dd>${r ? `${esc(r.date)}${r.changed_calls != null ? ` · ${int(r.changed_calls)} calls changed` : ""}${r.alert ? " · alert" : ""}` : "not run yet"}</dd>`; };
+  $("status").innerHTML = row("quarterly", "Quarterly plan") + row("monthly", "Monthly refresh") + row("storms", "Storm watch") + row("followups", "Storm follow-ups");
+
+  // ---------- List backtest ----------
+  $("lbt").innerHTML = `<thead><tr><th>List, made with data to 2014</th><th class="r">Counties</th><th class="r">Losses vs model, 2015–24</th><th class="r">Ran above the model</th><th class="r">Ran 1.5× or more</th></tr></thead><tbody>` +
+    ["grow", "re-price", "pause"].map(k => { const v = lbt[k + "_top25"]; return v ? `<tr><td>${LABEL[k]} · top 25</td><td class="r">${v.counties.length}</td><td class="r">${v.next_decade_dollars_vs_model.toFixed(2)}×</td><td class="r">${pct(v.share_ran_above_model, 0)}</td><td class="r">${pct(v.share_ran_high_1_5x, 0)}</td></tr>` : ""; }).join("") +
+    `<tr><td>All counties with 30+ claims (baseline)</td><td class="r">–</td><td class="r">${base.next_decade_dollars_vs_model.toFixed(2)}×</td><td class="r">${pct(base.share_ran_above_model, 0)}</td><td class="r">${pct(base.share_ran_high_1_5x, 0)}</td></tr></tbody>`;
+  $("lbt-read").textContent = "Grow and Pause held up: grow counties stayed far below the model, and pause counties kept running above it. Re-price did not beat the baseline, so it is a list to review with pricing, not a decision on its own. Four ways of ranking re-price and pause were tested; ranking by dollars at stake picked counties hit by Katrina and Sandy that went quiet afterwards, so the lists rank by strength of evidence.";
+
+  // ---------- Headline strip + blind test ----------
+  const act = Object.fromEntries(S.actions.map(a => [a.action, a]));
+  const ho = S.holdout;
+  $("strip").innerHTML = [
+    [int(S.counties), "counties scored"],
+    [int(S.claims_rows), "NFIP claims, 1978–2025"],
+    [int(act["grow"]?.counties), "grow counties"],
+    [int(act["re-price"]?.counties) + " / " + int(act["pause"]?.counties), "re-price / pause counties"],
+    [x(ho.lift_vs_low), "blind test: flagged high vs flagged low"],
+  ].map(([v, l]) => `<div class="stat"><span class="v">${v}</span><span class="l">${l}</span></div>`).join("");
+  const bmax = Math.max(ho.hit_rate_flagged, ho.base_rate_high, ho.hit_rate_model_only, ho.hit_rate_low_flag) || 1;
+  $("bt-bars").innerHTML = [
+    ["Flagged high by the score", ho.hit_rate_flagged, ""], ["All counties", ho.base_rate_high, "base"],
+    ["Top modeled-loss counties", ho.hit_rate_model_only, "model"], ["Flagged low (≤ 0.8×)", ho.hit_rate_low_flag, "base"],
+  ].map(([l, v, k]) => `<div class="bar-row"><span>${l}</span><div class="bar-track"><div class="bar-fill ${k}" style="width:${(v / bmax) * 100}%"></div></div><span class="num">${pct(v, 0)}</span></div>`).join("") +
+    `<p class="note">Share of each group whose 2015–2024 losses ran at least 1.5× the model. By dollars the picture is weaker: ${pct(ho.excess_share_low_or_normal, 0)} of 2015–24 losses above the model hit counties that were not flagged. That is why the grow list allows at most 2 counties per state.</p>`;
+
+  const firstPlan = (S.plan.grow && S.plan.grow[0] && S.plan.grow[0].fips) || "37021";
+  const start = (location.hash.match(/^#c(\d{5})$/) || [])[1] || firstPlan;
+  select(C[start] ? start : Object.keys(C)[0], false);
+  addEventListener("hashchange", () => { const m = location.hash.match(/^#c(\d{5})$/); if (m && C[m[1]]) select(m[1], false); });
+})();
+</script>

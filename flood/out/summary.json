@@ -1,0 +1,2001 @@
+{
+ "nri_version": "NRI v1.20 (December 2025)",
+ "claims_years": [
+  1978,
+  2025
+ ],
+ "dollars": "real 2024 dollars (CPI-U)",
+ "counties": 3232,
+ "counties_with_pen": 2950,
+ "claims_rows": 2657408,
+ "headline": {
+  "national_ealt": 66265482991.511,
+  "national_ealb": 63883726714.1897,
+  "n_high_flood": 257,
+  "n_selected": 189,
+  "selected_ealt": 32518147698.3788,
+  "selected_ealb": 31677446001.1489,
+  "selected_share_ealt": 0.4907,
+  "selected_share_ealb": 0.4959,
+  "selected_insured_model": 325386929.6997
+ },
+ "national": {
+  "paid_bldg_per_year": 2183885488.0,
+  "paid_bldg_per_year_ex2024": 2065889101.0,
+  "insured_model": 1741709365.0,
+  "ratio": 1.254,
+  "ratio_ex2024": 1.186
+ },
+ "yearly_paid_bldg": {
+  "1978": 461584435.0,
+  "1979": 1341903758.0,
+  "1980": 564864571.0,
+  "1981": 259781067.0,
+  "1982": 380951715.0,
+  "1983": 885105647.0,
+  "1984": 442108076.0,
+  "1985": 656155127.0,
+  "1986": 243731865.0,
+  "1987": 186750491.0,
+  "1988": 93282746.0,
+  "1989": 1325701018.0,
+  "1990": 290700174.0,
+  "1991": 646313893.0,
+  "1992": 1249757248.0,
+  "1993": 1059659490.0,
+  "1994": 658427197.0,
+  "1995": 2075532670.0,
+  "1996": 1254064174.0,
+  "1997": 839533896.0,
+  "1998": 1260533365.0,
+  "1999": 1094139461.0,
+  "2000": 317759657.0,
+  "2001": 1686108653.0,
+  "2002": 571114550.0,
+  "2003": 1050786806.0,
+  "2004": 2984646550.0,
+  "2005": 22287226998.0,
+  "2006": 820909616.0,
+  "2007": 754777698.0,
+  "2008": 3939474075.0,
+  "2009": 946373749.0,
+  "2010": 898860609.0,
+  "2011": 2848507627.0,
+  "2012": 11333189908.0,
+  "2013": 569292752.0,
+  "2014": 416619737.0,
+  "2015": 1147968005.0,
+  "2016": 4939297702.0,
+  "2017": 10569308158.0,
+  "2018": 1646332103.0,
+  "2019": 1511252849.0,
+  "2020": 950554360.0,
+  "2021": 1906398242.0,
+  "2022": 5014952510.0,
+  "2023": 894698246.0,
+  "2024": 7737396057.0,
+  "2025": 540928259.0
+ },
+ "holdout": {
+  "n": 1521,
+  "flagged": 528,
+  "flagged_low": 248,
+  "base_rate_high": 0.1788,
+  "hit_rate_flagged": 0.2462,
+  "hit_rate_low_flag": 0.125,
+  "hit_rate_model_only": 0.0945,
+  "chronic_hit_flagged": 0.3087,
+  "chronic_hit_low": 0.121,
+  "chronic_base": 0.2189,
+  "spearman": 0.2512,
+  "dollars_flagged": 0.8536,
+  "dollars_low": 1.0846,
+  "dollars_mid": 1.0248,
+  "lift": 1.3768,
+  "lift_vs_low": 1.9697,
+  "quintiles": [
+   {
+    "quint": 1,
+    "n": 305.0,
+    "score_median": 0.7271737236002036,
+    "share_ran_high": 0.10819672131147541,
+    "share_chronic_high": 0.10163934426229508,
+    "dollars_vs_expected": 1.0673054945814462
+   },
+   {
+    "quint": 2,
+    "n": 304.0,
+    "score_median": 0.903701606304155,
+    "share_ran_high": 0.14144736842105263,
+    "share_chronic_high": 0.18421052631578946,
+    "dollars_vs_expected": 1.344748424751671
+   },
+   {
+    "quint": 3,
+    "n": 304.0,
+    "score_median": 1.1431954053145361,
+    "share_ran_high": 0.17763157894736842,
+    "share_chronic_high": 0.2236842105263158,
+    "dollars_vs_expected": 0.5663892969955681
+   },
+   {
+    "quint": 4,
+    "n": 304.0,
+    "score_median": 1.7128513473553504,
+    "share_ran_high": 0.20065789473684212,
+    "share_chronic_high": 0.26644736842105265,
+    "dollars_vs_expected": 0.6971025011456538
+   },
+   {
+    "quint": 5,
+    "n": 304.0,
+    "score_median": 3.80781785248245,
+    "share_ran_high": 0.26644736842105265,
+    "share_chronic_high": 0.3190789473684211,
+    "dollars_vs_expected": 1.127146434362491
+   }
+  ],
+  "excess_share_low_or_normal": 0.8592,
+  "top20_test_flagged_before": 2,
+  "top20_test": [
+   {
+    "fips": "48201",
+    "county": "Harris",
+    "state": "TX",
+    "train_cred": 0.9613971106813806,
+    "rel_test": 1.7484049082681667,
+    "paid_test": 655947633.4804089,
+    "worst_year_test": 2017.0
+   },
+   {
+    "fips": "12071",
+    "county": "Lee",
+    "state": "FL",
+    "train_cred": 0.1438188930043719,
+    "rel_test": 6.912993187867683,
+    "paid_test": 372804501.03847814,
+    "worst_year_test": 2022.0
+   },
+   {
+    "fips": "12103",
+    "county": "Pinellas",
+    "state": "FL",
+    "train_cred": 0.7648225598647411,
+    "rel_test": 6.940421522710796,
+    "paid_test": 312514890.1516391,
+    "worst_year_test": 2024.0
+   },
+   {
+    "fips": "22033",
+    "county": "East Baton Rouge",
+    "state": "LA",
+    "train_cred": 0.4821781498560251,
+    "rel_test": 2.7380253537346677,
+    "paid_test": 136189723.847842,
+    "worst_year_test": 2016.0
+   },
+   {
+    "fips": "12021",
+    "county": "Collier",
+    "state": "FL",
+    "train_cred": 0.1281499511086002,
+    "rel_test": 1.3331383252594957,
+    "paid_test": 106404292.13092963,
+    "worst_year_test": 2022.0
+   },
+   {
+    "fips": "12057",
+    "county": "Hillsborough",
+    "state": "FL",
+    "train_cred": 0.28098627909295165,
+    "rel_test": 2.5642240412706756,
+    "paid_test": 98460098.70938617,
+    "worst_year_test": 2024.0
+   },
+   {
+    "fips": "48245",
+    "county": "Jefferson",
+    "state": "TX",
+    "train_cred": 2.44115184661065,
+    "rel_test": 7.856616766848177,
+    "paid_test": 94835818.51348068,
+    "worst_year_test": 2017.0
+   },
+   {
+    "fips": "22063",
+    "county": "Livingston",
+    "state": "LA",
+    "train_cred": 0.3915653300821954,
+    "rel_test": 1.9859385534839782,
+    "paid_test": 84834973.06236766,
+    "worst_year_test": 2016.0
+   },
+   {
+    "fips": "48167",
+    "county": "Galveston",
+    "state": "TX",
+    "train_cred": 1.7128030653998685,
+    "rel_test": 1.4222960982707922,
+    "paid_test": 81485180.71306755,
+    "worst_year_test": 2017.0
+   },
+   {
+    "fips": "12115",
+    "county": "Sarasota",
+    "state": "FL",
+    "train_cred": 0.285693826778258,
+    "rel_test": 2.6755361115811453,
+    "paid_test": 73432404.5124822,
+    "worst_year_test": 2024.0
+   },
+   {
+    "fips": "48361",
+    "county": "Orange",
+    "state": "TX",
+    "train_cred": 0.6743411495264785,
+    "rel_test": 6.307282658787071,
+    "paid_test": 60482269.83201271,
+    "worst_year_test": 2017.0
+   },
+   {
+    "fips": "12081",
+    "county": "Manatee",
+    "state": "FL",
+    "train_cred": 0.2541039790327307,
+    "rel_test": 2.372040791162178,
+    "paid_test": 55184159.24477853,
+    "worst_year_test": 2024.0
+   },
+   {
+    "fips": "12101",
+    "county": "Pasco",
+    "state": "FL",
+    "train_cred": 0.5837351277938572,
+    "rel_test": 3.008769424834669,
+    "paid_test": 52143103.15325377,
+    "worst_year_test": 2024.0
+   },
+   {
+    "fips": "12127",
+    "county": "Volusia",
+    "state": "FL",
+    "train_cred": 0.44668179590760065,
+    "rel_test": 3.0054414152275255,
+    "paid_test": 48519677.03310364,
+    "worst_year_test": 2022.0
+   },
+   {
+    "fips": "48339",
+    "county": "Montgomery",
+    "state": "TX",
+    "train_cred": 1.4662590957841433,
+    "rel_test": 2.3071119354632885,
+    "paid_test": 47206814.5881014,
+    "worst_year_test": 2017.0
+   },
+   {
+    "fips": "48039",
+    "county": "Brazoria",
+    "state": "TX",
+    "train_cred": 1.0930448362382708,
+    "rel_test": 1.3092689995428315,
+    "paid_test": 43469080.06385442,
+    "worst_year_test": 2017.0
+   },
+   {
+    "fips": "12015",
+    "county": "Charlotte",
+    "state": "FL",
+    "train_cred": 0.15557942501052283,
+    "rel_test": 2.772161967424783,
+    "paid_test": 42678499.51901366,
+    "worst_year_test": 2024.0
+   },
+   {
+    "fips": "48157",
+    "county": "Fort Bend",
+    "state": "TX",
+    "train_cred": 0.06041926963858892,
+    "rel_test": 0.7965803584772141,
+    "paid_test": 42196161.1395207,
+    "worst_year_test": 2017.0
+   },
+   {
+    "fips": "22005",
+    "county": "Ascension",
+    "state": "LA",
+    "train_cred": 0.5282578300514872,
+    "rel_test": 3.073258246666357,
+    "paid_test": 37313685.45559408,
+    "worst_year_test": 2016.0
+   },
+   {
+    "fips": "12087",
+    "county": "Monroe",
+    "state": "FL",
+    "train_cred": 0.49043823627260347,
+    "rel_test": 1.2731126560834565,
+    "paid_test": 35183500.65115816,
+    "worst_year_test": 2017.0
+   }
+  ]
+ },
+ "western_nc": {
+  "counties": 18,
+  "policies": 4708,
+  "homes": 509574,
+  "pen": 0.0092,
+  "insured_model": 2310161.0,
+  "paid_bldg": 5232186.0,
+  "paid_bldg_ex2024": 1621731.0,
+  "paid_2024": 174923569.0,
+  "ratio": 2.265,
+  "ratio_ex2024": 0.702,
+  "ratio_2024_alone": 75.719,
+  "model_years_in_2024": 60.5,
+  "rel": 1.808,
+  "rel_ex2024": 0.593,
+  "calls_as_of_2023": [
+   {
+    "fips": "37005",
+    "county": "Alleghany",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 1.0,
+    "call": "hold"
+   },
+   {
+    "fips": "37009",
+    "county": "Ashe",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.86,
+    "call": "hold"
+   },
+   {
+    "fips": "37011",
+    "county": "Avery",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.71,
+    "call": "grow"
+   },
+   {
+    "fips": "37021",
+    "county": "Buncombe",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.92,
+    "call": "hold"
+   },
+   {
+    "fips": "37023",
+    "county": "Burke",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.86,
+    "call": "hold"
+   },
+   {
+    "fips": "37027",
+    "county": "Caldwell",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.89,
+    "call": "hold"
+   },
+   {
+    "fips": "37087",
+    "county": "Haywood",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 1.48,
+    "call": "hold"
+   },
+   {
+    "fips": "37089",
+    "county": "Henderson",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.89,
+    "call": "hold"
+   },
+   {
+    "fips": "37099",
+    "county": "Jackson",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.84,
+    "call": "hold"
+   },
+   {
+    "fips": "37111",
+    "county": "McDowell",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.88,
+    "call": "hold"
+   },
+   {
+    "fips": "37115",
+    "county": "Madison",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.88,
+    "call": "hold"
+   },
+   {
+    "fips": "37121",
+    "county": "Mitchell",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 1.08,
+    "call": "hold"
+   },
+   {
+    "fips": "37149",
+    "county": "Polk",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 1.01,
+    "call": "hold"
+   },
+   {
+    "fips": "37161",
+    "county": "Rutherford",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 1.06,
+    "call": "hold"
+   },
+   {
+    "fips": "37175",
+    "county": "Transylvania",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.85,
+    "call": "hold"
+   },
+   {
+    "fips": "37189",
+    "county": "Watauga",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.82,
+    "call": "hold"
+   },
+   {
+    "fips": "37193",
+    "county": "Wilkes",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 1.1,
+    "call": "hold"
+   },
+   {
+    "fips": "37199",
+    "county": "Yancey",
+    "state": "NC",
+    "as_of": 2023,
+    "score": 0.87,
+    "call": "hold"
+   }
+  ],
+  "calls_now": [
+   {
+    "fips": "37005",
+    "county": "Alleghany",
+    "chr_cred": 1.0539491487620007,
+    "ratio_cred": 1.038264175482715,
+    "action": "hold"
+   },
+   {
+    "fips": "37009",
+    "county": "Ashe",
+    "chr_cred": 0.802557504358592,
+    "ratio_cred": 0.9956617823746792,
+    "action": "hold"
+   },
+   {
+    "fips": "37011",
+    "county": "Avery",
+    "chr_cred": 1.0813948266141529,
+    "ratio_cred": 1.3645486896585433,
+    "action": "hold"
+   },
+   {
+    "fips": "37021",
+    "county": "Buncombe",
+    "chr_cred": 2.519836241556911,
+    "ratio_cred": 3.001293199802359,
+    "action": "re-price"
+   },
+   {
+    "fips": "37023",
+    "county": "Burke",
+    "chr_cred": 1.7600207531247423,
+    "ratio_cred": 2.012755222783395,
+    "action": "re-price"
+   },
+   {
+    "fips": "37027",
+    "county": "Caldwell",
+    "chr_cred": 0.9256626802771711,
+    "ratio_cred": 0.8690281318261991,
+    "action": "hold"
+   },
+   {
+    "fips": "37087",
+    "county": "Haywood",
+    "chr_cred": 2.7342294980539767,
+    "ratio_cred": 1.6547139907708872,
+    "action": "re-price"
+   },
+   {
+    "fips": "37089",
+    "county": "Henderson",
+    "chr_cred": 0.9096415888918177,
+    "ratio_cred": 1.8032865438894596,
+    "action": "hold"
+   },
+   {
+    "fips": "37099",
+    "county": "Jackson",
+    "chr_cred": 0.8025234111009529,
+    "ratio_cred": 0.7995897173451036,
+    "action": "hold"
+   },
+   {
+    "fips": "37111",
+    "county": "McDowell",
+    "chr_cred": 0.8627955108883814,
+    "ratio_cred": 1.1366361485849903,
+    "action": "hold"
+   },
+   {
+    "fips": "37115",
+    "county": "Madison",
+    "chr_cred": 1.0423974161202727,
+    "ratio_cred": 1.4513509519839736,
+    "action": "hold"
+   },
+   {
+    "fips": "37121",
+    "county": "Mitchell",
+    "chr_cred": 1.3206359992527235,
+    "ratio_cred": 1.185503673902903,
+    "action": "hold"
+   },
+   {
+    "fips": "37149",
+    "county": "Polk",
+    "chr_cred": 1.211477891403862,
+    "ratio_cred": 1.2528223305116546,
+    "action": "hold"
+   },
+   {
+    "fips": "37161",
+    "county": "Rutherford",
+    "chr_cred": 1.2282756483279877,
+    "ratio_cred": 1.444328136034105,
+    "action": "hold"
+   },
+   {
+    "fips": "37175",
+    "county": "Transylvania",
+    "chr_cred": 0.9210042217224931,
+    "ratio_cred": 0.9344015883227655,
+    "action": "hold"
+   },
+   {
+    "fips": "37189",
+    "county": "Watauga",
+    "chr_cred": 0.8030440056102158,
+    "ratio_cred": 0.8913700107201311,
+    "action": "hold"
+   },
+   {
+    "fips": "37193",
+    "county": "Wilkes",
+    "chr_cred": 1.2976609747207677,
+    "ratio_cred": 1.0921904521393597,
+    "action": "hold"
+   },
+   {
+    "fips": "37199",
+    "county": "Yancey",
+    "chr_cred": 0.9580360008751673,
+    "ratio_cred": 1.2000467350416817,
+    "action": "hold"
+   }
+  ]
+ },
+ "tampa_bay": [
+  {
+   "fips": "12057",
+   "county": "Hillsborough",
+   "pen": 0.1209,
+   "ratio": 1.2079409903428482,
+   "rel": 0.9644643597157297,
+   "rel_train": 0.11811754567485773,
+   "rel_test": 2.5642240412706756,
+   "chr_train": 0.28098627909295165,
+   "ratio_cred": 0.9644643597157297,
+   "chr_cred": 0.36043986776455483,
+   "action": "hold",
+   "claims_train": 3955.0
+  },
+  {
+   "fips": "12081",
+   "county": "Manatee",
+   "pen": 0.1729,
+   "ratio": 1.1091318635315144,
+   "rel": 0.885571531352388,
+   "rel_train": 0.09963647413471155,
+   "rel_test": 2.372040791162178,
+   "chr_train": 0.2541039790327307,
+   "ratio_cred": 0.885571531352388,
+   "chr_cred": 0.3466173558859861,
+   "action": "hold",
+   "claims_train": 2687.0
+  },
+  {
+   "fips": "12101",
+   "county": "Pasco",
+   "pen": 0.103,
+   "ratio": 1.7359265023270432,
+   "rel": 1.3860273440221784,
+   "rel_train": 0.5314039354731721,
+   "rel_test": 3.008769424834669,
+   "chr_train": 0.5837351277938572,
+   "ratio_cred": 1.3860273440221784,
+   "chr_cred": 1.4470448551144235,
+   "action": "hold",
+   "claims_train": 5766.0
+  },
+  {
+   "fips": "12103",
+   "county": "Pinellas",
+   "pen": 0.1941,
+   "ratio": 3.2878094582580784,
+   "rel": 2.625107575102807,
+   "rel_train": 0.3437740619210895,
+   "rel_test": 6.940421522710796,
+   "chr_train": 0.7648225598647411,
+   "ratio_cred": 2.625107575102807,
+   "chr_cred": 1.0869720100604732,
+   "action": "hold",
+   "claims_train": 14363.0
+  },
+  {
+   "fips": "12115",
+   "county": "Sarasota",
+   "pen": 0.1795,
+   "ratio": 1.247404451507313,
+   "rel": 0.9959734335102611,
+   "rel_train": 0.10793404070563026,
+   "rel_test": 2.6755361115811453,
+   "chr_train": 0.285693826778258,
+   "ratio_cred": 0.9959734335102611,
+   "chr_cred": 0.47376390183879624,
+   "action": "hold",
+   "claims_train": 2789.0
+  }
+ ],
+ "tampa_bay_calls_as_of_2014": [
+  {
+   "fips": "12103",
+   "county": "Pinellas",
+   "state": "FL",
+   "as_of": 2014,
+   "score": 0.76,
+   "call": "hold"
+  },
+  {
+   "fips": "12057",
+   "county": "Hillsborough",
+   "state": "FL",
+   "as_of": 2014,
+   "score": 0.28,
+   "call": "hold"
+  },
+  {
+   "fips": "12101",
+   "county": "Pasco",
+   "state": "FL",
+   "as_of": 2014,
+   "score": 0.58,
+   "call": "hold"
+  },
+  {
+   "fips": "12115",
+   "county": "Sarasota",
+   "state": "FL",
+   "as_of": 2014,
+   "score": 0.29,
+   "call": "hold"
+  },
+  {
+   "fips": "12081",
+   "county": "Manatee",
+   "state": "FL",
+   "as_of": 2014,
+   "score": 0.25,
+   "call": "hold"
+  }
+ ],
+ "actions": [
+  {
+   "action": "grow",
+   "counties": 224,
+   "model_loss": 21546912433.1966,
+   "insured_model": 304151106.92432857,
+   "homes": 28250967.0,
+   "policies": 438126.0
+  },
+  {
+   "action": "hold",
+   "counties": 2445,
+   "model_loss": 29050335092.49381,
+   "insured_model": 1171359169.14009,
+   "homes": 54888963.0,
+   "policies": 2133883.0
+  },
+  {
+   "action": "pause",
+   "counties": 183,
+   "model_loss": 4023704283.121213,
+   "insured_model": 67089343.83762165,
+   "homes": 8151882.0,
+   "policies": 172366.0
+  },
+  {
+   "action": "re-price",
+   "counties": 380,
+   "model_loss": 9262774905.378052,
+   "insured_model": 199109745.27705702,
+   "homes": 17497835.0,
+   "policies": 416489.0
+  }
+ ],
+ "grow_with_20yr_shock": 41,
+ "plan": {
+  "grow": [
+   {
+    "fips": "06037",
+    "county": "Los Angeles",
+    "state": "CA",
+    "call": "grow",
+    "headline": "Grow Los Angeles: claims have run at 0.4\u00d7 the flood model and only 0.5% of homes have NFIP cover.",
+    "score": 0.4,
+    "recent": "Yes: 0.1\u00d7 the model in 2016\u20132025 (still at or below it).",
+    "pen": 0.0046,
+    "uninsured": 2274199,
+    "income": 87760,
+    "claims": 4648,
+    "model_loss": 2806752323.0,
+    "excess": -9765817.0
+   },
+   {
+    "fips": "06065",
+    "county": "Riverside",
+    "state": "CA",
+    "call": "grow",
+    "headline": "Grow Riverside: claims have run at 0.3\u00d7 the flood model and only 0.5% of homes have NFIP cover.",
+    "score": 0.26,
+    "recent": "Yes: 0.1\u00d7 the model in 2016\u20132025 (still at or below it).",
+    "pen": 0.0046,
+    "uninsured": 724903,
+    "income": 89672,
+    "claims": 1022,
+    "model_loss": 1118828946.0,
+    "excess": -4761759.0
+   },
+   {
+    "fips": "04013",
+    "county": "Maricopa",
+    "state": "AZ",
+    "call": "grow",
+    "headline": "Grow Maricopa: claims have run at 0.3\u00d7 the flood model and only 0.6% of homes have NFIP cover.",
+    "score": 0.26,
+    "recent": "Yes: 0.0\u00d7 the model in 2016\u20132025 (still at or below it).",
+    "pen": 0.0059,
+    "uninsured": 1501942,
+    "income": 85518,
+    "claims": 1588,
+    "model_loss": 1106425058.0,
+    "excess": -6085880.0
+   },
+   {
+    "fips": "04019",
+    "county": "Pima",
+    "state": "AZ",
+    "call": "grow",
+    "headline": "Grow Pima: claims have run at 0.5\u00d7 the flood model and only 0.7% of homes have NFIP cover.",
+    "score": 0.55,
+    "recent": "Yes: 0.0\u00d7 the model in 2016\u20132025 (still at or below it).",
+    "pen": 0.0068,
+    "uninsured": 380647,
+    "income": 67929,
+    "claims": 338,
+    "model_loss": 338405471.0,
+    "excess": -1300796.0
+   },
+   {
+    "fips": "15003",
+    "county": "Honolulu",
+    "state": "HI",
+    "call": "grow",
+    "headline": "Grow Honolulu: claims have run at 0.2\u00d7 the flood model and only 4.1% of homes have NFIP cover.",
+    "score": 0.2,
+    "recent": "Yes: 0.1\u00d7 the model in 2016\u20132025 (still at or below it).",
+    "pen": 0.041,
+    "uninsured": 162075,
+    "income": 104264,
+    "claims": 1716,
+    "model_loss": 319709182.0,
+    "excess": -13201282.0
+   }
+  ],
+  "re-price": [
+   {
+    "fips": "12029",
+    "county": "Dixie",
+    "state": "FL",
+    "call": "re-price",
+    "headline": "Re-price Dixie: insured homes here have lost 3.0\u00d7 what the flood model predicts, even leaving out the worst year (2024).",
+    "score": 2.97,
+    "recent": "Yes: 3.0\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.0581,
+    "uninsured": 9008,
+    "income": 47655,
+    "claims": 711,
+    "model_loss": 3872339.0,
+    "excess": 556342.0
+   },
+   {
+    "fips": "40143",
+    "county": "Tulsa",
+    "state": "OK",
+    "call": "re-price",
+    "headline": "Re-price Tulsa: insured homes here have lost 2.9\u00d7 what the flood model predicts, even leaving out the worst year (1984).",
+    "score": 2.9,
+    "recent": "Yes: 1.1\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.007,
+    "uninsured": 219462,
+    "income": 67317,
+    "claims": 3015,
+    "model_loss": 132210451.0,
+    "excess": 2201773.0
+   },
+   {
+    "fips": "24015",
+    "county": "Cecil",
+    "state": "MD",
+    "call": "re-price",
+    "headline": "Re-price Cecil: insured homes here have lost 2.8\u00d7 what the flood model predicts, even leaving out the worst year (2003).",
+    "score": 2.84,
+    "recent": "Yes: 1.1\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.0138,
+    "uninsured": 38129,
+    "income": 91146,
+    "claims": 530,
+    "model_loss": 10108890.0,
+    "excess": 321948.0
+   },
+   {
+    "fips": "48407",
+    "county": "San Jacinto",
+    "state": "TX",
+    "call": "re-price",
+    "headline": "Re-price San Jacinto: insured homes here have lost 2.8\u00d7 what the flood model predicts, even leaving out the worst year (2017).",
+    "score": 2.84,
+    "recent": "Yes: 2.6\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.0228,
+    "uninsured": 16264,
+    "income": 59526,
+    "claims": 403,
+    "model_loss": 4864478.0,
+    "excess": 255049.0
+   },
+   {
+    "fips": "42129",
+    "county": "Westmoreland",
+    "state": "PA",
+    "call": "re-price",
+    "headline": "Re-price Westmoreland: insured homes here have lost 2.8\u00d7 what the flood model predicts, even leaving out the worst year (2018).",
+    "score": 2.8,
+    "recent": "Yes: 1.0\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.0053,
+    "uninsured": 142392,
+    "income": 72468,
+    "claims": 1158,
+    "model_loss": 65457770.0,
+    "excess": 781648.0
+   }
+  ],
+  "pause": [
+   {
+    "fips": "28157",
+    "county": "Wilkinson",
+    "state": "MS",
+    "call": "pause",
+    "headline": "Pause Wilkinson: even leaving out its worst year (1997), insured homes here lose 49.9\u00d7 what the flood model predicts, across 1,124 paid claims.",
+    "score": 49.94,
+    "recent": "Yes: 6.1\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.0104,
+    "uninsured": 5419,
+    "income": 35930,
+    "claims": 1124,
+    "model_loss": 2247468.0,
+    "excess": 1432734.0
+   },
+   {
+    "fips": "17083",
+    "county": "Jersey",
+    "state": "IL",
+    "call": "pause",
+    "headline": "Pause Jersey: even leaving out its worst year (1993), insured homes here lose 39.1\u00d7 what the flood model predicts, across 1,587 paid claims.",
+    "score": 39.08,
+    "recent": "Yes: 9.8\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.0088,
+    "uninsured": 8080,
+    "income": 79104,
+    "claims": 1587,
+    "model_loss": 3009875.0,
+    "excess": 1263323.0
+   },
+   {
+    "fips": "28149",
+    "county": "Warren",
+    "state": "MS",
+    "call": "pause",
+    "headline": "Pause Warren: even leaving out its worst year (1983), insured homes here lose 15.5\u00d7 what the flood model predicts, across 2,177 paid claims.",
+    "score": 15.53,
+    "recent": "Yes: 1.7\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.0167,
+    "uninsured": 18944,
+    "income": 56648,
+    "claims": 2177,
+    "model_loss": 10095130.0,
+    "excess": 3068971.0
+   },
+   {
+    "fips": "29113",
+    "county": "Lincoln",
+    "state": "MO",
+    "call": "pause",
+    "headline": "Pause Lincoln: even leaving out its worst year (1993), insured homes here lose 15.2\u00d7 what the flood model predicts, across 1,941 paid claims.",
+    "score": 15.18,
+    "recent": "Yes: 3.7\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.006,
+    "uninsured": 27486,
+    "income": 85276,
+    "claims": 1941,
+    "model_loss": 15723357.0,
+    "excess": 1675497.0
+   },
+   {
+    "fips": "29087",
+    "county": "Holt",
+    "state": "MO",
+    "call": "pause",
+    "headline": "Pause Holt: even leaving out its worst year (2010), insured homes here lose 12.8\u00d7 what the flood model predicts, across 1,073 paid claims.",
+    "score": 12.79,
+    "recent": "Yes: 3.7\u00d7 the model in 2016\u20132025 (still above it).",
+    "pen": 0.0522,
+    "uninsured": 3610,
+    "income": 58516,
+    "claims": 1073,
+    "model_loss": 2440422.0,
+    "excess": 1880307.0
+   }
+  ]
+ },
+ "list_backtest": {
+  "as_of": 2014,
+  "outcome_years": [
+   2015,
+   2024
+  ],
+  "lists": {
+   "grow_top5": {
+    "counties": [
+     {
+      "fips": "06037",
+      "county": "Los Angeles",
+      "state": "CA",
+      "score_then": 0.58,
+      "next_decade": 0.06
+     },
+     {
+      "fips": "06065",
+      "county": "Riverside",
+      "state": "CA",
+      "score_then": 0.38,
+      "next_decade": 0.05
+     },
+     {
+      "fips": "04013",
+      "county": "Maricopa",
+      "state": "AZ",
+      "score_then": 0.36,
+      "next_decade": 0.04
+     },
+     {
+      "fips": "04019",
+      "county": "Pima",
+      "state": "AZ",
+      "score_then": 0.63,
+      "next_decade": 0.04
+     },
+     {
+      "fips": "15003",
+      "county": "Honolulu",
+      "state": "HI",
+      "score_then": 0.22,
+      "next_decade": 0.13
+     }
+    ],
+    "next_decade_dollars_vs_model": 0.07565462074231136,
+    "share_ran_above_model": 0.0,
+    "share_ran_high_1_5x": 0.0
+   },
+   "re-price_top5": {
+    "counties": [
+     {
+      "fips": "34023",
+      "county": "Middlesex",
+      "state": "NJ",
+      "score_then": 2.92,
+      "next_decade": 0.94
+     },
+     {
+      "fips": "13121",
+      "county": "Fulton",
+      "state": "GA",
+      "score_then": 2.89,
+      "next_decade": 1.04
+     },
+     {
+      "fips": "42115",
+      "county": "Susquehanna",
+      "state": "PA",
+      "score_then": 2.82,
+      "next_decade": 0.6
+     },
+     {
+      "fips": "42107",
+      "county": "Schuylkill",
+      "state": "PA",
+      "score_then": 2.76,
+      "next_decade": 0.75
+     },
+     {
+      "fips": "34019",
+      "county": "Hunterdon",
+      "state": "NJ",
+      "score_then": 2.72,
+      "next_decade": 0.98
+     }
+    ],
+    "next_decade_dollars_vs_model": 0.947904883890034,
+    "share_ran_above_model": 0.2,
+    "share_ran_high_1_5x": 0.0
+   },
+   "pause_top5": {
+    "counties": [
+     {
+      "fips": "38071",
+      "county": "Ramsey",
+      "state": "ND",
+      "score_then": 373.98,
+      "next_decade": 0.0
+     },
+     {
+      "fips": "28157",
+      "county": "Wilkinson",
+      "state": "MS",
+      "score_then": 73.9,
+      "next_decade": 6.17
+     },
+     {
+      "fips": "17083",
+      "county": "Jersey",
+      "state": "IL",
+      "score_then": 48.75,
+      "next_decade": 10.85
+     },
+     {
+      "fips": "28149",
+      "county": "Warren",
+      "state": "MS",
+      "score_then": 23.95,
+      "next_decade": 1.74
+     },
+     {
+      "fips": "29031",
+      "county": "Cape Girardeau",
+      "state": "MO",
+      "score_then": 19.51,
+      "next_decade": 2.93
+     }
+    ],
+    "next_decade_dollars_vs_model": 3.1547645901612027,
+    "share_ran_above_model": 0.8,
+    "share_ran_high_1_5x": 0.8
+   },
+   "grow_top25": {
+    "counties": [
+     {
+      "fips": "06037",
+      "county": "Los Angeles",
+      "state": "CA",
+      "score_then": 0.58,
+      "next_decade": 0.06
+     },
+     {
+      "fips": "06065",
+      "county": "Riverside",
+      "state": "CA",
+      "score_then": 0.38,
+      "next_decade": 0.05
+     },
+     {
+      "fips": "04013",
+      "county": "Maricopa",
+      "state": "AZ",
+      "score_then": 0.36,
+      "next_decade": 0.04
+     },
+     {
+      "fips": "04019",
+      "county": "Pima",
+      "state": "AZ",
+      "score_then": 0.63,
+      "next_decade": 0.04
+     },
+     {
+      "fips": "15003",
+      "county": "Honolulu",
+      "state": "HI",
+      "score_then": 0.22,
+      "next_decade": 0.13
+     },
+     {
+      "fips": "26163",
+      "county": "Wayne",
+      "state": "MI",
+      "score_then": 0.61,
+      "next_decade": 0.23
+     },
+     {
+      "fips": "12095",
+      "county": "Orange",
+      "state": "FL",
+      "score_then": 0.44,
+      "next_decade": 0.52
+     },
+     {
+      "fips": "48085",
+      "county": "Collin",
+      "state": "TX",
+      "score_then": 0.75,
+      "next_decade": 0.2
+     },
+     {
+      "fips": "51059",
+      "county": "Fairfax",
+      "state": "VA",
+      "score_then": 0.66,
+      "next_decade": 0.14
+     },
+     {
+      "fips": "13135",
+      "county": "Gwinnett",
+      "state": "GA",
+      "score_then": 0.64,
+      "next_decade": 0.18
+     },
+     {
+      "fips": "12031",
+      "county": "Duval",
+      "state": "FL",
+      "score_then": 0.38,
+      "next_decade": 1.03
+     },
+     {
+      "fips": "11001",
+      "county": "District of Columbia",
+      "state": "DC",
+      "score_then": 0.72,
+      "next_decade": 0.07
+     },
+     {
+      "fips": "34005",
+      "county": "Burlington",
+      "state": "NJ",
+      "score_then": 0.69,
+      "next_decade": 0.11
+     },
+     {
+      "fips": "41039",
+      "county": "Lane",
+      "state": "OR",
+      "score_then": 0.52,
+      "next_decade": 0.01
+     },
+     {
+      "fips": "48121",
+      "county": "Denton",
+      "state": "TX",
+      "score_then": 0.78,
+      "next_decade": 0.31
+     },
+     {
+      "fips": "08041",
+      "county": "El Paso",
+      "state": "CO",
+      "score_then": 0.62,
+      "next_decade": 0.15
+     },
+     {
+      "fips": "01089",
+      "county": "Madison",
+      "state": "AL",
+      "score_then": 0.51,
+      "next_decade": 0.06
+     },
+     {
+      "fips": "08031",
+      "county": "Denver",
+      "state": "CO",
+      "score_then": 0.78,
+      "next_decade": 0.03
+     },
+     {
+      "fips": "41051",
+      "county": "Multnomah",
+      "state": "OR",
+      "score_then": 0.79,
+      "next_decade": 0.09
+     },
+     {
+      "fips": "35001",
+      "county": "Bernalillo",
+      "state": "NM",
+      "score_then": 0.78,
+      "next_decade": 0.01
+     },
+     {
+      "fips": "55025",
+      "county": "Dane",
+      "state": "WI",
+      "score_then": 0.79,
+      "next_decade": 0.83
+     },
+     {
+      "fips": "39113",
+      "county": "Montgomery",
+      "state": "OH",
+      "score_then": 0.77,
+      "next_decade": 0.07
+     },
+     {
+      "fips": "17163",
+      "county": "St. Clair",
+      "state": "IL",
+      "score_then": 0.65,
+      "next_decade": 0.25
+     },
+     {
+      "fips": "24031",
+      "county": "Montgomery",
+      "state": "MD",
+      "score_then": 0.79,
+      "next_decade": 0.15
+     },
+     {
+      "fips": "47149",
+      "county": "Rutherford",
+      "state": "TN",
+      "score_then": 0.7,
+      "next_decade": 0.11
+     }
+    ],
+    "next_decade_dollars_vs_model": 0.2413808767152655,
+    "share_ran_above_model": 0.04,
+    "share_ran_high_1_5x": 0.0
+   },
+   "re-price_top25": {
+    "counties": [
+     {
+      "fips": "34023",
+      "county": "Middlesex",
+      "state": "NJ",
+      "score_then": 2.92,
+      "next_decade": 0.94
+     },
+     {
+      "fips": "13121",
+      "county": "Fulton",
+      "state": "GA",
+      "score_then": 2.89,
+      "next_decade": 1.04
+     },
+     {
+      "fips": "42115",
+      "county": "Susquehanna",
+      "state": "PA",
+      "score_then": 2.82,
+      "next_decade": 0.6
+     },
+     {
+      "fips": "42107",
+      "county": "Schuylkill",
+      "state": "PA",
+      "score_then": 2.76,
+      "next_decade": 0.75
+     },
+     {
+      "fips": "34019",
+      "county": "Hunterdon",
+      "state": "NJ",
+      "score_then": 2.72,
+      "next_decade": 0.98
+     },
+     {
+      "fips": "28109",
+      "county": "Pearl River",
+      "state": "MS",
+      "score_then": 2.71,
+      "next_decade": 0.58
+     },
+     {
+      "fips": "36095",
+      "county": "Schoharie",
+      "state": "NY",
+      "score_then": 2.7,
+      "next_decade": 0.01
+     },
+     {
+      "fips": "22087",
+      "county": "St. Bernard",
+      "state": "LA",
+      "score_then": 2.66,
+      "next_decade": 0.04
+     },
+     {
+      "fips": "36119",
+      "county": "Westchester",
+      "state": "NY",
+      "score_then": 2.59,
+      "next_decade": 1.45
+     },
+     {
+      "fips": "36085",
+      "county": "Richmond",
+      "state": "NY",
+      "score_then": 2.57,
+      "next_decade": 0.18
+     },
+     {
+      "fips": "36111",
+      "county": "Ulster",
+      "state": "NY",
+      "score_then": 2.54,
+      "next_decade": 0.07
+     },
+     {
+      "fips": "36103",
+      "county": "Suffolk",
+      "state": "NY",
+      "score_then": 2.51,
+      "next_decade": 0.17
+     },
+     {
+      "fips": "46013",
+      "county": "Brown",
+      "state": "SD",
+      "score_then": 2.48,
+      "next_decade": 0.0
+     },
+     {
+      "fips": "19017",
+      "county": "Bremer",
+      "state": "IA",
+      "score_then": 2.46,
+      "next_decade": 0.57
+     },
+     {
+      "fips": "39137",
+      "county": "Putnam",
+      "state": "OH",
+      "score_then": 2.39,
+      "next_decade": 0.12
+     },
+     {
+      "fips": "39153",
+      "county": "Summit",
+      "state": "OH",
+      "score_then": 2.38,
+      "next_decade": 0.53
+     },
+     {
+      "fips": "39151",
+      "county": "Stark",
+      "state": "OH",
+      "score_then": 2.37,
+      "next_decade": 0.39
+     },
+     {
+      "fips": "19103",
+      "county": "Johnson",
+      "state": "IA",
+      "score_then": 2.33,
+      "next_decade": 0.08
+     },
+     {
+      "fips": "22109",
+      "county": "Terrebonne",
+      "state": "LA",
+      "score_then": 2.33,
+      "next_decade": 0.06
+     },
+     {
+      "fips": "18015",
+      "county": "Carroll",
+      "state": "IN",
+      "score_then": 2.3,
+      "next_decade": 1.29
+     },
+     {
+      "fips": "17037",
+      "county": "DeKalb",
+      "state": "IL",
+      "score_then": 2.3,
+      "next_decade": 0.02
+     },
+     {
+      "fips": "36039",
+      "county": "Greene",
+      "state": "NY",
+      "score_then": 2.3,
+      "next_decade": 0.1
+     },
+     {
+      "fips": "36071",
+      "county": "Orange",
+      "state": "NY",
+      "score_then": 2.24,
+      "next_decade": 0.26
+     },
+     {
+      "fips": "36065",
+      "county": "Oneida",
+      "state": "NY",
+      "score_then": 2.14,
+      "next_decade": 1.86
+     },
+     {
+      "fips": "12129",
+      "county": "Wakulla",
+      "state": "FL",
+      "score_then": 2.14,
+      "next_decade": 1.18
+     }
+    ],
+    "next_decade_dollars_vs_model": 0.4074433863826513,
+    "share_ran_above_model": 0.2,
+    "share_ran_high_1_5x": 0.04
+   },
+   "pause_top25": {
+    "counties": [
+     {
+      "fips": "38071",
+      "county": "Ramsey",
+      "state": "ND",
+      "score_then": 373.98,
+      "next_decade": 0.0
+     },
+     {
+      "fips": "28157",
+      "county": "Wilkinson",
+      "state": "MS",
+      "score_then": 73.9,
+      "next_decade": 6.17
+     },
+     {
+      "fips": "17083",
+      "county": "Jersey",
+      "state": "IL",
+      "score_then": 48.75,
+      "next_decade": 10.85
+     },
+     {
+      "fips": "28149",
+      "county": "Warren",
+      "state": "MS",
+      "score_then": 23.95,
+      "next_decade": 1.74
+     },
+     {
+      "fips": "29031",
+      "county": "Cape Girardeau",
+      "state": "MO",
+      "score_then": 19.51,
+      "next_decade": 2.93
+     },
+     {
+      "fips": "17143",
+      "county": "Peoria",
+      "state": "IL",
+      "score_then": 18.71,
+      "next_decade": 0.56
+     },
+     {
+      "fips": "29113",
+      "county": "Lincoln",
+      "state": "MO",
+      "score_then": 18.35,
+      "next_decade": 4.43
+     },
+     {
+      "fips": "17013",
+      "county": "Calhoun",
+      "state": "IL",
+      "score_then": 14.72,
+      "next_decade": 1.88
+     },
+     {
+      "fips": "29087",
+      "county": "Holt",
+      "state": "MO",
+      "score_then": 14.03,
+      "next_decade": 3.62
+     },
+     {
+      "fips": "40115",
+      "county": "Ottawa",
+      "state": "OK",
+      "score_then": 13.4,
+      "next_decade": 1.6
+     },
+     {
+      "fips": "29163",
+      "county": "Pike",
+      "state": "MO",
+      "score_then": 13.02,
+      "next_decade": 4.84
+     },
+     {
+      "fips": "29099",
+      "county": "Jefferson",
+      "state": "MO",
+      "score_then": 12.28,
+      "next_decade": 3.6
+     },
+     {
+      "fips": "40083",
+      "county": "Logan",
+      "state": "OK",
+      "score_then": 11.48,
+      "next_decade": 2.58
+     },
+     {
+      "fips": "21073",
+      "county": "Franklin",
+      "state": "KY",
+      "score_then": 10.1,
+      "next_decade": 0.38
+     },
+     {
+      "fips": "22029",
+      "county": "Concordia",
+      "state": "LA",
+      "score_then": 9.74,
+      "next_decade": 0.48
+     },
+     {
+      "fips": "29189",
+      "county": "St. Louis",
+      "state": "MO",
+      "score_then": 9.6,
+      "next_decade": 3.37
+     },
+     {
+      "fips": "42095",
+      "county": "Northampton",
+      "state": "PA",
+      "score_then": 9.29,
+      "next_decade": 0.44
+     },
+     {
+      "fips": "29183",
+      "county": "St. Charles",
+      "state": "MO",
+      "score_then": 9.27,
+      "next_decade": 1.92
+     },
+     {
+      "fips": "42081",
+      "county": "Lycoming",
+      "state": "PA",
+      "score_then": 8.19,
+      "next_decade": 0.26
+     },
+     {
+      "fips": "37013",
+      "county": "Beaufort",
+      "state": "NC",
+      "score_then": 8.17,
+      "next_decade": 1.41
+     },
+     {
+      "fips": "17161",
+      "county": "Rock Island",
+      "state": "IL",
+      "score_then": 8.14,
+      "next_decade": 0.94
+     },
+     {
+      "fips": "22077",
+      "county": "Pointe Coupee",
+      "state": "LA",
+      "score_then": 8.13,
+      "next_decade": 2.36
+     },
+     {
+      "fips": "12033",
+      "county": "Escambia",
+      "state": "FL",
+      "score_then": 8.06,
+      "next_decade": 1.81
+     },
+     {
+      "fips": "34035",
+      "county": "Somerset",
+      "state": "NJ",
+      "score_then": 7.88,
+      "next_decade": 2.17
+     },
+     {
+      "fips": "29071",
+      "county": "Franklin",
+      "state": "MO",
+      "score_then": 7.38,
+      "next_decade": 9.55
+     }
+    ],
+    "next_decade_dollars_vs_model": 2.0634169954421013,
+    "share_ran_above_model": 0.72,
+    "share_ran_high_1_5x": 0.68
+   }
+  },
+  "baseline_all_counties": {
+   "next_decade_dollars_vs_model": 1.0238199043976346,
+   "share_ran_above_model": 0.2583826429980276,
+   "share_ran_high_1_5x": 0.17882971729125574
+  }
+ },
+ "afford_flagged_grow": 22,
+ "top_reprice": [
+  {
+   "fips": "48167",
+   "county": "Galveston",
+   "state": "TX",
+   "pen": 0.4222,
+   "chr_cred": 2.4359379171202384,
+   "ratio_cred": 1.7688983363662103,
+   "claims_n": 46946.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "12087",
+   "county": "Monroe",
+   "state": "FL",
+   "pen": 0.5825,
+   "chr_cred": 1.5827814877803184,
+   "ratio_cred": 1.107730046084569,
+   "claims_n": 18043.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "36103",
+   "county": "Suffolk",
+   "state": "NY",
+   "pen": 0.0537,
+   "chr_cred": 1.6205811264234293,
+   "ratio_cred": 2.0389175556126236,
+   "claims_n": 26641.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "48339",
+   "county": "Montgomery",
+   "state": "TX",
+   "pen": 0.1069,
+   "chr_cred": 2.40046620754392,
+   "ratio_cred": 1.2430965996854189,
+   "claims_n": 10921.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "12127",
+   "county": "Volusia",
+   "state": "FL",
+   "pen": 0.1114,
+   "chr_cred": 1.970478870928945,
+   "ratio_cred": 1.1897238593732509,
+   "claims_n": 9323.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "45051",
+   "county": "Horry",
+   "state": "SC",
+   "pen": 0.1463,
+   "chr_cred": 1.999316354770992,
+   "ratio_cred": 1.38071077994756,
+   "claims_n": 8558.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "34003",
+   "county": "Bergen",
+   "state": "NJ",
+   "pen": 0.0225,
+   "chr_cred": 2.9550881195214034,
+   "ratio_cred": 1.4079395709319547,
+   "claims_n": 11623.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "36119",
+   "county": "Westchester",
+   "state": "NY",
+   "pen": 0.0304,
+   "chr_cred": 2.3354508421339406,
+   "ratio_cred": 1.214538772514989,
+   "claims_n": 8870.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "37055",
+   "county": "Dare",
+   "state": "NC",
+   "pen": 0.3967,
+   "chr_cred": 2.898714787897524,
+   "ratio_cred": 1.2623088168676673,
+   "claims_n": 13211.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "22113",
+   "county": "Vermilion",
+   "state": "LA",
+   "pen": 0.253,
+   "chr_cred": 1.56047228193128,
+   "ratio_cred": 0.9127908423154315,
+   "claims_n": 4053.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "25023",
+   "county": "Plymouth",
+   "state": "MA",
+   "pen": 0.043,
+   "chr_cred": 1.8800111204074161,
+   "ratio_cred": 1.2486979803558165,
+   "claims_n": 8818.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "34039",
+   "county": "Union",
+   "state": "NJ",
+   "pen": 0.0287,
+   "chr_cred": 1.8932784979022166,
+   "ratio_cred": 0.9991541740264096,
+   "claims_n": 5813.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "48061",
+   "county": "Cameron",
+   "state": "TX",
+   "pen": 0.0973,
+   "chr_cred": 1.9539890718183797,
+   "ratio_cred": 1.055707069577544,
+   "claims_n": 4857.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "06097",
+   "county": "Sonoma",
+   "state": "CA",
+   "pen": 0.0107,
+   "chr_cred": 2.383225874506958,
+   "ratio_cred": 1.1387602967414545,
+   "claims_n": 5742.0,
+   "action": "re-price"
+  },
+  {
+   "fips": "12113",
+   "county": "Santa Rosa",
+   "state": "FL",
+   "pen": 0.1405,
+   "chr_cred": 2.729334003458026,
+   "ratio_cred": 3.816394968592789,
+   "claims_n": 8141.0,
+   "action": "re-price"
+  }
+ ],
+ "top_grow": [
+  {
+   "fips": "06037",
+   "county": "Los Angeles",
+   "state": "CA",
+   "pen": 0.0046,
+   "ealb": 2806752323.0004754,
+   "homes": 2284783.0,
+   "policies": 10584.0,
+   "chr_cred": 0.39606930008905505,
+   "action": "grow"
+  },
+  {
+   "fips": "06065",
+   "county": "Riverside",
+   "state": "CA",
+   "pen": 0.0046,
+   "ealb": 1118828946.0373063,
+   "homes": 728246.0,
+   "policies": 3343.0,
+   "chr_cred": 0.2612690002980479,
+   "action": "grow"
+  },
+  {
+   "fips": "04013",
+   "county": "Maricopa",
+   "state": "AZ",
+   "pen": 0.0059,
+   "ealb": 1106425057.7032912,
+   "homes": 1510831.0,
+   "policies": 8889.0,
+   "chr_cred": 0.2556282778619217,
+   "action": "grow"
+  },
+  {
+   "fips": "06071",
+   "county": "San Bernardino",
+   "state": "CA",
+   "pen": 0.0031,
+   "ealb": 941164210.7456988,
+   "homes": 624158.0,
+   "policies": 1919.0,
+   "chr_cred": 0.4425257329796829,
+   "action": "grow"
+  },
+  {
+   "fips": "06059",
+   "county": "Orange",
+   "state": "CA",
+   "pen": 0.0101,
+   "ealb": 826869516.7678303,
+   "homes": 791916.0,
+   "policies": 7994.0,
+   "chr_cred": 0.1766351006266947,
+   "action": "grow"
+  },
+  {
+   "fips": "06085",
+   "county": "Santa Clara",
+   "state": "CA",
+   "pen": 0.0167,
+   "ealb": 715765715.7413589,
+   "homes": 486356.0,
+   "policies": 8141.0,
+   "chr_cred": 0.12715707115210811,
+   "action": "grow"
+  },
+  {
+   "fips": "06073",
+   "county": "San Diego",
+   "state": "CA",
+   "pen": 0.0068,
+   "ealb": 643316863.3199383,
+   "homes": 890566.0,
+   "policies": 6088.0,
+   "chr_cred": 0.4084038753777625,
+   "action": "grow"
+  },
+  {
+   "fips": "06001",
+   "county": "Alameda",
+   "state": "CA",
+   "pen": 0.0084,
+   "ealb": 493659116.5087468,
+   "homes": 405480.0,
+   "policies": 3420.0,
+   "chr_cred": 0.5196715141535062,
+   "action": "grow"
+  },
+  {
+   "fips": "06013",
+   "county": "Contra Costa",
+   "state": "CA",
+   "pen": 0.0086,
+   "ealb": 411425363.2075608,
+   "homes": 310943.0,
+   "policies": 2681.0,
+   "chr_cred": 0.3997573426077775,
+   "action": "grow"
+  },
+  {
+   "fips": "04019",
+   "county": "Pima",
+   "state": "AZ",
+   "pen": 0.0068,
+   "ealb": 338405471.4270986,
+   "homes": 383267.0,
+   "policies": 2620.0,
+   "chr_cred": 0.5486605926446281,
+   "action": "grow"
+  },
+  {
+   "fips": "15003",
+   "county": "Honolulu",
+   "state": "HI",
+   "pen": 0.041,
+   "ealb": 319709182.3141721,
+   "homes": 169009.0,
+   "policies": 6934.0,
+   "chr_cred": 0.19588603395119358,
+   "action": "grow"
+  },
+  {
+   "fips": "06111",
+   "county": "Ventura",
+   "state": "CA",
+   "pen": 0.0164,
+   "ealb": 309975376.490879,
+   "homes": 230123.0,
+   "policies": 3771.0,
+   "chr_cred": 0.27919881810392183,
+   "action": "grow"
+  },
+  {
+   "fips": "48029",
+   "county": "Bexar",
+   "state": "TX",
+   "pen": 0.0078,
+   "ealb": 301986554.30709887,
+   "homes": 567488.0,
+   "policies": 4411.0,
+   "chr_cred": 0.6025177054967701,
+   "action": "grow"
+  },
+  {
+   "fips": "26163",
+   "county": "Wayne",
+   "state": "MI",
+   "pen": 0.0052,
+   "ealb": 236787297.73152402,
+   "homes": 650804.0,
+   "policies": 3357.0,
+   "chr_cred": 0.6045851880225719,
+   "action": "grow"
+  },
+  {
+   "fips": "06081",
+   "county": "San Mateo",
+   "state": "CA",
+   "pen": 0.0183,
+   "ealb": 219925266.21679488,
+   "homes": 182415.0,
+   "policies": 3346.0,
+   "chr_cred": 0.39412996323482774,
+   "action": "grow"
+  }
+ ]
+}
