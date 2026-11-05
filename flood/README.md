@@ -12,7 +12,8 @@ County-by-county grow / re-price / hold / avoid calls for a private flood insure
 | Analysis | `flood/src/flood.py` (scores, calls, blind test) |
 | Run everything | `python3 flood/src/run_flood.py` → `flood/out/` and `flood/demo/data.json` |
 | Scheduled refresh | `python3 flood/src/refresh.py --monthly | --quarterly | --storms | --followups` → `flood/out/reports/` |
-| n8n workflow | `flood/n8n/flood_refresh_workflow.json` (set the Notion block ID and alert email first) |
+| n8n workflow | `flood/n8n/flood_refresh_workflow.json` (runs from `~/workspace/fricative-flood-gap-finder`; set the Notion block ID and alert email first) |
+| Code | https://github.com/rutuja310/fricative-flood-gap-finder |
 
 ## Inputs
 
