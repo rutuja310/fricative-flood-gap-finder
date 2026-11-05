@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Loom script: 5-minute version in the doc (5 Nov 2026)
+
+- **The Loom script doc now holds the decision-led 5-minute script**, replacing the 7½-minute, 12-slide version. Slide numbers match the 10-slide deck.
+- **Trimmed to about 795 words (about 5:05).** Cut the Buncombe worked example, the "how I got here matters" opener, and two longer phrasings.
+- **Demo clicks reordered** to lead with the protective call: Pause → Wilkinson, Re-price → Dixie, Grow → Los Angeles, Storm watch, Downloads. The recording checklist was updated to match.
+
 ### Next steps from the side discussion (5 Nov 2026)
 
 Added to the deck's next-steps slide (three columns: Bring your own model / Make it usable, and right / Sharpen the story), its speaker notes, the Loom script (Slide 12) and the memo:
