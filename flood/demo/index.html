@@ -81,7 +81,9 @@ button:focus-visible, input:focus-visible, li[tabindex]:focus-visible { outline:
 .show-btn { font-size: .78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; }
 .show-btn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .list ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
-.list li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 8px; padding: 9px 8px; border-radius: 8px; cursor: pointer; }
+.list li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: 8px; align-items: baseline; padding: 8px; border-radius: 8px; cursor: pointer; }
+.list .sc { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 500; color: var(--ci); }
+.list-key { display: flex; justify-content: space-between; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 0 8px 0 calc(1.6rem + 16px); }
 .list li:hover, .list li.on { background: var(--soft); }
 .list .rk { font-family: var(--mono); color: var(--ci); font-weight: 500; }
 .list .nm { font-weight: 600; }
@@ -308,11 +310,10 @@ footer a { color: inherit; }
       <div class="pop" id="pop-${k}" role="region" aria-label="${t}: top ${(S.plan[k] || []).length} counties">
       <div class="pop-tools"><button class="show-btn" aria-pressed="false" data-list="${k}">Show on map</button>
         <a class="show-btn" data-dl="downloads/plan-${k}.csv" href="downloads/plan-${k}.csv" download style="text-decoration:none">CSV</a></div>
+      <p class="list-key"><span>County</span><span>Score (× model)</span></p>
       <ol>${(S.plan[k] || []).map((r, i) => `
-        <li tabindex="0" data-id="${r.fips}"><span class="rk">${i + 1}</span>
-          <div><div class="nm">${esc(r.county)}, ${esc(r.state)}</div>
-          <div class="rs">${esc(r.headline.replace(/^[^:]+:\s*/, "").replace(/\.$/, ""))}</div>
-          <div class="rc">Still true recently: ${esc((r.recent || "").replace(/^Yes:\s*/, ""))}</div></div></li>`).join("")}</ol>
+        <li tabindex="0" data-id="${r.fips}" title="${esc(r.headline)}"><span class="rk">${i + 1}</span>
+          <span class="nm">${esc(r.county)}, ${esc(r.state)}</span><span class="sc">${x(r.score)}</span></li>`).join("")}</ol>
       <p class="bt-line">${lbt[bk] ? btText[k](lbt[bk]) : ""}</p>
       </div>
     </div>`).join("");

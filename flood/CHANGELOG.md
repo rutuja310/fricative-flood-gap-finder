@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Shorter hover lists (5 Nov 2026)
+
+- **One line per county.** Each county in the Grow / Re-price / Pause dropdowns shows only its rank, name and score (× model), under a small "County · Score (× model)" header. The reason and the recent-years check moved out of the list; they show in the county panel when the county is clicked, and the full reason appears as a tooltip on hover.
+
 ### Map and county panel, equal size (5 Nov 2026)
 
 - **Layout.** The map and the county panel are two equal columns of the same height (the map is a little smaller). They stack on phones.
