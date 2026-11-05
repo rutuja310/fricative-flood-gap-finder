@@ -169,8 +169,52 @@ td.r, th.r { text-align: right; font-family: var(--mono); font-variant-numeric: 
 .bar-track { height: 14px; background: var(--soft); border-radius: 3px; overflow: hidden; }
 .bar-fill { height: 100%; background: var(--reprice); }
 .bar-fill.base { background: var(--hold); } .bar-fill.model { background: var(--muted); }
-footer { font-size: .8rem; color: var(--muted); display: grid; gap: 6px; max-width: 92ch; }
+footer { font-size: .8rem; color: var(--muted); display: grid; gap: 10px; }
 footer a { color: inherit; }
+.method-bar { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
+.method-bar .lbl { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; }
+.m-btn { font-size: .85rem; font-weight: 500; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; display: inline-flex; gap: 8px; align-items: center; }
+.m-btn:hover { border-color: var(--ink); }
+.m-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.m-btn .i { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid currentColor; display: inline-grid; place-items: center; font: 600 .7rem var(--display); font-style: italic; }
+/* Explainer drawer */
+dialog.drawer { margin: 0 0 0 auto; height: 100%; max-height: 100%; width: min(600px, 100%); max-width: 100%; padding: 0; border: 0;
+  border-left: 1px solid var(--line); background: var(--panel); color: var(--ink); box-shadow: -18px 0 40px -20px rgba(10, 18, 26, .45); }
+dialog.drawer::backdrop { background: rgba(10, 18, 26, .45); }
+@media (prefers-reduced-motion: no-preference) { dialog.drawer[open] { animation: slide-in .22s ease-out; } @keyframes slide-in { from { transform: translateX(40px); opacity: 0; } } }
+.dr-head { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; background: var(--panel);
+  padding: 20px max(20px, env(safe-area-inset-right, 0px)) 14px 24px; border-bottom: 1px solid var(--line); }
+.dr-head h2 { font-size: 1.45rem; }
+.dr-x { font-size: 1.4rem; line-height: 1; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; flex: none; }
+.dr-x:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.dr-tabs { display: flex; gap: 6px; flex-wrap: wrap; padding: 12px max(20px, env(safe-area-inset-right, 0px)) 0 24px; }
+.dr-tabs button { font-size: .8rem; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.dr-tabs button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.dr-body { padding: 16px max(20px, env(safe-area-inset-right, 0px)) 32px 24px; display: grid; gap: 18px; font-size: .92rem; line-height: 1.55; }
+.dr-body h3 { font-family: var(--body); font-weight: 600; font-size: .95rem; }
+.dr-body .lead { font-size: 1rem; color: var(--ink); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: st; }
+.steps li { counter-increment: st; display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 4px 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+.steps li::before { content: counter(st); grid-row: span 2; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--bg); font: 600 .9rem var(--mono); }
+.steps b { font-weight: 600; } .steps span { color: var(--muted); }
+.calls { display: grid; gap: 8px; }
+.call-row { display: grid; grid-template-columns: 6.5rem 5.5rem minmax(0, 1fr); gap: 10px; align-items: baseline; padding: 10px 12px; border-radius: 10px; border-left: 5px solid var(--c); background: var(--bg); }
+.call-row.grow { --c: var(--grow); } .call-row.re-price { --c: var(--reprice); } .call-row.pause { --c: var(--pause); } .call-row.hold { --c: var(--hold); }
+.call-row .t { font-weight: 600; } .call-row .r { font-family: var(--mono); font-size: .82rem; } .call-row .d { color: var(--muted); }
+@media (max-width: 520px) { .call-row { grid-template-columns: minmax(0, 1fr) auto; } .call-row .d { grid-column: 1 / -1; } }
+.ex { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.ex-h { padding: 10px 14px; background: var(--soft); font-weight: 600; }
+.ex table { font-size: .86rem; }
+.ex td:first-child { color: var(--muted); }
+.ex tr.total td { font-weight: 600; color: var(--ink); border-top: 1px solid var(--line); }
+.cards { display: grid; gap: 10px; }
+.card { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); display: grid; gap: 4px; }
+.card .h { font-weight: 600; } .card .m { color: var(--muted); }
+.card.grow { border-left: 5px solid var(--grow); } .card.re-price { border-left: 5px solid var(--reprice); } .card.pause { border-left: 5px solid var(--pause); }
+.why { padding: 12px 14px; border-radius: 10px; background: var(--warn-bg); color: var(--warn-ink); }
+.lim { display: grid; gap: 10px; }
+.lim .card { grid-template-columns: minmax(0, 1fr); }
+.lim .k { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
 .loading { color: var(--muted); }
 </style>
 
@@ -227,11 +271,23 @@ footer a { color: inherit; }
   </section>
 
   <footer>
-    <p><b>How a call is made.</b> Expected loss = FEMA National Risk Index modeled flood loss to buildings (inland + coastal, v1.20, Dec 2025) × the share of homes with NFIP cover (Aug 2026). Actual = NFIP building claims paid per year, 1978–2025, in 2024 dollars. Each county is compared with the US-wide ratio for the same years, with its single worst year left out so one storm doesn't decide the call. The result is shrunk toward 1 when the county has few claims (full weight at 1,082 paid claims). Pause: 3× or more. Re-price: 1.5× or more. Grow: 0.8× or less, with under 10% of homes insured. Hold: everything else.</p>
-    <p><b>How the lists are ranked.</b> Grow: modeled loss on homes without NFIP cover. Only affordable counties whose last ten years agree are included, at most 2 per state so the list never sits in one storm path. Re-price and Pause: strength of evidence. Only counties with 300+ paid claims whose last ten years agree are included.</p>
-    <p><b>Limits.</b> Private flood cover isn't public by county, so “homes without NFIP cover” is an upper bound on headroom, especially in Florida and Texas. Today's insured share stands in for past years. The model is FEMA's public one, not the insurer's own. Affordability uses Census ACS 2019–2023 median household income and home value; “modeled loss per home” spreads loss to all buildings over homes, so it overstates the cost per home.</p>
+    <div class="method-bar"><span class="lbl">Methodology</span>
+      <button class="m-btn" type="button" data-explain="call"><span class="i">i</span>How a call is made</button>
+      <button class="m-btn" type="button" data-explain="lists"><span class="i">i</span>How the lists are ranked</button>
+      <button class="m-btn" type="button" data-explain="limits"><span class="i">i</span>Limits</button>
+    </div>
     <p>Sources: <a href="https://www.fema.gov/about/openfema/data-sets" target="_blank" rel="noopener">OpenFEMA</a> (NFIP claims v3, residential penetration rates, disaster declarations) · <a href="https://www.arcgis.com/home/item.html?id=39485e8035d446a5bff03259508ae355" target="_blank" rel="noopener">FEMA National Risk Index counties</a> · <a href="https://www.census.gov/programs-surveys/acs/data/summary-file.html" target="_blank" rel="noopener">Census ACS summary files</a> · BLS CPI-U.</p>
   </footer>
+  <dialog class="drawer" id="explain" aria-labelledby="dr-title">
+    <div class="dr-head"><div><p class="eyebrow">Methodology</p><h2 id="dr-title">How a call is made</h2></div>
+      <button class="dr-x" type="button" id="dr-close" aria-label="Close">×</button></div>
+    <div class="dr-tabs" role="group" aria-label="Methodology topics">
+      <button type="button" data-tab="call" aria-pressed="true">How a call is made</button>
+      <button type="button" data-tab="lists" aria-pressed="false">How the lists are ranked</button>
+      <button type="button" data-tab="limits" aria-pressed="false">Limits</button>
+    </div>
+    <div class="dr-body" id="dr-body"></div>
+  </dialog>
 </div>
 <div class="tip" id="tip" hidden></div>
 
@@ -484,6 +540,77 @@ footer a { color: inherit; }
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   });
   if (!local) $("dl-view").textContent = "Download on the public site";
+
+  // ---------- Methodology drawer ----------
+  const TITLES = { call: "How a call is made", lists: "How the lists are ranked", limits: "Limits" };
+  function explainCall() {
+    const c = C[selected] || {}, exp = c.im != null ? c.im * NAT : null;
+    const z = c.z != null ? c.z : null;
+    return `
+      <p class="lead">Every county gets one number: <b>how much insured homes actually lost, compared with what FEMA's flood model says they should have lost.</b> 1.0× means a county behaves like the typical US county. Above 1 means the model is too low there; below 1 means it is too high.</p>
+      <ol class="steps">
+        <li><b>What the model expects</b><span>FEMA's National Risk Index modeled flood loss to buildings (inland + coastal) × the share of homes with an NFIP policy.</span></li>
+        <li><b>What was actually paid</b><span>NFIP building claims paid each year, 1978–2025, all in 2024 dollars.</span></li>
+        <li><b>Compare, against the US norm</b><span>Actual ÷ expected, divided by the same ratio for the whole US over the same years. That cancels what every county shares, such as insured homes sitting mostly in mapped flood zones.</span></li>
+        <li><b>Leave out the worst year</b><span>One storm shouldn't set the price, so each county's single worst year is dropped.</span></li>
+        <li><b>Be careful with thin data</b><span>A county with few claims is pulled toward 1.0×. Full weight at 1,082 paid claims (a standard actuarial credibility rule); 270 claims gets half weight.</span></li>
+      </ol>
+      <h3>The four calls</h3>
+      <div class="calls">
+        <div class="call-row grow"><span class="t">Grow</span><span class="r">≤ 0.8×</span><span class="d">Claims ran at or below the model, and fewer than 1 in 10 homes are insured. Sell more here, with a cap.</span></div>
+        <div class="call-row re-price"><span class="t">Re-price</span><span class="r">≥ 1.5×</span><span class="d">Claims run well above the model even without the worst year. Charge more before growing.</span></div>
+        <div class="call-row pause"><span class="t">Pause</span><span class="r">≥ 3×</span><span class="d">Claims run three times the model or more, year after year. Stop new business or tighten terms.</span></div>
+        <div class="call-row hold"><span class="t">Hold</span><span class="r">between</span><span class="d">No strong signal, or too few claims to tell. Price at the model.</span></div>
+      </div>
+      ${c.n ? `<div class="ex"><div class="ex-h">Worked example: ${esc(c.n)}, ${esc(c.s)}</div><div class="tbl"><table>
+        <tr><td>What the model expects per year</td><td class="r">${money(exp)}</td></tr>
+        <tr><td>What was actually paid per year</td><td class="r">${money(c.pd)}</td></tr>
+        <tr><td>Gap, all years</td><td class="r">${x(c.gr)}</td></tr>
+        <tr><td>Gap with the worst year (${c.wy || "–"}) left out</td><td class="r">${x(c.gc)}</td></tr>
+        <tr><td>Weight from ${int(c.c)} paid claims</td><td class="r">${z == null ? "–" : (z * 100).toFixed(0) + "%"}</td></tr>
+        <tr class="total"><td>Score: ${z == null ? "" : `${(z * 100).toFixed(0)}% × ${x(c.gc)} + ${((1 - z) * 100).toFixed(0)}% × 1.0×`}</td><td class="r">${x(c.g)} → ${LABEL[c.a]}</td></tr>
+      </table></div></div><p class="note">Select another county on the map to see its own worked example.</p>` : ""}`;
+  }
+  function explainLists() {
+    return `
+      <p class="lead">Each quarter the tool turns the calls into three short lists: the five counties to act on first for each decision. A county has to pass every check to make a list.</p>
+      <div class="cards">
+        <div class="card grow"><span class="h">Grow: the biggest prize, spread out</span><span class="m"><b>Qualifies:</b> call is grow, the last ten years (2016–2025) also ran at or below the model, and households can afford cover (median income $50k+ and modeled loss under 2% of it).</span><span class="m"><b>Ranked by:</b> modeled flood loss on homes without NFIP cover, a proxy for the premium on offer.</span><span class="m"><b>Cap:</b> at most 2 counties per state.</span></div>
+        <div class="card re-price"><span class="h">Re-price: the clearest evidence</span><span class="m"><b>Qualifies:</b> call is re-price, 300+ paid claims, and the last ten years also ran above the model.</span><span class="m"><b>Ranked by:</b> strength of evidence (the score).</span><span class="m">Treat it as a list to review with pricing, not a decision on its own.</span></div>
+        <div class="card pause"><span class="h">Pause: the clearest evidence</span><span class="m"><b>Qualifies:</b> call is pause, 300+ paid claims, and the last ten years also ran above the model.</span><span class="m"><b>Ranked by:</b> strength of evidence (the score).</span></div>
+      </div>
+      <p class="why"><b>Why the cap on growth?</b> The biggest storms tend to hit counties with clean records. Lee County, Florida looked safe before Hurricane Ian. A clean history is not proof of safety, so the grow list never piles into one state or storm path.</p>
+      <p class="why"><b>Why rank by evidence, not dollars?</b> Ranking by dollars at stake picked counties hit by one huge storm, such as Katrina or Sandy, that then went quiet. Ranking by how consistently a county runs above the model held up better.</p>
+      <p class="note">The lists are rebuilt each quarter, and whenever FEMA publishes new data, by the scheduled refresh.</p>`;
+  }
+  function explainLimits() {
+    const L = [
+      ["It's FEMA's model, not yours", "Your rates come from a model your company licenses. A county can match FEMA's model and still be off in yours.", "Load your model's county losses and re-run every gap."],
+      ["Private flood cover isn't public", "\u201cHomes without NFIP cover\u201d counts every home without a federal policy, so it overstates the headroom where private writers are active, especially Florida and Texas.", "Add state-level private flood data, or your own book."],
+      ["History can't see the next big storm", "Most surprise losses in 2015–2024 hit counties that had looked fine.", "The 2-per-state cap on growth and the daily storm watch."],
+      ["Today's insured share stands in for the past", "The NFIP's insured share is from August 2026 and is used for every year back to 1978.", "Comparing each county with the US norm for the same years limits the effect."],
+      ["County level only", "The tool plans where to grow; it doesn't price individual homes, whose elevation and flood zone matter.", "Street-level pricing is a later phase."],
+      ["Rough affordability", "\u201cModeled loss per home\u201d spreads loss to all buildings over homes, so it overstates the cost per home. Use it to rank, not as a premium.", "Plug in your own premiums."],
+      ["Not yet validated with underwriters", "The workflow and pain points come from secondary research.", "Interviews with 3–5 flood underwriters, then a one-quarter pilot."],
+    ];
+    return `<p class="lead">What this version can't tell you yet, what it means for you, and what would fix it.</p>
+      <div class="lim cards">${L.map(([h, m, f]) => `<div class="card"><span class="h">${esc(h)}</span><span class="m">${esc(m)}</span><span class="k">Fix</span><span class="m">${esc(f)}</span></div>`).join("")}</div>`;
+  }
+  const dlg = $("explain");
+  function showTab(t) {
+    $("dr-title").textContent = TITLES[t];
+    $("dr-body").innerHTML = t === "call" ? explainCall() : t === "lists" ? explainLists() : explainLimits();
+    dlg.querySelectorAll(".dr-tabs button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tab === t)));
+    $("dr-body").scrollTop = 0; dlg.scrollTop = 0;
+  }
+  document.querySelectorAll("[data-explain]").forEach(b => b.addEventListener("click", () => {
+    showTab(b.dataset.explain);
+    if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+    $("dr-close").focus();
+  }));
+  dlg.querySelectorAll(".dr-tabs button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+  $("dr-close").addEventListener("click", () => dlg.close ? dlg.close() : dlg.removeAttribute("open"));
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 
   const firstPlan = (S.plan.grow && S.plan.grow[0] && S.plan.grow[0].fips) || "37021";
   const start = (location.hash.match(/^#c(\d{5})$/) || [])[1] || firstPlan;

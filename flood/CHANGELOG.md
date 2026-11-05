@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+### Methodology panel (5 Nov 2026)
+
+- **Three buttons replace the dense footer text:** "How a call is made", "How the lists are ranked" and "Limits". Each opens a side panel; tabs inside switch between the three, and ×, Escape or a click outside closes it.
+- **How a call is made:**
+  - A one-line plain definition of the score (1.0× = the typical US county).
+  - Five numbered steps: model expects, actually paid, compare vs the US norm, leave out the worst year, careful with thin data.
+  - The four calls with thresholds and what to do.
+  - A worked example computed live for the selected county. Buncombe: $564K expected vs $1.9M paid → 3.3× → 2.7× without 2024 → 87% weight from 828 claims → score 2.5× → Re-price.
+- **How the lists are ranked:**
+  - Per list: who qualifies, how they're ranked, and the cap.
+  - Why growth is capped at 2 per state.
+  - Why the lists rank by evidence rather than dollars.
+- **Limits:** seven limits, each with what it means for you and what would fix it.
+- **The footer** keeps only the sources line.
+
 ### Demo is the working tool only; evidence lives in the deck (5 Nov 2026)
 
 - **Removed from the demo:** the "Would these lists have worked?" backtest table, the headline-numbers strip, the "Does the gap repeat?" blind-test bars, and the backtest line inside each hover list.
