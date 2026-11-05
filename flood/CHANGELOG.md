@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Map and county panel, equal size (5 Nov 2026)
+
+- **Layout.** The map and the county panel are two equal columns of the same height (the map is a little smaller). They stack on phones.
+- **County panel, tightened:**
+  - Header: county, call, and the score behind it.
+  - The one-line reason, then "Still true recently?" on one line, in green when it agrees and red when it doesn't. The affordability flag shows when it applies.
+  - A wider claims chart.
+  - The evidence and The market side by side. Evidence: model expects / yr, actually paid / yr, gap all years, gap with the worst year left out, paid claims. Market: homes, share with NFIP cover, homes without NFIP cover, median income, median home value, modeled loss / yr.
+  - FEMA's flood rating and the caveats in one footnote. "Worst year in normal years of loss" was dropped from the panel; it's still in the county download.
+- **Map key.** Under the map, a key with how many counties have each call.
+
 ### Plan hover bar (5 Nov 2026)
 
 - **Compact plan.** The three full top-5 lists at the top are now a bar of three tiles: Grow, Re-price, Pause. Each tile shows the decision, what to do, and the first three counties.

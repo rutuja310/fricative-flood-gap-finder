@@ -100,7 +100,17 @@ button:focus-visible, input:focus-visible, li[tabindex]:focus-visible { outline:
 .bt-line b { color: var(--ink); font-weight: 600; }
 
 /* Map + county sheet */
-.desk { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.desk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+.desk > .panel { align-content: start; }
+.map-key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .82rem; color: var(--muted); margin: 0; padding: 0; list-style: none; }
+.map-key li { display: inline-flex; align-items: center; gap: 6px; }
+.map-key b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.call { display: grid; justify-items: end; gap: 4px; }
+.score { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px 22px; }
+@media (max-width: 520px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.sec { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding-bottom: 6px; margin-bottom: 6px; border-bottom: 1px solid var(--line); }
+.check.yes span:last-child { color: var(--ok); } .check.no span:last-child { color: var(--pause-ink); }
 @media (max-width: 900px) { .desk { grid-template-columns: minmax(0, 1fr); } }
 .tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .search { flex: 1 1 15rem; min-width: 0; display: flex; }
@@ -130,11 +140,11 @@ button:focus-visible, input:focus-visible, li[tabindex]:focus-visible { outline:
 .pill { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: .85rem; padding: 3px 10px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
 .pill.grow { color: var(--grow-ink); } .pill.re-price { color: var(--reprice-ink); } .pill.pause { color: var(--pause-ink); } .pill.hold { color: var(--muted); }
 .sheet-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; justify-content: space-between; }
-.headline { font-family: var(--display); font-size: 1.3rem; line-height: 1.3; text-wrap: pretty; }
-.check { font-size: .9rem; display: grid; gap: 4px; }
+.headline { font-family: var(--display); font-size: 1.2rem; line-height: 1.3; text-wrap: pretty; }
+.check { font-size: .88rem; }
 .check .k { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
 .flag { background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 8px 12px; font-size: .88rem; }
-.kv { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; font-size: .9rem; margin: 0; }
+.kv { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; font-size: .86rem; margin: 0; }
 .kv dt { color: var(--muted); } .kv dd { margin: 0; text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .kv .sec { grid-column: 1 / -1; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding-top: 6px; border-top: 1px solid var(--line); }
 .spark { width: 100%; height: auto; display: block; }
@@ -206,7 +216,8 @@ footer a { color: inherit; }
         <button class="dl-btn ghost" id="dl-view" type="button">Download these counties (CSV)</button>
       </div>
       <svg class="map" id="map" viewBox="0 0 975 610" role="img" aria-label="US counties colored by call"></svg>
-      <p class="note">Colors show the call for every county. Grey: no strong signal or too little data. Connecticut appears grey because FEMA's risk index uses the state's new planning regions, which this map doesn't draw.</p>
+      <ul class="map-key" id="map-key"></ul>
+      <p class="note">Grey: no strong signal or too little data. Connecticut appears grey because FEMA's risk index uses the state's new planning regions, which this map doesn't draw.</p>
     </div>
     <aside class="panel" id="sheet" aria-live="polite"><p class="loading">Select a county.</p></aside>
   </section>
@@ -385,6 +396,10 @@ footer a { color: inherit; }
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", restyle);
   new MutationObserver(restyle).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
+  // Map key: how many counties carry each call
+  const nCalls = Object.fromEntries(S.actions.map(a => [a.action, a.counties]));
+  $("map-key").innerHTML = ["grow", "re-price", "pause", "hold"].map(k => `<li><i class="sw ${k}"></i>${LABEL[k]} <b>${int(nCalls[k])}</b></li>`).join("");
+
   // ---------- Search ----------
   const byName = {};
   $("names").innerHTML = Object.entries(C).sort((a, b) => (a[1].n + a[1].s).localeCompare(b[1].n + b[1].s))
@@ -394,7 +409,7 @@ footer a { color: inherit; }
   // ---------- County sheet ----------
   function spark(c) {
     if (!c.ys) return '<p class="note">No NFIP claims on record for this county.</p>';
-    const W = 360, H = 120, L = 34, B = 18, yrs = D.years, n = yrs.length;
+    const W = 560, H = 120, L = 40, B = 18, yrs = D.years, n = yrs.length;
     const expK = (c.im || 0) * NAT / 1000;
     const max = Math.max(expK * 1.2, d3.max(c.ys)) || 1;
     const sx = (i) => L + (i * (W - L - 4)) / n, bw = (W - L - 4) / n - 1;
@@ -416,33 +431,33 @@ footer a { color: inherit; }
     const uninsured = c.h != null && c.pol != null ? c.h - c.pol : null;
     const rest = (c.hl || c.w || "").replace(/^[^:]+:\s*/, "");
     const flag = c.a === "grow" && c.af ? `<p class="flag"><b>Grow, slowly:</b> affordability will limit uptake here (median household income ${money(c.inc)}${c.lpi != null ? `; modeled flood loss per home is ${pct(c.lpi)} of it` : ""}).</p>` : "";
+    const ro = c.ro === true ? "yes" : c.ro === false ? "no" : "";
     $("sheet").innerHTML = `
       <div class="sheet-head"><div><p class="eyebrow">${esc(c.s)} · FIPS ${id}</p><h2>${esc(c.n)}</h2></div>
-        <span class="pill ${c.a}"><i class="sw ${c.a}"></i>${LABEL[c.a]}</span></div>
+        <div class="call"><span class="pill ${c.a}"><i class="sw ${c.a}"></i>${LABEL[c.a]}</span><span class="score">score ${x(c.g)}</span></div></div>
       <p class="headline"><b>${LABEL[c.a]} ${esc(c.n)}:</b> ${esc(rest)}</p>
-      <div class="check"><span class="k">Still true recently?</span><span>${esc(c.rn || "–")}</span></div>
+      <p class="check ${ro}"><span class="k">Still true recently?</span> <span>${esc(c.rn || "–")}</span></p>
       ${flag}
       <div style="display:grid;gap:6px">${spark(c)}
         <div class="legend"><span><i class="lg-bar"></i>NFIP building claims paid each year (2024 $)</span><span><i class="lg-line"></i>What the model predicts</span></div></div>
-      <dl class="kv">
-        <span class="sec">The evidence</span>
-        <dt>Expected NFIP paid / yr (model, US norm)</dt><dd>${money(exp)}</dd>
-        <dt>Actual NFIP paid / yr, 1978–2025</dt><dd>${money(c.pd)}</dd>
-        <dt>Gap, all years</dt><dd>${x(c.gr)}</dd>
-        <dt>Gap without worst year (${c.wy || "–"})</dt><dd>${x(c.gc)}</dd>
-        <dt>Worst year, in normal years of loss</dt><dd>${c.sh == null ? "–" : int(c.sh) + " yrs"}</dd>
-        <dt>Paid claims behind it</dt><dd>${int(c.c)}</dd>
-        <dt>Score used for the call</dt><dd><b>${x(c.g)}</b></dd>
-        <span class="sec">The market</span>
-        <dt>Homes</dt><dd>${int(c.h)}</dd>
-        <dt>Homes with NFIP cover</dt><dd>${int(c.pol)} (${pct(c.p)})</dd>
-        <dt>Homes without NFIP cover (upper bound)</dt><dd>${int(uninsured)}</dd>
-        <dt>Median household income</dt><dd>${money(c.inc)}</dd>
-        <dt>Median home value</dt><dd>${money(c.hv)}</dd>
-        <dt>Modeled flood loss, all buildings / yr</dt><dd>${money(c.m)}</dd>
-        <dt>FEMA inland / coastal flood rating</dt><dd style="font-family:var(--body)">${esc(c.ir || "–")} / ${esc(c.cr || "–")}</dd>
-      </dl>
-      <p class="note">Private flood cover isn't public by county, so homes without NFIP cover is an upper bound on headroom.</p>`;
+      <div class="cols">
+        <div><p class="sec">The evidence</p><dl class="kv">
+          <dt>Model expects / yr</dt><dd>${money(exp)}</dd>
+          <dt>Actually paid / yr</dt><dd>${money(c.pd)}</dd>
+          <dt>Gap, all years</dt><dd>${x(c.gr)}</dd>
+          <dt>Gap, ${c.wy || "worst year"} left out</dt><dd>${x(c.gc)}</dd>
+          <dt>Paid claims since 1978</dt><dd>${int(c.c)}</dd>
+        </dl></div>
+        <div><p class="sec">The market</p><dl class="kv">
+          <dt>Homes</dt><dd>${int(c.h)}</dd>
+          <dt>With NFIP cover</dt><dd>${pct(c.p)}</dd>
+          <dt>Without NFIP cover</dt><dd>${int(uninsured)}</dd>
+          <dt>Median income</dt><dd>${money(c.inc)}</dd>
+          <dt>Median home value</dt><dd>${money(c.hv)}</dd>
+          <dt>Modeled loss / yr</dt><dd>${money(c.m)}</dd>
+        </dl></div>
+      </div>
+      <p class="note">FEMA flood rating: inland ${esc(c.ir || "–")}, coastal ${esc(c.cr || "–")}. Homes without NFIP cover is an upper bound: private cover isn't public by county. Model expects = FEMA's modeled loss on insured homes at the US norm; modeled loss / yr covers all buildings.</p>`;
   }
 
   // ---------- Storm watch + reports ----------
