@@ -98,8 +98,6 @@ button:focus-visible, input:focus-visible, li[tabindex]:focus-visible { outline:
 .dl-list .what { display: grid; gap: 2px; min-width: 0; }
 .dl-list .what b { font-weight: 600; }
 .dl-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-.bt-line { font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
-.bt-line b { color: var(--ink); font-weight: 600; }
 
 /* Map + county sheet */
 .desk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
@@ -237,21 +235,6 @@ footer a { color: inherit; }
     </div>
   </section>
 
-  <section class="panel">
-    <div><h2>Would these lists have worked?</h2>
-    <p class="note">The same rules, run on claims up to 2014 only, then checked against 2015–2024. “Losses vs model” compares what those counties actually lost with what the model predicted for that decade; pricing at the model would be 1.0×.</p></div>
-    <div class="tbl"><table id="lbt"></table></div>
-    <p class="note" id="lbt-read"></p>
-  </section>
-
-  <section class="strip" id="strip" aria-label="Headline numbers"></section>
-
-  <section class="panel">
-    <div><h2>Does the gap repeat? Blind test of the score</h2>
-    <p class="note">Counties scored on 1978–2014 claims only, then checked on 2015–2024. “Ran high” means losses at least 1.5× the model, relative to the US norm for that decade.</p></div>
-    <div class="bars" id="bt-bars"></div>
-  </section>
-
   <footer>
     <p><b>How a call is made.</b> Expected loss = FEMA National Risk Index modeled flood loss to buildings (inland + coastal, v1.20, Dec 2025) × the share of homes with NFIP cover (Aug 2026). Actual = NFIP building claims paid per year, 1978–2025, in 2024 dollars. Each county is compared with the US-wide ratio for the same years, with its single worst year left out so one storm doesn't decide the call. The result is shrunk toward 1 when the county has few claims (full weight at 1,082 paid claims). Pause: 3× or more. Re-price: 1.5× or more. Grow: 0.8× or less, with under 10% of homes insured. Hold: everything else.</p>
     <p><b>How the lists are ranked.</b> Grow: modeled loss on homes without NFIP cover. Only affordable counties whose last ten years agree are included, at most 2 per state so the list never sits in one storm path. Re-price and Pause: strength of evidence. Only counties with 300+ paid claims whose last ten years agree are included.</p>
@@ -289,16 +272,10 @@ footer a { color: inherit; }
   // ---------- This quarter's plan ----------
   const qd = R.quarterly && R.quarterly.date ? new Date(R.quarterly.date + "T12:00:00") : new Date();
   $("plan-date").textContent = `This quarter's plan · Q${Math.floor(qd.getMonth() / 3) + 1} ${qd.getFullYear()}`;
-  const lbt = S.list_backtest.lists, base = S.list_backtest.baseline_all_counties;
   const META = {
     "grow": ["Grow", "Put agents, marketing and capacity here", "grow_top25"],
-    "re-price": ["Re-price", "Take these to the pricing team", "re-price_top25"],
+    "re-price": ["Re-price", "Review these with the pricing team", "re-price_top25"],
     "pause": ["Pause", "Stop new business or tighten terms", "pause_top25"],
-  };
-  const btText = {
-    "grow": (v) => `Lists like this made in 2014 lost <b>${v.next_decade_dollars_vs_model.toFixed(2)}×</b> the model over 2015–24; ${pct(v.share_ran_above_model, 0)} ran above it (all counties: ${pct(base.share_ran_above_model, 0)}).`,
-    "re-price": (v) => `Weak evidence: lists like this made in 2014 lost ${v.next_decade_dollars_vs_model.toFixed(2)}× the model over 2015–24. <b>Review with pricing; don't act on the list alone.</b>`,
-    "pause": (v) => `Lists like this made in 2014 lost <b>${v.next_decade_dollars_vs_model.toFixed(2)}×</b> the model over 2015–24; ${pct(v.share_ran_above_model, 0)} ran above it (all counties: ${pct(base.share_ran_above_model, 0)}).`,
   };
   $("lists").innerHTML = Object.entries(META).map(([k, [t, sub, bk]]) => `
     <div class="tile list ${k}" data-k="${k}">
@@ -314,7 +291,6 @@ footer a { color: inherit; }
       <ol>${(S.plan[k] || []).map((r, i) => `
         <li tabindex="0" data-id="${r.fips}" title="${esc(r.headline)}"><span class="rk">${i + 1}</span>
           <span class="nm">${esc(r.county)}, ${esc(r.state)}</span><span class="sc">${x(r.score)}</span></li>`).join("")}</ol>
-      <p class="bt-line">${lbt[bk] ? btText[k](lbt[bk]) : ""}</p>
       </div>
     </div>`).join("");
   // Open on hover (with a short close delay so the pointer can travel into the list), on click/tap, and on focus.
@@ -517,29 +493,6 @@ footer a { color: inherit; }
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   });
   if (!local) $("dl-view").textContent = "Download on the public site";
-
-  // ---------- List backtest ----------
-  $("lbt").innerHTML = `<thead><tr><th>List, made with data to 2014</th><th class="r">Counties</th><th class="r">Losses vs model, 2015–24</th><th class="r">Ran above the model</th><th class="r">Ran 1.5× or more</th></tr></thead><tbody>` +
-    ["grow", "re-price", "pause"].map(k => { const v = lbt[k + "_top25"]; return v ? `<tr><td>${LABEL[k]} · top 25</td><td class="r">${v.counties.length}</td><td class="r">${v.next_decade_dollars_vs_model.toFixed(2)}×</td><td class="r">${pct(v.share_ran_above_model, 0)}</td><td class="r">${pct(v.share_ran_high_1_5x, 0)}</td></tr>` : ""; }).join("") +
-    `<tr><td>All counties with 30+ claims (baseline)</td><td class="r">–</td><td class="r">${base.next_decade_dollars_vs_model.toFixed(2)}×</td><td class="r">${pct(base.share_ran_above_model, 0)}</td><td class="r">${pct(base.share_ran_high_1_5x, 0)}</td></tr></tbody>`;
-  $("lbt-read").textContent = "Grow and Pause held up: grow counties stayed far below the model, and pause counties kept running above it. Re-price did not beat the baseline, so it is a list to review with pricing, not a decision on its own. Four ways of ranking re-price and pause were tested; ranking by dollars at stake picked counties hit by Katrina and Sandy that went quiet afterwards, so the lists rank by strength of evidence.";
-
-  // ---------- Headline strip + blind test ----------
-  const act = Object.fromEntries(S.actions.map(a => [a.action, a]));
-  const ho = S.holdout;
-  $("strip").innerHTML = [
-    [int(S.counties), "counties scored"],
-    [int(S.claims_rows), "NFIP claims, 1978–2025"],
-    [int(act["grow"]?.counties), "grow counties"],
-    [int(act["re-price"]?.counties) + " / " + int(act["pause"]?.counties), "re-price / pause counties"],
-    [x(ho.lift_vs_low), "blind test: flagged high vs flagged low"],
-  ].map(([v, l]) => `<div class="stat"><span class="v">${v}</span><span class="l">${l}</span></div>`).join("");
-  const bmax = Math.max(ho.hit_rate_flagged, ho.base_rate_high, ho.hit_rate_model_only, ho.hit_rate_low_flag) || 1;
-  $("bt-bars").innerHTML = [
-    ["Flagged high by the score", ho.hit_rate_flagged, ""], ["All counties", ho.base_rate_high, "base"],
-    ["Top modeled-loss counties", ho.hit_rate_model_only, "model"], ["Flagged low (≤ 0.8×)", ho.hit_rate_low_flag, "base"],
-  ].map(([l, v, k]) => `<div class="bar-row"><span>${l}</span><div class="bar-track"><div class="bar-fill ${k}" style="width:${(v / bmax) * 100}%"></div></div><span class="num">${pct(v, 0)}</span></div>`).join("") +
-    `<p class="note">Share of each group whose 2015–2024 losses ran at least 1.5× the model. By dollars the picture is weaker: ${pct(ho.excess_share_low_or_normal, 0)} of 2015–24 losses above the model hit counties that were not flagged. That is why the grow list allows at most 2 counties per state.</p>`;
 
   const firstPlan = (S.plan.grow && S.plan.grow[0] && S.plan.grow[0].fips) || "37021";
   const start = (location.hash.match(/^#c(\d{5})$/) || [])[1] || firstPlan;

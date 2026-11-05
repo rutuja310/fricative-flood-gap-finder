@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Demo is the working tool only; evidence lives in the deck (5 Nov 2026)
+
+- **Removed from the demo:** the "Would these lists have worked?" backtest table, the headline-numbers strip, the "Does the gap repeat?" blind-test bars, and the backtest line inside each hover list.
+- **Where that evidence now lives:**
+  - Benchmark slide: the 2014 list backtest.
+  - Methodology slide: the blind test, now including "9% picked by the model alone".
+  - Architecture slide: 3,232 counties and 2.7M claims.
+  - Risks slide: the 86% catastrophe finding.
+  - The memo covers all of it in full.
+- **Re-price subtitle** now reads "Review these with the pricing team", so the weak-backtest caveat stays without the numbers.
+- **The demo keeps:** the plan bar, the map and county panel, the storm watch, downloads and reports, and the how-it-works footer.
+
 ### Shorter hover lists (5 Nov 2026)
 
 - **One line per county.** Each county in the Grow / Re-price / Pause dropdowns shows only its rank, name and score (× model), under a small "County · Score (× model)" header. The reason and the recent-years check moved out of the list; they show in the county panel when the county is clicked, and the full reason appears as a tooltip on hover.
