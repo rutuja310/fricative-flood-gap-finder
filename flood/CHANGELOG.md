@@ -13,6 +13,10 @@
 - **Blind test:** counties flagged high ran high again 29.2% of the time (24.6%), against 20.5% for any county (17.9%) and 11.8% for counties flagged low (12.5%). Rank correlation 0.32 (0.25). 82% of the losses above the model hit unflagged counties (86%).
 - Not yet in `flood/out/`, the deck or the demo: the pipeline hasn't been re-run.
 
+### Source list on GitHub (6 Nov 2026)
+
+- **The memo's source list is now public**: `flood/SOURCES.md` (a copy of the memo's Source list tab, plus links to each data set) and `flood/demo/sources.html`, built alongside the methodology page by `publish.build_methodology()`. Linked from `flood/README.md`.
+
 ### Methodology document (6 Nov 2026)
 
 - **New `flood/METHODOLOGY.md`**: the data sources with exact tables, the score step by step (worst year out, US norm, credibility), the call rules, the list rules (affordability check, last-decade check, two per state), the storm watch, and every test with its results: the list backtest, point in time, the county blind test, storm years out (NOAA) and census tracts. Linked from `flood/README.md`.

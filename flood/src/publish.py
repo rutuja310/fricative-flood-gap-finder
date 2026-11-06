@@ -286,16 +286,28 @@ def md_to_html(md):
     return "\n".join(out)
 
 
+DOC_PAGES = [  # (markdown in flood/, page in flood/demo/, title, description)
+    ("METHODOLOGY.md", "methodology.html", "Methodology",
+     "How the Private Flood Insurance Gap Finder scores counties and how it was tested."),
+    ("SOURCES.md", "sources.html", "Sources", "The source behind each key claim in the Private Flood Insurance Gap Finder memo."),
+]
+
+
 def build_methodology():
-    """flood/demo/methodology.html for GitHub Pages, from flood/METHODOLOGY.md."""
-    body = md_to_html((ROOT / "METHODOLOGY.md").read_text())
+    """The methodology and source-list pages for GitHub Pages (flood/demo/*.html), from the markdown in flood/."""
+    for md, html_name, title, desc in DOC_PAGES:
+        build_doc_page(md, html_name, title, desc)
+
+
+def build_doc_page(md, html_name, title, desc):
+    body = md_to_html((ROOT / md).read_text())
     fonts = ("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600"
              "&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap")
     page = (f'<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
             f'<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-            f"<title>Methodology · Private Flood Insurance Gap Finder</title>\n"
-            f'<meta name="description" content="How the Private Flood Insurance Gap Finder scores counties and how it was tested.">\n'
+            f"<title>{title} · Private Flood Insurance Gap Finder</title>\n"
+            f'<meta name="description" content="{desc}">\n'
             f'<link rel="stylesheet" href="{fonts}">\n<style>{METHOD_CSS}</style>\n</head>\n<body>\n<main>\n'
-            f'<p class="eyebrow"><a href="./">Private Flood Insurance Gap Finder</a> · Methodology</p>\n'
+            f'<p class="eyebrow"><a href="./">Private Flood Insurance Gap Finder</a> · {title}</p>\n'
             f"{body}\n</main>\n</body>\n</html>\n")
-    (DEMO / "methodology.html").write_text(page)
+    (DEMO / html_name).write_text(page)

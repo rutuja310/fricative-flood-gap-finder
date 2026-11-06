@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sources · Private Flood Insurance Gap Finder</title>
+<meta name="description" content="The source behind each key claim in the Private Flood Insurance Gap Finder memo.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+:root { --bg: #f4f5f1; --panel: #fbfcf9; --ink: #15202b; --muted: #56616c; --line: #d8ddd5; --soft: #e9ece6; --accent: #a9541a;
+  --display: "Source Serif 4", Georgia, serif; --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; color-scheme: light }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11171d; --panel: #182029; --ink: #e8ece8; --muted: #a3adb5; --line: #2c3742; --soft: #212b35; --accent: #f0a75a; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #11171d; --panel: #182029; --ink: #e8ece8; --muted: #a3adb5; --line: #2c3742; --soft: #212b35;
+  --accent: #f0a75a; color-scheme: dark }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+main { max-width: 52rem; margin-inline: auto; padding: 32px max(16px, env(safe-area-inset-left, 0px)) 64px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.2; text-wrap: balance; }
+h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 8px 0 16px; }
+h2 { font-size: 1.5rem; margin: 40px 0 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.15rem; margin: 28px 0 8px; }
+p, ul, ol { margin: 0 0 14px; }
+li { margin-bottom: 6px; }
+a { color: var(--accent); }
+.eyebrow { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.eyebrow a { color: inherit; }
+code { font-family: var(--mono); font-size: .88em; background: var(--soft); padding: 1px 5px; border-radius: 4px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; overflow-x: auto; }
+pre code { background: none; padding: 0; }
+.table { overflow-x: auto; margin: 0 0 18px; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; background: var(--panel); }
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: var(--soft); font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+<p class="eyebrow"><a href="./">Private Flood Insurance Gap Finder</a> · Sources</p>
+<h1>Source list</h1>
+<p>The sources behind each key claim in the memo for the Private Flood Insurance Gap Finder. One line per claim. <b>Fact</b> = straight from the data or a calculation on it, or reported by a named source. <b>Inference</b> = my judgment, not yet checked with people in the industry.</p>
+<div class="table"><table><thead><tr><th>#</th><th>Claim</th><th>Source</th><th>Fact or inference</th></tr></thead><tbody><tr><td>1</td><td>Only 3.2M of 108.8M homes (2.9%) have NFIP flood cover</td><td>OpenFEMA NFIP residential penetration rates (Aug 2026)</td><td>Fact (data)</td></tr><tr><td>2</td><td>FEMA's model expects $63.9B a year of flood loss to buildings ($66.3B all flood loss)</td><td>FEMA National Risk Index v1.20 (Dec 2025), inland + coastal flooding</td><td>Fact (model output)</td></tr><tr><td>3</td><td>The NFIP pays about $2.2B a year in building claims</td><td>OpenFEMA FimaNfipClaims v3, 1978–2025, in 2024 $ with BLS CPI-U</td><td>Fact (calculation)</td></tr><tr><td>4</td><td>The NFIP couldn't write new policies during the Oct 2025 shutdown</td><td>NPR, 16 Oct 2025</td><td>Fact (reported)</td></tr><tr><td>5</td><td>Another NFIP lapse was threatened in Jan 2026</td><td>Insurance Journal, 29 Jan 2026</td><td>Fact (reported)</td></tr><tr><td>6</td><td>The largest private flood writer grew from ~50k to 205k+ policies in 2020–24</td><td>Insurance Journal, 8 Oct 2024</td><td>Fact (reported)</td></tr><tr><td>7</td><td>Titan Flood, Flow Flood and Wright FocusFlood write private flood</td><td>Company websites (titanflood.com, flowinsurance.com, wrightflood.com)</td><td>Fact (reported); Flow not fully confirmed</td></tr><tr><td>8</td><td>Young private insurers and MGAs are the right user</td><td>Secondary research</td><td>Inference</td></tr><tr><td>9</td><td>Today's underwriting workflow and its pain points</td><td>Secondary research</td><td>Inference</td></tr><tr><td>10</td><td>Big carriers have vendor models and analytics teams; young MGAs don't</td><td>Secondary research</td><td>Inference</td></tr><tr><td>11</td><td>2.7M claims joined with the model for all 3,232 counties</td><td>OpenFEMA claims, NRI, penetration, ACS, joined on county FIPS</td><td>Fact (data)</td></tr><tr><td>12</td><td>The pitch's "$45B of $52B" is $32.5B of $66.3B on current data (189 high-risk counties under 5% insured)</td><td>NRI v1.20 + OpenFEMA penetration</td><td>Fact (calculation)</td></tr><tr><td>13</td><td>Western NC is 0.9% insured; Helene paid about 60 normal years of claims</td><td>OpenFEMA claims + penetration</td><td>Fact (calculation)</td></tr><tr><td>14</td><td>Western NC ran 1.8× the model, 0.6× with 2024 left out</td><td>OpenFEMA claims + NRI</td><td>Fact (calculation)</td></tr><tr><td>15</td><td>Buncombe, NC: $564K expected, $1.9M paid, 3.3× → 2.7× without 2024 → 2.5× weighted (re-price)</td><td>OpenFEMA claims + NRI + penetration</td><td>Fact (calculation)</td></tr><tr><td>16</td><td>Leave out the worst year; full weight at 1,082 claims</td><td>Classical credibility (Actuarial Standard of Practice 25)</td><td>Inference (method choice)</td></tr><tr><td>17</td><td>Lists made on 2014 data: grow counties ran 0.24× the model in 2015–24, pause 2.06× (72% above the model), re-price 0.41×, all counties 1.02× (26%)</td><td>Backtest on OpenFEMA claims + NRI</td><td>Fact (calculation); that it holds going forward is inference</td></tr><tr><td>18</td><td>Counties flagged high ran high 25% of the time vs 13% flagged low and 9% on the model alone</td><td>Blind test on OpenFEMA claims + NRI</td><td>Fact (calculation); forward use is inference</td></tr><tr><td>19</td><td>86% of losses above the model hit counties that hadn't been flagged; 2 of the top 20 had been</td><td>Blind test</td><td>Fact (calculation)</td></tr><tr><td>20</td><td>Ranking by dollars picked the Katrina and Sandy counties, so lists rank by evidence</td><td>Backtest variants</td><td>Fact (calculation)</td></tr><tr><td>21</td><td>Pause counties run 13–50× the model (Wilkinson, MS 49.9×; Jersey, IL 39.1×; Warren 15.5×; Lincoln 15.2×; Holt 12.8×)</td><td>Tool output</td><td>Fact (calculation)</td></tr><tr><td>22</td><td>Dry counties like Maricopa and Pima top the grow list</td><td>Tool output</td><td>Fact (calculation); that they're low-demand is inference</td></tr><tr><td>23</td><td>Vendor flood models land within about 4% of NFIP losses nationally</td><td>Journal of Catastrophe Risk and Resilience, Feb 2026</td><td>Fact (reported)</td></tr><tr><td>24</td><td>Isaias live run: 15 Florida counties declared, 10 on re-price or pause lists; Dixie on the re-price list</td><td>OpenFEMA Disaster Declarations Summaries v2 + tool output</td><td>Fact (calculation)</td></tr><tr><td>25</td><td>County median household income and home value</td><td>Census ACS 2019–2023 5-year, B19013 and B25077</td><td>Fact (data)</td></tr><tr><td>26</td><td>Affordability flag: income under $50k, or modeled loss per home over 2% of income</td><td>Method choice</td><td>Inference</td></tr><tr><td>27</td><td>Private flood cover isn't public by county, so grow headroom is an upper bound</td><td>NAIC private flood data (state level only)</td><td>Fact (availability); headroom is inference</td></tr><tr><td>28</td><td>The recommendations (pause, re-price as review, grow as a screen)</td><td>All of the above</td><td>Inference</td></tr></tbody></table></div>
+<h2>Data sets</h2>
+<ul><li><a href="https://www.fema.gov/about/openfema/data-sets">OpenFEMA data sets</a>: NFIP claims (v3), NFIP policies (v3), NFIP residential penetration rates, disaster declarations summaries (v2)</li><li><a href="https://hazards.fema.gov/nri/">FEMA National Risk Index</a>: county and census-tract tables, v1.20</li><li><a href="https://www.census.gov/programs-surveys/acs/data/summary-file.html">Census ACS summary files</a>: 2019–2023 5-year tables B19013, B25077 and B25001</li><li><a href="https://www.bls.gov/cpi/">BLS Consumer Price Index</a>: CPI-U, US city average</li><li><a href="https://www.ncdc.noaa.gov/stormevents/">NOAA Storm Events Database</a>: 2015–2024 details</li></ul>
+<p>How each source is used and joined: <a href="https://rutuja310.github.io/fricative-flood-gap-finder/flood/demo/methodology.html">Methodology</a>.</p>
+</main>
+</body>
+</html>

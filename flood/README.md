@@ -10,6 +10,7 @@ County-by-county grow / re-price / hold / avoid calls for a private flood insure
 | Deck | https://claude.ai/artifact/Ru7kDpujGzwgQkVd2jLqVN |
 | Memo | https://claude.ai/artifact/RPDn32fitiTPVDedgiZcNS |
 | Deck (PowerPoint, public) | https://github.com/rutuja310/fricative-flood-gap-finder/blob/main/flood/deck/Private-Flood-Insurance-Gap-Finder.pptx |
+| Sources (public) | https://rutuja310.github.io/fricative-flood-gap-finder/flood/demo/sources.html ([`flood/SOURCES.md`](SOURCES.md)) |
 | Loom script | https://claude.ai/artifact/HBS1jnxXFPzNZisXVJgH11 |
 | Fetch raw data | `sh flood/src/fetch_raw.sh` → `flood/raw/` (not in git) |
 | Point-in-time policies (optional) | `sh flood/src/fetch_policies_api.sh` → `flood/raw/policies/` (hours when the API is slow; adds the point-in-time backtest) |
