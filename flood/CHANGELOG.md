@@ -1,4 +1,4 @@
-# Flood Gap Finder: change log
+# Private Flood Insurance Gap Finder: change log
 
 ## Unreleased
 
@@ -12,6 +12,10 @@
   - All counties: 1.01× (1.02×).
 - **Blind test:** counties flagged high ran high again 29.2% of the time (24.6%), against 20.5% for any county (17.9%) and 11.8% for counties flagged low (12.5%). Rank correlation 0.32 (0.25). 82% of the losses above the model hit unflagged counties (86%).
 - Not yet in `flood/out/`, the deck or the demo: the pipeline hasn't been re-run.
+
+### One product name everywhere (5 Nov 2026)
+
+- **"Private Flood Insurance Gap Finder" replaces "Flood Gap Finder"** on the site (page title and heading, landing page), both READMEs, this change log, the report and email titles `refresh.py` writes (and the two reports already written), the n8n workflow name, the Excel plan's title row, deck slide 4 ("With the Private Flood Insurance Gap Finder"), and the Loom script and memo doc titles. The repo and site URL keep `fricative-flood-gap-finder`.
 
 ### Storm years out, and a tract-level test (5 Nov 2026)
 

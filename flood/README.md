@@ -1,4 +1,4 @@
-# Flood Gap Finder
+# Private Flood Insurance Gap Finder
 
 County-by-county grow / re-price / hold / avoid calls for a private flood insurer. Each call compares NFIP paid claims (1978–2025) with FEMA's modeled flood loss. Public data only.
 

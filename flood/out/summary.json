@@ -121,7 +121,7 @@
    {
     "quint": 4,
     "n": 304.0,
-    "score_median": 1.7128513473553506,
+    "score_median": 1.7128513473553508,
     "share_ran_high": 0.20065789473684212,
     "share_chronic_high": 0.26644736842105265,
     "dollars_vs_expected": 0.6971025011456538
@@ -129,10 +129,10 @@
    {
     "quint": 5,
     "n": 304.0,
-    "score_median": 3.80781785248245,
+    "score_median": 3.8078178524824495,
     "share_ran_high": 0.26644736842105265,
     "share_chronic_high": 0.3190789473684211,
-    "dollars_vs_expected": 1.127146434362491
+    "dollars_vs_expected": 1.1271464343624908
    }
   ],
   "excess_share_low_or_normal": 0.8592,
@@ -142,7 +142,7 @@
     "fips": "48201",
     "county": "Harris",
     "state": "TX",
-    "train_cred": 0.9613971106813808,
+    "train_cred": 0.9613971106813806,
     "rel_test": 1.7484049082681667,
     "paid_test": 655947633.4804089,
     "worst_year_test": 2017.0
@@ -151,72 +151,72 @@
     "fips": "12071",
     "county": "Lee",
     "state": "FL",
-    "train_cred": 0.14381889300437192,
-    "rel_test": 6.91299318786768,
-    "paid_test": 372804501.03847796,
+    "train_cred": 0.1438188930043719,
+    "rel_test": 6.912993187867683,
+    "paid_test": 372804501.03847814,
     "worst_year_test": 2022.0
    },
    {
     "fips": "12103",
     "county": "Pinellas",
     "state": "FL",
-    "train_cred": 0.7648225598647412,
-    "rel_test": 6.940421522710799,
-    "paid_test": 312514890.1516392,
+    "train_cred": 0.7648225598647411,
+    "rel_test": 6.940421522710796,
+    "paid_test": 312514890.1516391,
     "worst_year_test": 2024.0
    },
    {
     "fips": "22033",
     "county": "East Baton Rouge",
     "state": "LA",
-    "train_cred": 0.48217814985602525,
-    "rel_test": 2.7380253537346673,
-    "paid_test": 136189723.84784198,
+    "train_cred": 0.4821781498560251,
+    "rel_test": 2.7380253537346677,
+    "paid_test": 136189723.847842,
     "worst_year_test": 2016.0
    },
    {
     "fips": "12021",
     "county": "Collier",
     "state": "FL",
-    "train_cred": 0.12814995110860022,
-    "rel_test": 1.333138325259496,
-    "paid_test": 106404292.13092965,
+    "train_cred": 0.1281499511086002,
+    "rel_test": 1.3331383252594957,
+    "paid_test": 106404292.13092963,
     "worst_year_test": 2022.0
    },
    {
     "fips": "12057",
     "county": "Hillsborough",
     "state": "FL",
-    "train_cred": 0.2809862790929517,
-    "rel_test": 2.5642240412706756,
-    "paid_test": 98460098.70938617,
+    "train_cred": 0.28098627909295165,
+    "rel_test": 2.5642240412706765,
+    "paid_test": 98460098.7093862,
     "worst_year_test": 2024.0
    },
    {
     "fips": "48245",
     "county": "Jefferson",
     "state": "TX",
-    "train_cred": 2.4411518466106505,
-    "rel_test": 7.856616766848177,
-    "paid_test": 94835818.51348068,
+    "train_cred": 2.44115184661065,
+    "rel_test": 7.856616766848175,
+    "paid_test": 94835818.51348066,
     "worst_year_test": 2017.0
    },
    {
     "fips": "22063",
     "county": "Livingston",
     "state": "LA",
-    "train_cred": 0.3915653300821955,
-    "rel_test": 1.985938553483979,
-    "paid_test": 84834973.06236771,
+    "train_cred": 0.3915653300821954,
+    "rel_test": 1.9859385534839786,
+    "paid_test": 84834973.0623677,
     "worst_year_test": 2016.0
    },
    {
     "fips": "48167",
     "county": "Galveston",
     "state": "TX",
-    "train_cred": 1.7128030653998687,
-    "rel_test": 1.4222960982707922,
-    "paid_test": 81485180.71306755,
+    "train_cred": 1.7128030653998692,
+    "rel_test": 1.4222960982707917,
+    "paid_test": 81485180.71306753,
     "worst_year_test": 2017.0
    },
    {
@@ -224,24 +224,24 @@
     "county": "Sarasota",
     "state": "FL",
     "train_cred": 0.285693826778258,
-    "rel_test": 2.6755361115811453,
-    "paid_test": 73432404.5124822,
+    "rel_test": 2.6755361115811462,
+    "paid_test": 73432404.51248221,
     "worst_year_test": 2024.0
    },
    {
     "fips": "48361",
     "county": "Orange",
     "state": "TX",
-    "train_cred": 0.6743411495264786,
-    "rel_test": 6.307282658787071,
-    "paid_test": 60482269.83201271,
+    "train_cred": 0.6743411495264785,
+    "rel_test": 6.307282658787073,
+    "paid_test": 60482269.83201273,
     "worst_year_test": 2017.0
    },
    {
     "fips": "12081",
     "county": "Manatee",
     "state": "FL",
-    "train_cred": 0.2541039790327308,
+    "train_cred": 0.25410397903273074,
     "rel_test": 2.3720407911621786,
     "paid_test": 55184159.244778536,
     "worst_year_test": 2024.0
@@ -251,15 +251,15 @@
     "county": "Pasco",
     "state": "FL",
     "train_cred": 0.5837351277938571,
-    "rel_test": 3.0087694248346692,
-    "paid_test": 52143103.15325378,
+    "rel_test": 3.0087694248346697,
+    "paid_test": 52143103.153253786,
     "worst_year_test": 2024.0
    },
    {
     "fips": "12127",
     "county": "Volusia",
     "state": "FL",
-    "train_cred": 0.4466817959076009,
+    "train_cred": 0.4466817959076008,
     "rel_test": 3.005441415227526,
     "paid_test": 48519677.033103645,
     "worst_year_test": 2022.0
@@ -268,7 +268,7 @@
     "fips": "48339",
     "county": "Montgomery",
     "state": "TX",
-    "train_cred": 1.466259095784143,
+    "train_cred": 1.4662590957841433,
     "rel_test": 2.3071119354632885,
     "paid_test": 47206814.5881014,
     "worst_year_test": 2017.0
@@ -286,9 +286,9 @@
     "fips": "12015",
     "county": "Charlotte",
     "state": "FL",
-    "train_cred": 0.15557942501052283,
-    "rel_test": 2.7721619674247835,
-    "paid_test": 42678499.519013666,
+    "train_cred": 0.15557942501052277,
+    "rel_test": 2.772161967424784,
+    "paid_test": 42678499.51901367,
     "worst_year_test": 2024.0
    },
    {
@@ -313,7 +313,7 @@
     "fips": "12087",
     "county": "Monroe",
     "state": "FL",
-    "train_cred": 0.4904382362726035,
+    "train_cred": 0.490438236272603,
     "rel_test": 1.273112656083457,
     "paid_test": 35183500.65115817,
     "worst_year_test": 2017.0
@@ -493,27 +493,27 @@
     "fips": "37009",
     "county": "Ashe",
     "chr_cred": 0.802557504358592,
-    "ratio_cred": 0.9956617823746791,
+    "ratio_cred": 0.9956617823746792,
     "action": "hold"
    },
    {
     "fips": "37011",
     "county": "Avery",
-    "chr_cred": 1.0813948266141526,
+    "chr_cred": 1.0813948266141524,
     "ratio_cred": 1.3645486896585428,
     "action": "hold"
    },
    {
     "fips": "37021",
     "county": "Buncombe",
-    "chr_cred": 2.519836241556911,
+    "chr_cred": 2.51983624155691,
     "ratio_cred": 3.001293199802358,
     "action": "re-price"
    },
    {
     "fips": "37023",
     "county": "Burke",
-    "chr_cred": 1.760020753124742,
+    "chr_cred": 1.7600207531247423,
     "ratio_cred": 2.0127552227833942,
     "action": "re-price"
    },
@@ -527,14 +527,14 @@
    {
     "fips": "37087",
     "county": "Haywood",
-    "chr_cred": 2.734229498053976,
+    "chr_cred": 2.7342294980539767,
     "ratio_cred": 1.6547139907708868,
     "action": "re-price"
    },
    {
     "fips": "37089",
     "county": "Henderson",
-    "chr_cred": 0.9096415888918177,
+    "chr_cred": 0.9096415888918181,
     "ratio_cred": 1.8032865438894594,
     "action": "hold"
    },
@@ -549,13 +549,13 @@
     "fips": "37111",
     "county": "McDowell",
     "chr_cred": 0.8627955108883814,
-    "ratio_cred": 1.13663614858499,
+    "ratio_cred": 1.1366361485849903,
     "action": "hold"
    },
    {
     "fips": "37115",
     "county": "Madison",
-    "chr_cred": 1.0423974161202727,
+    "chr_cred": 1.0423974161202725,
     "ratio_cred": 1.4513509519839736,
     "action": "hold"
    },
@@ -569,35 +569,35 @@
    {
     "fips": "37149",
     "county": "Polk",
-    "chr_cred": 1.2114778914038622,
-    "ratio_cred": 1.2528223305116546,
+    "chr_cred": 1.211477891403862,
+    "ratio_cred": 1.2528223305116544,
     "action": "hold"
    },
    {
     "fips": "37161",
     "county": "Rutherford",
     "chr_cred": 1.2282756483279877,
-    "ratio_cred": 1.4443281360341047,
+    "ratio_cred": 1.4443281360341045,
     "action": "hold"
    },
    {
     "fips": "37175",
     "county": "Transylvania",
-    "chr_cred": 0.9210042217224932,
+    "chr_cred": 0.921004221722493,
     "ratio_cred": 0.9344015883227654,
     "action": "hold"
    },
    {
     "fips": "37189",
     "county": "Watauga",
-    "chr_cred": 0.8030440056102158,
+    "chr_cred": 0.8030440056102157,
     "ratio_cred": 0.891370010720131,
     "action": "hold"
    },
    {
     "fips": "37193",
     "county": "Wilkes",
-    "chr_cred": 1.2976609747207677,
+    "chr_cred": 1.2976609747207675,
     "ratio_cred": 1.0921904521393595,
     "action": "hold"
    },
@@ -605,7 +605,7 @@
     "fips": "37199",
     "county": "Yancey",
     "chr_cred": 0.9580360008751673,
-    "ratio_cred": 1.2000467350416817,
+    "ratio_cred": 1.2000467350416815,
     "action": "hold"
    }
   ]
@@ -615,13 +615,13 @@
    "fips": "12057",
    "county": "Hillsborough",
    "pen": 0.1209,
-   "ratio": 1.2079409903428482,
-   "rel": 0.9644643597157293,
+   "ratio": 1.2079409903428484,
+   "rel": 0.9644643597157295,
    "rel_train": 0.11811754567485773,
-   "rel_test": 2.5642240412706756,
-   "chr_train": 0.2809862790929517,
-   "ratio_cred": 0.9644643597157293,
-   "chr_cred": 0.36043986776455483,
+   "rel_test": 2.5642240412706765,
+   "chr_train": 0.28098627909295165,
+   "ratio_cred": 0.9644643597157295,
+   "chr_cred": 0.3604398677645548,
    "action": "hold",
    "claims_train": 3955.0
   },
@@ -633,9 +633,9 @@
    "rel": 0.8855715313523876,
    "rel_train": 0.09963647413471156,
    "rel_test": 2.3720407911621786,
-   "chr_train": 0.2541039790327308,
+   "chr_train": 0.25410397903273074,
    "ratio_cred": 0.8855715313523876,
-   "chr_cred": 0.34661735588598636,
+   "chr_cred": 0.3466173558859861,
    "action": "hold",
    "claims_train": 2687.0
   },
@@ -643,12 +643,12 @@
    "fips": "12101",
    "county": "Pasco",
    "pen": 0.103,
-   "ratio": 1.7359265023270434,
-   "rel": 1.3860273440221782,
+   "ratio": 1.7359265023270436,
+   "rel": 1.3860273440221784,
    "rel_train": 0.5314039354731722,
-   "rel_test": 3.0087694248346692,
+   "rel_test": 3.0087694248346697,
    "chr_train": 0.5837351277938571,
-   "ratio_cred": 1.3860273440221782,
+   "ratio_cred": 1.3860273440221784,
    "chr_cred": 1.4470448551144235,
    "action": "hold",
    "claims_train": 5766.0
@@ -657,13 +657,13 @@
    "fips": "12103",
    "county": "Pinellas",
    "pen": 0.1941,
-   "ratio": 3.2878094582580797,
-   "rel": 2.6251075751028075,
+   "ratio": 3.287809458258079,
+   "rel": 2.6251075751028066,
    "rel_train": 0.3437740619210895,
-   "rel_test": 6.940421522710799,
-   "chr_train": 0.7648225598647412,
-   "ratio_cred": 2.6251075751028075,
-   "chr_cred": 1.0869720100604732,
+   "rel_test": 6.940421522710796,
+   "chr_train": 0.7648225598647411,
+   "ratio_cred": 2.6251075751028066,
+   "chr_cred": 1.086972010060474,
    "action": "hold",
    "claims_train": 14363.0
   },
@@ -674,10 +674,10 @@
    "ratio": 1.2474044515073133,
    "rel": 0.9959734335102609,
    "rel_train": 0.10793404070563026,
-   "rel_test": 2.6755361115811453,
+   "rel_test": 2.6755361115811462,
    "chr_train": 0.285693826778258,
    "ratio_cred": 0.9959734335102609,
-   "chr_cred": 0.47376390183879624,
+   "chr_cred": 0.4737639018387962,
    "action": "hold",
    "claims_train": 2789.0
   }
@@ -1122,7 +1122,7 @@
       "next_decade": 2.93
      }
     ],
-    "next_decade_dollars_vs_model": 3.1547645901612027,
+    "next_decade_dollars_vs_model": 3.1547645901612036,
     "share_ran_above_model": 0.8,
     "share_ran_high_1_5x": 0.8
    },
@@ -1486,7 +1486,7 @@
       "next_decade": 1.18
      }
     ],
-    "next_decade_dollars_vs_model": 0.4074433863826513,
+    "next_decade_dollars_vs_model": 0.4074433863826514,
     "share_ran_above_model": 0.2,
     "share_ran_high_1_5x": 0.04
    },
@@ -1668,13 +1668,13 @@
       "next_decade": 9.55
      }
     ],
-    "next_decade_dollars_vs_model": 2.0634169954421013,
+    "next_decade_dollars_vs_model": 2.0634169954421018,
     "share_ran_above_model": 0.72,
     "share_ran_high_1_5x": 0.68
    }
   },
   "baseline_all_counties": {
-   "next_decade_dollars_vs_model": 1.0238199043976344,
+   "next_decade_dollars_vs_model": 1.0238199043976346,
    "share_ran_above_model": 0.2583826429980276,
    "share_ran_high_1_5x": 0.17882971729125574
   }
@@ -1686,8 +1686,8 @@
    "county": "Galveston",
    "state": "TX",
    "pen": 0.4222,
-   "chr_cred": 2.4359379171202384,
-   "ratio_cred": 1.7688983363662096,
+   "chr_cred": 2.435937917120238,
+   "ratio_cred": 1.7688983363662092,
    "claims_n": 46946.0,
    "action": "re-price"
   },
@@ -1696,8 +1696,8 @@
    "county": "Monroe",
    "state": "FL",
    "pen": 0.5825,
-   "chr_cred": 1.582781487780319,
-   "ratio_cred": 1.1077300460845687,
+   "chr_cred": 1.5827814877803181,
+   "ratio_cred": 1.1077300460845685,
    "claims_n": 18043.0,
    "action": "re-price"
   },
@@ -1716,7 +1716,7 @@
    "county": "Montgomery",
    "state": "TX",
    "pen": 0.1069,
-   "chr_cred": 2.40046620754392,
+   "chr_cred": 2.4004662075439196,
    "ratio_cred": 1.2430965996854184,
    "claims_n": 10921.0,
    "action": "re-price"
@@ -1726,7 +1726,7 @@
    "county": "Volusia",
    "state": "FL",
    "pen": 0.1114,
-   "chr_cred": 1.9704788709289458,
+   "chr_cred": 1.9704788709289447,
    "ratio_cred": 1.1897238593732504,
    "claims_n": 9323.0,
    "action": "re-price"
@@ -1736,8 +1736,8 @@
    "county": "Horry",
    "state": "SC",
    "pen": 0.1463,
-   "chr_cred": 1.9993163547709927,
-   "ratio_cred": 1.38071077994756,
+   "chr_cred": 1.9993163547709918,
+   "ratio_cred": 1.3807107799475595,
    "claims_n": 8558.0,
    "action": "re-price"
   },
@@ -1746,8 +1746,8 @@
    "county": "Bergen",
    "state": "NJ",
    "pen": 0.0225,
-   "chr_cred": 2.9550881195214047,
-   "ratio_cred": 1.4079395709319544,
+   "chr_cred": 2.9550881195214043,
+   "ratio_cred": 1.4079395709319542,
    "claims_n": 11623.0,
    "action": "re-price"
   },
@@ -1756,7 +1756,7 @@
    "county": "Westchester",
    "state": "NY",
    "pen": 0.0304,
-   "chr_cred": 2.33545084213394,
+   "chr_cred": 2.3354508421339393,
    "ratio_cred": 1.2145387725149883,
    "claims_n": 8870.0,
    "action": "re-price"
@@ -1776,8 +1776,8 @@
    "county": "Vermilion",
    "state": "LA",
    "pen": 0.253,
-   "chr_cred": 1.5604722819312795,
-   "ratio_cred": 0.9127908423154312,
+   "chr_cred": 1.5604722819312793,
+   "ratio_cred": 0.9127908423154313,
    "claims_n": 4053.0,
    "action": "re-price"
   },
@@ -1786,7 +1786,7 @@
    "county": "Plymouth",
    "state": "MA",
    "pen": 0.043,
-   "chr_cred": 1.8800111204074168,
+   "chr_cred": 1.880011120407416,
    "ratio_cred": 1.248697980355816,
    "claims_n": 8818.0,
    "action": "re-price"
@@ -1796,7 +1796,7 @@
    "county": "Union",
    "state": "NJ",
    "pen": 0.0287,
-   "chr_cred": 1.8932784979022166,
+   "chr_cred": 1.8932784979022164,
    "ratio_cred": 0.9991541740264093,
    "claims_n": 5813.0,
    "action": "re-price"
@@ -1806,7 +1806,7 @@
    "county": "Cameron",
    "state": "TX",
    "pen": 0.0973,
-   "chr_cred": 1.9539890718183792,
+   "chr_cred": 1.9539890718183794,
    "ratio_cred": 1.0557070695775435,
    "claims_n": 4857.0,
    "action": "re-price"
@@ -1817,7 +1817,7 @@
    "state": "CA",
    "pen": 0.0107,
    "chr_cred": 2.383225874506958,
-   "ratio_cred": 1.1387602967414543,
+   "ratio_cred": 1.138760296741454,
    "claims_n": 5742.0,
    "action": "re-price"
   },
@@ -1826,7 +1826,7 @@
    "county": "Santa Rosa",
    "state": "FL",
    "pen": 0.1405,
-   "chr_cred": 2.7293340034580273,
+   "chr_cred": 2.729334003458027,
    "ratio_cred": 3.8163949685927885,
    "claims_n": 8141.0,
    "action": "re-price"
@@ -1841,7 +1841,7 @@
    "ealb": 2806752323.0004754,
    "homes": 2284783.0,
    "policies": 10584.0,
-   "chr_cred": 0.39606930008905505,
+   "chr_cred": 0.396069300089055,
    "action": "grow"
   },
   {
@@ -1852,7 +1852,7 @@
    "ealb": 1118828946.0373063,
    "homes": 728246.0,
    "policies": 3343.0,
-   "chr_cred": 0.2612690002980479,
+   "chr_cred": 0.2612690002980478,
    "action": "grow"
   },
   {
@@ -1874,7 +1874,7 @@
    "ealb": 941164210.7456988,
    "homes": 624158.0,
    "policies": 1919.0,
-   "chr_cred": 0.4425257329796829,
+   "chr_cred": 0.44252573297968284,
    "action": "grow"
   },
   {
@@ -1885,7 +1885,7 @@
    "ealb": 826869516.7678303,
    "homes": 791916.0,
    "policies": 7994.0,
-   "chr_cred": 0.1766351006266947,
+   "chr_cred": 0.17663510062669469,
    "action": "grow"
   },
   {
@@ -1907,7 +1907,7 @@
    "ealb": 643316863.3199383,
    "homes": 890566.0,
    "policies": 6088.0,
-   "chr_cred": 0.4084038753777625,
+   "chr_cred": 0.40840387537776246,
    "action": "grow"
   },
   {
@@ -1940,7 +1940,7 @@
    "ealb": 338405471.4270986,
    "homes": 383267.0,
    "policies": 2620.0,
-   "chr_cred": 0.5486605926446281,
+   "chr_cred": 0.548660592644628,
    "action": "grow"
   },
   {
@@ -1951,7 +1951,7 @@
    "ealb": 319709182.31417215,
    "homes": 169009.0,
    "policies": 6934.0,
-   "chr_cred": 0.19588603395119356,
+   "chr_cred": 0.19588603395119353,
    "action": "grow"
   },
   {
@@ -1962,7 +1962,7 @@
    "ealb": 309975376.490879,
    "homes": 230123.0,
    "policies": 3771.0,
-   "chr_cred": 0.2791988181039219,
+   "chr_cred": 0.27919881810392183,
    "action": "grow"
   },
   {
@@ -2045,7 +2045,7 @@
       "next_decade": 0.04
      }
     ],
-    "next_decade_dollars_vs_model": 0.04563661488573127,
+    "next_decade_dollars_vs_model": 0.04563661488573128,
     "share_ran_above_model": 0.0,
     "share_ran_high_1_5x": 0.0
    },
@@ -2493,7 +2493,7 @@
       "next_decade": 0.55
      }
     ],
-    "next_decade_dollars_vs_model": 0.9148625114031209,
+    "next_decade_dollars_vs_model": 0.9148625114031207,
     "share_ran_above_model": 0.28,
     "share_ran_high_1_5x": 0.16
    },
@@ -2723,15 +2723,15 @@
    {
     "quint": 3,
     "n": 304.0,
-    "score_median": 1.13907306807756,
+    "score_median": 1.1390730680775598,
     "share_ran_high": 0.2532894736842105,
     "share_chronic_high": 0.28289473684210525,
-    "dollars_vs_expected": 1.6484773608500798
+    "dollars_vs_expected": 1.64847736085008
    },
    {
     "quint": 4,
     "n": 304.0,
-    "score_median": 1.662467043964976,
+    "score_median": 1.662467043964977,
     "share_ran_high": 0.23026315789473684,
     "share_chronic_high": 0.3059210526315789,
     "dollars_vs_expected": 0.6775929898529143
@@ -2739,7 +2739,7 @@
    {
     "quint": 5,
     "n": 304.0,
-    "score_median": 3.3992178988907424,
+    "score_median": 3.3992178988907433,
     "share_ran_high": 0.3256578947368421,
     "share_chronic_high": 0.3618421052631579,
     "dollars_vs_expected": 1.3735157670260274
@@ -2752,7 +2752,7 @@
     "fips": "48201",
     "county": "Harris",
     "state": "TX",
-    "train_cred": 1.2912195554650405,
+    "train_cred": 1.2912195554650407,
     "rel_test": 1.7772745616460754,
     "paid_test": 655947633.4804089,
     "worst_year_test": 2017.0
@@ -2762,8 +2762,8 @@
     "county": "Lee",
     "state": "FL",
     "train_cred": 0.14917673945986706,
-    "rel_test": 7.091602762555773,
-    "paid_test": 372804501.03847796,
+    "rel_test": 7.091602762555776,
+    "paid_test": 372804501.03847814,
     "worst_year_test": 2022.0
    },
    {
@@ -2771,17 +2771,17 @@
     "county": "Pinellas",
     "state": "FL",
     "train_cred": 0.6997545100335159,
-    "rel_test": 6.613277614868863,
-    "paid_test": 312514890.1516392,
+    "rel_test": 6.61327761486886,
+    "paid_test": 312514890.1516391,
     "worst_year_test": 2024.0
    },
    {
     "fips": "22033",
     "county": "East Baton Rouge",
     "state": "LA",
-    "train_cred": 1.045740024422629,
-    "rel_test": 3.67411305891574,
-    "paid_test": 136189723.84784198,
+    "train_cred": 1.0457400244226285,
+    "rel_test": 3.6741130589157405,
+    "paid_test": 136189723.847842,
     "worst_year_test": 2016.0
    },
    {
@@ -2789,8 +2789,8 @@
     "county": "Collier",
     "state": "FL",
     "train_cred": 0.12535681087996456,
-    "rel_test": 1.1007848578249593,
-    "paid_test": 106404292.13092965,
+    "rel_test": 1.100784857824959,
+    "paid_test": 106404292.13092963,
     "worst_year_test": 2022.0
    },
    {
@@ -2798,8 +2798,8 @@
     "county": "Hillsborough",
     "state": "FL",
     "train_cred": 0.36837940887873993,
-    "rel_test": 3.471423626830569,
-    "paid_test": 98460098.70938617,
+    "rel_test": 3.4714236268305694,
+    "paid_test": 98460098.7093862,
     "worst_year_test": 2024.0
    },
    {
@@ -2807,26 +2807,26 @@
     "county": "Jefferson",
     "state": "TX",
     "train_cred": 3.3047165591401346,
-    "rel_test": 8.789135207138651,
-    "paid_test": 94835818.51348068,
+    "rel_test": 8.78913520713865,
+    "paid_test": 94835818.51348066,
     "worst_year_test": 2017.0
    },
    {
     "fips": "22063",
     "county": "Livingston",
     "state": "LA",
-    "train_cred": 0.7088360723716063,
-    "rel_test": 2.3781040831874622,
-    "paid_test": 84834973.06236771,
+    "train_cred": 0.7088360723716064,
+    "rel_test": 2.378104083187462,
+    "paid_test": 84834973.0623677,
     "worst_year_test": 2016.0
    },
    {
     "fips": "48167",
     "county": "Galveston",
     "state": "TX",
-    "train_cred": 2.525162321991909,
-    "rel_test": 1.8651556540679244,
-    "paid_test": 81485180.71306755,
+    "train_cred": 2.52516232199191,
+    "rel_test": 1.865155654067924,
+    "paid_test": 81485180.71306753,
     "worst_year_test": 2017.0
    },
    {
@@ -2834,8 +2834,8 @@
     "county": "Sarasota",
     "state": "FL",
     "train_cred": 0.2711180221124171,
-    "rel_test": 2.6802457939679587,
-    "paid_test": 73432404.5124822,
+    "rel_test": 2.6802457939679596,
+    "paid_test": 73432404.51248221,
     "worst_year_test": 2024.0
    },
    {
@@ -2843,8 +2843,8 @@
     "county": "Orange",
     "state": "TX",
     "train_cred": 1.3559605985472725,
-    "rel_test": 9.087735686070708,
-    "paid_test": 60482269.83201271,
+    "rel_test": 9.08773568607071,
+    "paid_test": 60482269.83201273,
     "worst_year_test": 2017.0
    },
    {
@@ -2861,8 +2861,8 @@
     "county": "Pasco",
     "state": "FL",
     "train_cred": 0.7877721268886831,
-    "rel_test": 4.86325675710157,
-    "paid_test": 52143103.15325378,
+    "rel_test": 4.863256757101571,
+    "paid_test": 52143103.153253786,
     "worst_year_test": 2024.0
    },
    {
@@ -2878,7 +2878,7 @@
     "fips": "48339",
     "county": "Montgomery",
     "state": "TX",
-    "train_cred": 2.9752560205146525,
+    "train_cred": 2.9752560205146534,
     "rel_test": 2.6124175041934996,
     "paid_test": 47206814.5881014,
     "worst_year_test": 2017.0
@@ -2887,7 +2887,7 @@
     "fips": "48039",
     "county": "Brazoria",
     "state": "TX",
-    "train_cred": 1.4792871609732925,
+    "train_cred": 1.4792871609732927,
     "rel_test": 1.51505324781982,
     "paid_test": 43469080.06385441,
     "worst_year_test": 2017.0
@@ -2896,16 +2896,16 @@
     "fips": "12015",
     "county": "Charlotte",
     "state": "FL",
-    "train_cred": 0.22789089897839473,
-    "rel_test": 4.03372277490978,
-    "paid_test": 42678499.519013666,
+    "train_cred": 0.2278908989783947,
+    "rel_test": 4.033722774909781,
+    "paid_test": 42678499.51901367,
     "worst_year_test": 2024.0
    },
    {
     "fips": "48157",
     "county": "Fort Bend",
     "state": "TX",
-    "train_cred": 0.11790974533560533,
+    "train_cred": 0.11790974533560535,
     "rel_test": 0.768542148019637,
     "paid_test": 42196161.139520705,
     "worst_year_test": 2017.0
@@ -2923,7 +2923,7 @@
     "fips": "12087",
     "county": "Monroe",
     "state": "FL",
-    "train_cred": 0.6168099719065665,
+    "train_cred": 0.616809971906566,
     "rel_test": 1.5947825065683663,
     "paid_test": 35183500.65115817,
     "worst_year_test": 2017.0
@@ -2973,7 +2973,7 @@
    {
     "quint": 3,
     "n": 1350.0,
-    "score_median": 1.2192607340827726,
+    "score_median": 1.2192607340827724,
     "share_ran_high": 0.24518518518518517,
     "share_chronic_high": 0.22148148148148147,
     "dollars_vs_expected": 1.6391194680735384
@@ -2984,12 +2984,12 @@
     "score_median": 1.9244919774469975,
     "share_ran_high": 0.28,
     "share_chronic_high": 0.2614814814814815,
-    "dollars_vs_expected": 1.5024156302696943
+    "dollars_vs_expected": 1.502415630269694
    },
    {
     "quint": 5,
     "n": 1350.0,
-    "score_median": 4.998761802089027,
+    "score_median": 4.998761802089026,
     "share_ran_high": 0.4177777777777778,
     "share_chronic_high": 0.34074074074074073,
     "dollars_vs_expected": 2.0973526582903332
@@ -3003,7 +3003,7 @@
     "county": "Lee",
     "state": "FL",
     "train_cred": 0.6703711754813575,
-    "rel_test": 47.707724004688366,
+    "rel_test": 47.70772400468836,
     "paid_test": 41713615.222537115,
     "worst_year_test": 2022.0
    },
@@ -3012,8 +3012,8 @@
     "county": "Harris",
     "state": "TX",
     "train_cred": 1.347940374137113,
-    "rel_test": 4.552901244413625,
-    "paid_test": 24694140.681138378,
+    "rel_test": 4.552901244413623,
+    "paid_test": 24694140.681138374,
     "worst_year_test": 2017.0
    },
    {
@@ -3021,8 +3021,8 @@
     "county": "Lee",
     "state": "FL",
     "train_cred": 3.242867298729338,
-    "rel_test": 40.562645234997404,
-    "paid_test": 21972388.924441174,
+    "rel_test": 40.56264523499737,
+    "paid_test": 21972388.924441162,
     "worst_year_test": 2022.0
    },
    {
@@ -3030,8 +3030,8 @@
     "county": "Pinellas",
     "state": "FL",
     "train_cred": 2.3399731093144664,
-    "rel_test": 9.313179925361299,
-    "paid_test": 19846010.880078167,
+    "rel_test": 9.313179925361302,
+    "paid_test": 19846010.880078174,
     "worst_year_test": 2024.0
    },
    {
@@ -3039,8 +3039,8 @@
     "county": "Pinellas",
     "state": "FL",
     "train_cred": 0.7135946478894732,
-    "rel_test": 18.83769742693674,
-    "paid_test": 16935641.019256957,
+    "rel_test": 18.837697426936725,
+    "paid_test": 16935641.019256946,
     "worst_year_test": 2024.0
    },
    {
@@ -3048,8 +3048,8 @@
     "county": "Harris",
     "state": "TX",
     "train_cred": 0.701411617242971,
-    "rel_test": 3.9043163518137827,
-    "paid_test": 16645146.011386659,
+    "rel_test": 3.904316351813782,
+    "paid_test": 16645146.011386657,
     "worst_year_test": 2017.0
    },
    {
@@ -3057,8 +3057,8 @@
     "county": "Harris",
     "state": "TX",
     "train_cred": 0.5444599405450024,
-    "rel_test": 2.7936885539061302,
-    "paid_test": 16017114.595437849,
+    "rel_test": 2.79368855390613,
+    "paid_test": 16017114.59543785,
     "worst_year_test": 2017.0
    },
    {
@@ -3074,9 +3074,9 @@
     "fips": "12103024005",
     "county": "Pinellas",
     "state": "FL",
-    "train_cred": 3.498201676364899,
-    "rel_test": 16.211934001996582,
-    "paid_test": 15574761.242243629,
+    "train_cred": 3.4982016763648995,
+    "rel_test": 16.21193400199658,
+    "paid_test": 15574761.242243627,
     "worst_year_test": 2024.0
    },
    {
@@ -3084,8 +3084,8 @@
     "county": "St. John the Baptist",
     "state": "LA",
     "train_cred": 0.40953301921060975,
-    "rel_test": 7.345781794255681,
-    "paid_test": 15413918.488611873,
+    "rel_test": 7.345781794255678,
+    "paid_test": 15413918.488611868,
     "worst_year_test": 2021.0
    },
    {
@@ -3093,7 +3093,7 @@
     "county": "Lee",
     "state": "FL",
     "train_cred": 1.8348914192996526,
-    "rel_test": 73.3409270890553,
+    "rel_test": 73.34092708905528,
     "paid_test": 14927140.602601996,
     "worst_year_test": 2022.0
    },
@@ -3102,35 +3102,35 @@
     "county": "Lee",
     "state": "FL",
     "train_cred": 0.7540455972271085,
-    "rel_test": 31.98119859564181,
-    "paid_test": 14287245.38812918,
+    "rel_test": 31.9811985956418,
+    "paid_test": 14287245.388129178,
     "worst_year_test": 2022.0
    },
    {
     "fips": "12081001705",
     "county": "Manatee",
     "state": "FL",
-    "train_cred": 0.7328884321978226,
-    "rel_test": 5.88609568817857,
-    "paid_test": 14117352.842721626,
+    "train_cred": 0.7328884321978228,
+    "rel_test": 5.886095688178571,
+    "paid_test": 14117352.84272163,
     "worst_year_test": 2024.0
    },
    {
     "fips": "12103027701",
     "county": "Pinellas",
     "state": "FL",
-    "train_cred": 1.4391926898932634,
+    "train_cred": 1.439192689893263,
     "rel_test": 9.629391245772927,
-    "paid_test": 13151229.101802383,
+    "paid_test": 13151229.101802384,
     "worst_year_test": 2024.0
    },
    {
     "fips": "12103028002",
     "county": "Pinellas",
     "state": "FL",
-    "train_cred": 0.6973625884109145,
-    "rel_test": 11.163451309240545,
-    "paid_test": 12238616.736842347,
+    "train_cred": 0.6973625884109143,
+    "rel_test": 11.163451309240546,
+    "paid_test": 12238616.73684235,
     "worst_year_test": 2024.0
    },
    {
@@ -3138,7 +3138,7 @@
     "county": "Lee",
     "state": "FL",
     "train_cred": 0.9652254339084796,
-    "rel_test": 16.87743416231888,
+    "rel_test": 16.877434162318877,
     "paid_test": 12022010.755764773,
     "worst_year_test": 2022.0
    },
@@ -3147,16 +3147,16 @@
     "county": "Livingston",
     "state": "LA",
     "train_cred": 3.4968937283402193,
-    "rel_test": 10.969088088209638,
-    "paid_test": 11963271.714154605,
+    "rel_test": 10.96908808820963,
+    "paid_test": 11963271.7141546,
     "worst_year_test": 2016.0
    },
    {
     "fips": "12017450502",
     "county": "Citrus",
     "state": "FL",
-    "train_cred": 2.063364166398972,
-    "rel_test": 12.892738184348383,
+    "train_cred": 2.0633641663989715,
+    "rel_test": 12.892738184348381,
     "paid_test": 11761663.730031129,
     "worst_year_test": 2024.0
    },
@@ -3165,7 +3165,7 @@
     "county": "Hillsborough",
     "state": "FL",
     "train_cred": 0.7448960376789313,
-    "rel_test": 22.793652543147914,
+    "rel_test": 22.79365254314791,
     "paid_test": 11622737.29981678,
     "worst_year_test": 2024.0
    },
@@ -3174,8 +3174,8 @@
     "county": "East Baton Rouge",
     "state": "LA",
     "train_cred": 0.7443699873262771,
-    "rel_test": 3.272773098345457,
-    "paid_test": 11385753.124059921,
+    "rel_test": 3.2727730983454584,
+    "paid_test": 11385753.124059927,
     "worst_year_test": 2016.0
    }
   ],
@@ -3214,7 +3214,7 @@
     "score_median": 0.7326052286798288,
     "share_ran_high": 0.11842105263157894,
     "share_chronic_high": 0.11842105263157894,
-    "dollars_vs_expected": 0.4323105745628844
+    "dollars_vs_expected": 0.4323105745628843
    },
    {
     "quint": 2,
@@ -3227,7 +3227,7 @@
    {
     "quint": 3,
     "n": 304.0,
-    "score_median": 1.13907306807756,
+    "score_median": 1.1390730680775598,
     "share_ran_high": 0.3848684210526316,
     "share_chronic_high": 0.3848684210526316,
     "dollars_vs_expected": 1.8591255890097633
@@ -3235,7 +3235,7 @@
    {
     "quint": 4,
     "n": 304.0,
-    "score_median": 1.662467043964976,
+    "score_median": 1.662467043964977,
     "share_ran_high": 0.3881578947368421,
     "share_chronic_high": 0.3881578947368421,
     "dollars_vs_expected": 1.2462297164055285
@@ -3243,7 +3243,7 @@
    {
     "quint": 5,
     "n": 304.0,
-    "score_median": 3.3992178988907424,
+    "score_median": 3.3992178988907433,
     "share_ran_high": 0.5,
     "share_chronic_high": 0.5,
     "dollars_vs_expected": 2.4488945420888344
@@ -3256,7 +3256,7 @@
     "fips": "22033",
     "county": "East Baton Rouge",
     "state": "LA",
-    "train_cred": 1.045740024422629,
+    "train_cred": 1.0457400244226285,
     "rel_test": 13.416747376923242,
     "paid_test": 206282879.9734404,
     "worst_year_test": 2016.0
@@ -3265,7 +3265,7 @@
     "fips": "48201",
     "county": "Harris",
     "state": "TX",
-    "train_cred": 1.2912195554650405,
+    "train_cred": 1.2912195554650407,
     "rel_test": 0.8333203679310078,
     "paid_test": 127570648.17112958,
     "worst_year_test": 2017.0
@@ -3275,17 +3275,17 @@
     "county": "Jefferson",
     "state": "TX",
     "train_cred": 3.3047165591401346,
-    "rel_test": 23.528357347190138,
-    "paid_test": 105303299.5427563,
+    "rel_test": 23.528357347190134,
+    "paid_test": 105303299.54275629,
     "worst_year_test": 2017.0
    },
    {
     "fips": "22063",
     "county": "Livingston",
     "state": "LA",
-    "train_cred": 0.7088360723716063,
-    "rel_test": 6.369754165340846,
-    "paid_test": 94252061.85818633,
+    "train_cred": 0.7088360723716064,
+    "rel_test": 6.369754165340844,
+    "paid_test": 94252061.8581863,
     "worst_year_test": 2016.0
    },
    {
@@ -3293,15 +3293,15 @@
     "county": "Orange",
     "state": "TX",
     "train_cred": 1.3559605985472725,
-    "rel_test": 21.909454606727994,
-    "paid_test": 60482269.83201271,
+    "rel_test": 21.909454606728,
+    "paid_test": 60482269.83201273,
     "worst_year_test": 2017.0
    },
    {
     "fips": "48339",
     "county": "Montgomery",
     "state": "TX",
-    "train_cred": 2.9752560205146525,
+    "train_cred": 2.9752560205146534,
     "rel_test": 6.29822925084397,
     "paid_test": 47206814.5881014,
     "worst_year_test": 2017.0
@@ -3310,7 +3310,7 @@
     "fips": "48157",
     "county": "Fort Bend",
     "state": "TX",
-    "train_cred": 0.11790974533560533,
+    "train_cred": 0.11790974533560535,
     "rel_test": 2.055518107052026,
     "paid_test": 46811297.570601515,
     "worst_year_test": 2017.0
@@ -3320,8 +3320,8 @@
     "county": "Craven",
     "state": "NC",
     "train_cred": 2.632689648575296,
-    "rel_test": 50.487419091813315,
-    "paid_test": 44045055.95955929,
+    "rel_test": 50.48741909181332,
+    "paid_test": 44045055.9595593,
     "worst_year_test": 2018.0
    },
    {
@@ -3330,7 +3330,7 @@
     "state": "LA",
     "train_cred": 1.0811043329448844,
     "rel_test": 11.461022061657497,
-    "paid_test": 41445571.868437864,
+    "paid_test": 41445571.86843787,
     "worst_year_test": 2016.0
    },
    {
@@ -3347,15 +3347,15 @@
     "county": "St. Johns",
     "state": "FL",
     "train_cred": 0.2854471474071024,
-    "rel_test": 2.2086840830251893,
-    "paid_test": 26457482.247425247,
+    "rel_test": 2.208684083025189,
+    "paid_test": 26457482.247425243,
     "worst_year_test": 2016.0
    },
    {
     "fips": "22019",
     "county": "Calcasieu",
     "state": "LA",
-    "train_cred": 1.4597181398489711,
+    "train_cred": 1.459718139848971,
     "rel_test": 2.612035521482005,
     "paid_test": 20407275.734089766,
     "worst_year_test": 2021.0
@@ -3364,9 +3364,9 @@
     "fips": "48199",
     "county": "Hardin",
     "state": "TX",
-    "train_cred": 3.474450363648202,
-    "rel_test": 18.847879218869565,
-    "paid_test": 17017429.56292239,
+    "train_cred": 3.4744503636482014,
+    "rel_test": 18.84787921886957,
+    "paid_test": 17017429.562922392,
     "worst_year_test": 2017.0
    },
    {
@@ -3374,26 +3374,26 @@
     "county": "Carteret",
     "state": "NC",
     "train_cred": 1.839018802628482,
-    "rel_test": 6.242190311962638,
-    "paid_test": 14453745.616188493,
+    "rel_test": 6.24219031196264,
+    "paid_test": 14453745.616188496,
     "worst_year_test": 2018.0
    },
    {
     "fips": "22105",
     "county": "Tangipahoa",
     "state": "LA",
-    "train_cred": 0.5680504391136542,
-    "rel_test": 3.743701048081211,
-    "paid_test": 14429344.142748032,
+    "train_cred": 0.5680504391136543,
+    "rel_test": 3.7437010480812103,
+    "paid_test": 14429344.14274803,
     "worst_year_test": 2016.0
    },
    {
     "fips": "36119",
     "county": "Westchester",
     "state": "NY",
-    "train_cred": 3.5644710611129486,
-    "rel_test": 5.972544307256873,
-    "paid_test": 14062071.71564031,
+    "train_cred": 3.564471061112949,
+    "rel_test": 5.972544307256875,
+    "paid_test": 14062071.715640314,
     "worst_year_test": 2021.0
    },
    {
@@ -3427,9 +3427,9 @@
     "fips": "34003",
     "county": "Bergen",
     "state": "NJ",
-    "train_cred": 3.06367322440047,
-    "rel_test": 1.8388761545774202,
-    "paid_test": 9755411.698023282,
+    "train_cred": 3.063673224400469,
+    "rel_test": 1.8388761545774206,
+    "paid_test": 9755411.698023284,
     "worst_year_test": 2021.0
    }
   ],

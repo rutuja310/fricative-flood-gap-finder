@@ -91,7 +91,7 @@ def about_rows(summary, q):
     bt = summary["list_backtest"]
     lb, base = bt["lists"], bt["baseline_all_counties"]
     rows = [
-        ("Flood Gap Finder", f"This quarter's plan, {q}"),
+        ("Private Flood Insurance Gap Finder", f"This quarter's plan, {q}"),
         ("Generated", dt.date.today().isoformat()),
         ("Live site", SITE),
         ("", ""),

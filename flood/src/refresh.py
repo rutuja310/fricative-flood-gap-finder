@@ -1,4 +1,4 @@
-"""Scheduled refresh for Flood Gap Finder, called by the n8n workflow (flood/n8n/flood_refresh_workflow.json).
+"""Scheduled refresh for Private Flood Insurance Gap Finder, called by the n8n workflow (flood/n8n/flood_refresh_workflow.json).
 
 Modes (one per run; each prints a JSON summary on stdout for n8n):
   --monthly     If FEMA has republished NFIP claims or insured-share data since the last run, re-fetch, re-run
@@ -185,7 +185,7 @@ def cmd_monthly(a):
     if s is None:
         return p
     first = not p["changes"] and p["changed_calls"] == 0
-    md = (f"# Flood Gap Finder: monthly refresh, {today():%B %Y}\n\n"
+    md = (f"# Private Flood Insurance Gap Finder: monthly refresh, {today():%B %Y}\n\n"
           f"FEMA data: claims refreshed {p['fema'].get('NfipClaims')}, insured share refreshed "
           f"{p['fema'].get('NfipResidentialPenetrationRates')}.\n\n"
           f"**{p['changed_calls']} counties changed call since the last monthly run.**"
@@ -204,7 +204,7 @@ def cmd_quarterly(a):
     bt = s["list_backtest"]
     lb = bt["lists"]
     base = bt["baseline_all_counties"]
-    md = (f"# Flood Gap Finder: plan for Q{q} {today().year}\n\n"
+    md = (f"# Private Flood Insurance Gap Finder: plan for Q{q} {today().year}\n\n"
           "Three lists for this quarter. Each county comes with the reason and whether the last ten years agree.\n"
           + plan_md(s)
           + "\n\n## What changed since the last quarterly plan\n\n" + changes_md(p["changes"])
@@ -279,7 +279,7 @@ def cmd_storms(a):
     state["last_check"] = today().isoformat()
     REPORTS.mkdir(parents=True, exist_ok=True)
     STORM_STATE.write_text(json.dumps(state, indent=1))
-    md = [f"# Flood Gap Finder: storm watch, {today():%d %B %Y}\n",
+    md = [f"# Private Flood Insurance Gap Finder: storm watch, {today():%d %B %Y}\n",
           f"New FEMA declarations for floods, hurricanes and tropical or coastal storms since {since}: "
           f"**{len(out_events)}**" + (", **alert**." if alert else ", no alert.")
           + f" {len(recent)} declarations in the last {RECENT_DAYS} days in total.\n",
@@ -320,7 +320,7 @@ def cmd_followups(a):
         results.append({"disaster": f["disaster"], "title": f["title"], "due": f["due"], "changed": changed})
         f["done"] = True
     STORM_STATE.write_text(json.dumps(state, indent=1))
-    md = [f"# Flood Gap Finder: storm follow-up, {today():%d %B %Y}\n"]
+    md = [f"# Private Flood Insurance Gap Finder: storm follow-up, {today():%d %B %Y}\n"]
     for r in results:
         md.append(f"\n## {r['title'].title()} (follow-up due {r['due']})\n")
         md.append(("Calls changed: " + "; ".join(f"{c['county']} {LABEL[c['from']]} → {LABEL[c['to']]}"
@@ -356,7 +356,7 @@ def publish_site(mode):
     git("add", "flood/out", "flood/demo")
     if git("diff", "--cached", "--quiet").returncode == 0:
         return False
-    git("commit", "-m", f"Flood Gap Finder: {mode} refresh {today().isoformat()}")
+    git("commit", "-m", f"Private Flood Insurance Gap Finder: {mode} refresh {today().isoformat()}")
     return git("push").returncode == 0
 
 

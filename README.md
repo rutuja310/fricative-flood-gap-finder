@@ -1,4 +1,4 @@
-# Flood Gap Finder
+# Private Flood Insurance Gap Finder
 
 A quarterly decision tool for the underwriter at a private flood insurer. For each of 3,232 US counties it gives one of four calls: grow, re-price, pause or hold. Each call compares 48 years of NFIP claims (1978–2025) with FEMA's modeled flood loss. Public data only.
 
