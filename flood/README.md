@@ -13,6 +13,7 @@ County-by-county grow / re-price / hold / avoid calls for a private flood insure
 | Fetch raw data | `sh flood/src/fetch_raw.sh` → `flood/raw/` (not in git) |
 | Point-in-time policies (optional) | `sh flood/src/fetch_policies_api.sh` → `flood/raw/policies/` (hours when the API is slow; adds the point-in-time backtest) |
 | Tracts and storms (optional) | `sh flood/src/fetch_tracts.sh` → NRI tracts, ACS homes, tract crosswalk, NOAA storms (about a minute; adds the tract and storm-years-out tests) |
+| Methodology | [`flood/METHODOLOGY.md`](METHODOLOGY.md): data, score, calls, lists, storm watch, and every test |
 | Analysis | `flood/src/flood.py` (scores, calls, blind test) |
 | Run everything | `python3 flood/src/run_flood.py` → `flood/out/` and `flood/demo/data.json` |
 | Scheduled refresh | `python3 flood/src/refresh.py --monthly | --quarterly | --storms | --followups [--publish]` → `flood/out/reports/`; `--publish` commits and pushes so the site updates |

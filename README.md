@@ -6,7 +6,7 @@ A quarterly decision tool for the underwriter at a private flood insurer. For ea
 
 This repo holds only the flood project.
 
-Everything is in [`flood/`](flood/README.md): the pipeline, the scheduled refresh, the n8n workflow, the live demo, the outputs and the change log.
+Everything is in [`flood/`](flood/README.md): the pipeline, the scheduled refresh, the n8n workflow, the live demo, the outputs, the change log and the [methodology](flood/METHODOLOGY.md).
 
 ## Quick start
 
