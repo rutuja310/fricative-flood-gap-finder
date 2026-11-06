@@ -181,3 +181,121 @@ def build_page():
     """flood/demo/index.html for GitHub Pages: page.html (the Claude artifact source) in a full document."""
     body = (DEMO / "page.html").read_text()
     (DEMO / "index.html").write_text(HEAD + "</head>\n<body>\n" + body + "\n</body>\n</html>\n")
+    build_methodology()
+
+
+METHOD_CSS = """
+:root { --bg: #f4f5f1; --panel: #fbfcf9; --ink: #15202b; --muted: #56616c; --line: #d8ddd5; --soft: #e9ece6; --accent: #a9541a;
+  --display: "Source Serif 4", Georgia, serif; --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; color-scheme: light }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11171d; --panel: #182029; --ink: #e8ece8; --muted: #a3adb5; --line: #2c3742; --soft: #212b35; --accent: #f0a75a; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #11171d; --panel: #182029; --ink: #e8ece8; --muted: #a3adb5; --line: #2c3742; --soft: #212b35;
+  --accent: #f0a75a; color-scheme: dark }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+main { max-width: 52rem; margin-inline: auto; padding: 32px max(16px, env(safe-area-inset-left, 0px)) 64px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.2; text-wrap: balance; }
+h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 8px 0 16px; }
+h2 { font-size: 1.5rem; margin: 40px 0 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.15rem; margin: 28px 0 8px; }
+p, ul, ol { margin: 0 0 14px; }
+li { margin-bottom: 6px; }
+a { color: var(--accent); }
+.eyebrow { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.eyebrow a { color: inherit; }
+code { font-family: var(--mono); font-size: .88em; background: var(--soft); padding: 1px 5px; border-radius: 4px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; overflow-x: auto; }
+pre code { background: none; padding: 0; }
+.table { overflow-x: auto; margin: 0 0 18px; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; background: var(--panel); }
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: var(--soft); font-weight: 600; }
+"""
+
+
+def _inline(s):
+    """Escape, then the inline markdown METHODOLOGY.md uses: `code`, **bold**, [text](link)."""
+    import html
+    import re
+    s = html.escape(s, quote=False)
+    s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
+    s = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", s)
+    return re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', s)
+
+
+def md_to_html(md):
+    """Just enough markdown for METHODOLOGY.md: headings, paragraphs, bullet and numbered lists (one nested
+    level), pipe tables and fenced code."""
+    out, para, i = [], [], 0
+    lines = md.splitlines()
+
+    def flush():
+        if para:
+            out.append(f"<p>{_inline(' '.join(para))}</p>")
+            para.clear()
+
+    while i < len(lines):
+        ln = lines[i]
+        if ln.startswith("```"):
+            flush()
+            j = i + 1
+            while not lines[j].startswith("```"):
+                j += 1
+            import html
+            out.append("<pre><code>" + html.escape("\n".join(lines[i + 1:j])) + "</code></pre>")
+            i = j + 1
+            continue
+        if ln.startswith("#"):
+            flush()
+            n = len(ln) - len(ln.lstrip("#"))
+            out.append(f"<h{n}>{_inline(ln[n:].strip())}</h{n}>")
+        elif ln.startswith("|"):
+            flush()
+            rows = []
+            while i < len(lines) and lines[i].startswith("|"):
+                rows.append([c.strip() for c in lines[i].strip().strip("|").split("|")])
+                i += 1
+            head, body = rows[0], rows[2:]
+            out.append('<div class="table"><table><thead><tr>' + "".join(f"<th>{_inline(c)}</th>" for c in head)
+                       + "</tr></thead><tbody>" + "".join("<tr>" + "".join(f"<td>{_inline(c)}</td>" for c in r)
+                                                         + "</tr>" for r in body) + "</tbody></table></div>")
+            continue
+        elif ln.startswith(("- ", "1. ")) or (ln[:1].isdigit() and ". " in ln[:4]):
+            flush()
+            tag = "ul" if ln.startswith("- ") else "ol"
+            items = []
+            while i < len(lines) and lines[i].strip() and not lines[i].startswith("#"):
+                cur = lines[i]
+                if cur.startswith("  "):
+                    items[-1][1].append(cur.strip()[2:])
+                else:
+                    items.append([cur.split(" ", 1)[1], []])
+                i += 1
+            lis = []
+            for text, sub in items:
+                inner = "".join(f"<li>{_inline(t)}</li>" for t in sub)
+                lis.append(f"<li>{_inline(text)}" + (f"<ul>{inner}</ul>" if sub else "") + "</li>")
+            out.append(f"<{tag}>" + "".join(lis) + f"</{tag}>")
+            continue
+        elif not ln.strip():
+            flush()
+        else:
+            para.append(ln.strip())
+        i += 1
+    flush()
+    return "\n".join(out)
+
+
+def build_methodology():
+    """flood/demo/methodology.html for GitHub Pages, from flood/METHODOLOGY.md."""
+    body = md_to_html((ROOT / "METHODOLOGY.md").read_text())
+    fonts = ("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600"
+             "&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap")
+    page = (f'<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+            f'<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+            f"<title>Methodology · Private Flood Insurance Gap Finder</title>\n"
+            f'<meta name="description" content="How the Private Flood Insurance Gap Finder scores counties and how it was tested.">\n'
+            f'<link rel="stylesheet" href="{fonts}">\n<style>{METHOD_CSS}</style>\n</head>\n<body>\n<main>\n'
+            f'<p class="eyebrow"><a href="./">Private Flood Insurance Gap Finder</a> · Methodology</p>\n'
+            f"{body}\n</main>\n</body>\n</html>\n")
+    (DEMO / "methodology.html").write_text(page)

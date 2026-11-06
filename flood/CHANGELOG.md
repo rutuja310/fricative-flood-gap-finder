@@ -16,6 +16,7 @@
 ### Methodology document (6 Nov 2026)
 
 - **New `flood/METHODOLOGY.md`**: the data sources with exact tables, the score step by step (worst year out, US norm, credibility), the call rules, the list rules (affordability check, last-decade check, two per state), the storm watch, and every test with its results: the list backtest, point in time, the county blind test, storm years out (NOAA) and census tracts. Linked from `flood/README.md`.
+- **Methodology as a web page**: `publish.build_methodology()` turns `METHODOLOGY.md` into `flood/demo/methodology.html` on every run, in the demo's fonts and colors (light and dark), so anyone can read it at https://rutuja310.github.io/fricative-flood-gap-finder/flood/demo/methodology.html with no sign-in.
 
 ### One product name everywhere (5 Nov 2026)
 
